@@ -142,7 +142,7 @@ export const schemaTypes = [
       localized('problem', 'Problema y contexto', true, true),
       localized('role', 'Tu contribución personal', true, true),
       localized('solution', 'Solución y decisiones técnicas', true, true),
-      localized('results', 'Resultados verificables', true, true),
+      localized('results', 'Resultados verificables (si existen)', false, true),
       localized('lessons', 'Aprendizajes', false, true),
       technologies,
       url('repository', 'Repositorio público'),
@@ -213,8 +213,28 @@ export const schemaTypes = [
         type: 'string',
         validation: required,
       }),
-      defineField({ name: 'date', title: 'Fecha de emisión', type: 'date' }),
-      defineField({ name: 'expires', title: 'Fecha de vencimiento (opcional)', type: 'date' }),
+      defineField({
+        name: 'date',
+        title: 'Mes de emisión (AAAA-MM)',
+        type: 'string',
+        validation: (rule) =>
+          rule.custom((value) =>
+            !value || /^\d{4}-(0[1-9]|1[0-2])$/.test(value)
+              ? true
+              : 'Usa el formato AAAA-MM sin inventar un día.',
+          ),
+      }),
+      defineField({
+        name: 'expires',
+        title: 'Mes de vencimiento (AAAA-MM, opcional)',
+        type: 'string',
+        validation: (rule) =>
+          rule.custom((value) =>
+            !value || /^\d{4}-(0[1-9]|1[0-2])$/.test(value)
+              ? true
+              : 'Usa el formato AAAA-MM sin inventar un día.',
+          ),
+      }),
       defineField({
         name: 'credentialId',
         title: 'Identificador público de la credencial',

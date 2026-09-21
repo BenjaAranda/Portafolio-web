@@ -27,7 +27,7 @@ Antes de cambiar esquemas, exportar documentos y assets: desde `apps/studio`, `n
 
 Mensualmente repetir la exportación. Probar restauración en un dataset de prueba mediante `sanity dataset import`, revisando las opciones antes de ejecutar. Una importación puede modificar contenido; no restaurar sobre producción sin revisar el objetivo y conservar una copia actual.
 
-El rollback de Vercel restaura código, no documentos de Sanity. La restauración real y la publicación del Studio permanecen pendientes hasta contar con el proyecto remoto.
+El rollback de Vercel restaura código, no documentos de Sanity. La restauración real y la publicación del Studio deben verificarse una vez creado el proyecto remoto. El importador inicial conserva documentos existentes; no sirve como restauración de un backup.
 
 ## Si Publish no actualiza el sitio
 

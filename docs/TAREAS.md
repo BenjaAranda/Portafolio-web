@@ -40,9 +40,11 @@
 - [x] Práctica MasterBase, fechas y tres cursos sustentados por el informe y sus certificados.
 - [x] Incorporar enlaces publicados de EF SET, MCCR y validación de Duoc; conservar evidencias locales MasterBase.
 - [ ] Recibir archivos o enlaces de los cursos Santander si se desea mostrar el documento.
-- [ ] Crear/configurar Sanity; publicar Studio; verificar acceso con cuenta no autorizada.
+- [x] Preparar importador no destructivo de contenido e imágenes para Sanity.
+- [ ] Crear/configurar Sanity; ejecutar el importador, publicar Studio y verificar acceso con cuenta no autorizada.
 - [ ] Cargar y revisar contenido real en CMS.
-- [ ] Conectar GitHub y Vercel; validar preview y producción.
+- [x] Crear proyecto `portafolio-web` en Vercel y verificar primera compilación remota con `SITE_READY=false`.
+- [ ] Autorizar la conexión GitHub–Vercel, validar despliegues automáticos y producción conectada a Sanity.
 - [ ] Probar ciclo remoto crear/editar/retirar y cambiar CV con webhook.
 - [ ] Elegir dominio y revisar cuotas/condiciones de servicios.
 - [ ] Exportar y probar restauración de contenido real.
