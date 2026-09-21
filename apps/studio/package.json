@@ -1,0 +1,21 @@
+{
+  "name": "@portfolio/studio",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "sanity dev",
+    "build": "sanity build",
+    "deploy": "sanity deploy",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "sanity": "6.15.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "styled-components": "^6.1.15"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.0",
+    "@types/react": "^19.0.0"
+  }
+}
