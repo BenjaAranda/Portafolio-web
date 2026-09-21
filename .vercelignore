@@ -1,0 +1,12 @@
+node_modules
+node_modules.incomplete
+apps/*/node_modules
+apps/*/.next
+apps/*/.sanity
+backups
+.firecrawl
+playwright-report
+test-results
+coverage
+.env*
+!.env.example

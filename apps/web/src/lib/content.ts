@@ -7,7 +7,12 @@ import { seed } from './seed';
 export const cmsConfigured = Boolean(process.env.SANITY_PROJECT_ID);
 export const siteReady =
   process.env.SITE_READY === 'true' && cmsConfigured && process.env.VERCEL_ENV !== 'preview';
-export const siteOrigin = (process.env.SITE_URL || 'http://localhost:3000').replace(/\/$/, '');
+export const siteOrigin = (
+  process.env.SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : 'http://localhost:3000')
+).replace(/\/$/, '');
 const asset = '{"url": asset->url, alt}';
 const query = `{
   "settings": *[_type == "siteSettings"] | order(_updatedAt desc)[0]{name,email,github,linkedin,"cvEs": cvEs.asset->url,"cvEn": cvEn.asset->url},
