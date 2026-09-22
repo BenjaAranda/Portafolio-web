@@ -40,6 +40,8 @@ async function image(value: Image | null | undefined, key?: string) {
 }
 
 async function createMissing(id: string, type: string, build: () => Promise<Record<string, unknown>>) {
+  // Public datasets hide IDs containing dots from anonymous readers.
+  if (id.includes('.')) throw new Error(`ID no público: ${id}`);
   if (await client.getDocument(id)) {
     console.log(`Conservado: ${id}`);
     return;
@@ -65,7 +67,7 @@ async function main() {
   }));
 
   for (const [index, project] of seed.projects.entries()) {
-    await createMissing(`project.${project.slug}`, 'project', async () => ({
+    await createMissing(`project-${project.slug}`, 'project', async () => ({
       slug: { _type: 'slug', current: project.slug },
       title: localized(project.title, 'localizedString'),
       summary: localized(project.summary, 'localizedText'),
@@ -89,7 +91,7 @@ async function main() {
   }
 
   for (const [index, skill] of seed.skills.entries()) {
-    await createMissing(`skillGroup.${skill._id}`, 'skillGroup', async () => ({
+    await createMissing(`skillGroup-${skill._id}`, 'skillGroup', async () => ({
       title: localized(skill.title, 'localizedString'),
       description: localized(skill.description, 'localizedString'),
       technologies: skill.technologies,
@@ -100,7 +102,7 @@ async function main() {
 
   for (const type of ['experience', 'education'] as const) {
     for (const [index, item] of seed[type].entries()) {
-      await createMissing(`${type}.${item._id}`, type, async () => ({
+      await createMissing(`${type}-${item._id}`, type, async () => ({
         organization: item.organization,
         title: localized(item.title, 'localizedString'),
         period: localized(item.period, 'localizedString'),
@@ -111,7 +113,7 @@ async function main() {
   }
 
   for (const [index, credential] of seed.certifications.entries()) {
-    await createMissing(`certification.${credential._id}`, 'certification', async () => ({
+    await createMissing(`certification-${credential._id}`, 'certification', async () => ({
       title: credential.title,
       issuer: credential.issuer,
       date: credential.date,
