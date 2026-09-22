@@ -2,6 +2,8 @@
 
 Sitio bilingüe de perfil profesional, proyectos y certificaciones. Usa Next.js App Router, React y TypeScript; incluye un Studio Sanity opcional y está preparado para Vercel.
 
+Publicación: [benjamin-aranda.vercel.app](https://benjamin-aranda.vercel.app/es)
+
 ## Desarrollo local
 
 Node.js 22 LTS (22.12 o superior), npm.

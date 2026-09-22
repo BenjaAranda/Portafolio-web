@@ -27,6 +27,8 @@ Sin ID se usa la vista inicial. Con ID se exige contenido válido de Sanity; un 
 
 Vercel Hobby queda sujeto a sus condiciones personales/no comerciales y cuotas actuales. El proyecto `portafolio-web` está desplegado con contenido de Sanity y conectado al repositorio `BenjaAranda/Portafolio-web`, con `main` como rama de producción. La publicación permanece con `SITE_READY=false` hasta la revisión final.
 
+El alias gratuito de producción es `https://benjamin-aranda.vercel.app`. `apps/web/vercel.json` lo reasigna automáticamente a cada despliegue y `SITE_URL` debe conservar ese mismo origen para metadata, sitemap y enlaces canónicos.
+
 ## Webhook
 
 En Sanity Manage, crear un webhook HTTPS dirigido a `https://TU-DOMINIO/api/revalidate`, dataset `production`, métodos Create/Update/Delete. Excluir drafts (dejar desactivada la opción de disparar por borradores).
