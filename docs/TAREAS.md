@@ -44,7 +44,7 @@
 - [ ] Crear/configurar Sanity; ejecutar el importador, publicar Studio y verificar acceso con cuenta no autorizada.
 - [ ] Cargar y revisar contenido real en CMS.
 - [x] Crear proyecto `portafolio-web` en Vercel y verificar primera compilación remota con `SITE_READY=false`.
-- [ ] Autorizar la conexión GitHub–Vercel, validar despliegues automáticos y producción conectada a Sanity.
+- [x] Autorizar la conexión GitHub–Vercel y conectar `main` como rama de producción con contenido de Sanity.
 - [ ] Probar ciclo remoto crear/editar/retirar y cambiar CV con webhook.
 - [ ] Elegir dominio y revisar cuotas/condiciones de servicios.
 - [ ] Exportar y probar restauración de contenido real.

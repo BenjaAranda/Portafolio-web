@@ -25,7 +25,7 @@ Sin ID se usa la vista inicial. Con ID se exige contenido válido de Sanity; un 
 5. Vercel usa automáticamente su dominio de producción como origen canónico. Al conectar un dominio propio, establecer `SITE_URL` con ese origen HTTPS y volver a desplegar.
 6. Probar build, metadata, CV, contacto, enlaces y publicación CMS antes de activar `SITE_READY=true` en producción y volver a desplegar.
 
-Vercel Hobby queda sujeto a sus condiciones personales/no comerciales y cuotas actuales. El proyecto `portafolio-web` está desplegado en Vercel con contenido de Sanity. La publicación permanece con `SITE_READY=false`; la conexión Git automática aún requiere que la cuenta de Vercel tenga acceso al repositorio mediante la aplicación de GitHub.
+Vercel Hobby queda sujeto a sus condiciones personales/no comerciales y cuotas actuales. El proyecto `portafolio-web` está desplegado con contenido de Sanity y conectado al repositorio `BenjaAranda/Portafolio-web`, con `main` como rama de producción. La publicación permanece con `SITE_READY=false` hasta la revisión final.
 
 ## Webhook
 
@@ -53,4 +53,4 @@ Opcional: configurar `CLOUDFLARE_ANALYTICS_TOKEN`. Se carga solo con `SITE_READY
 
 ## Pendientes antes de producción
 
-Preparar el CV en inglés, revisar la versión inglesa y el contenido editorial, conectar GitHub a Vercel para despliegues por `push`, decidir dominio definitivo y hacer una revisión final antes de activar `SITE_READY=true`. Hay un respaldo de Sanity en `backups/` (excluido de Git). Noindex es una indicación a buscadores y no un control de acceso; usar Deployment Protection de Vercel si se necesita una preview privada.
+Preparar el CV en inglés, revisar la versión inglesa y el contenido editorial, decidir el dominio definitivo y hacer una revisión final antes de activar `SITE_READY=true`. Hay un respaldo de Sanity en `backups/` (excluido de Git). Noindex es una indicación a buscadores y no un control de acceso; usar Deployment Protection de Vercel si se necesita una preview privada.

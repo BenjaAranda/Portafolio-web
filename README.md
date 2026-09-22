@@ -28,7 +28,7 @@ Para instalar el navegador de pruebas: `npx playwright install chromium` desde `
 
 ## Estado
 
-El sitio local incluye siete fichas bilingües: BecasFind, SIVIS, LevelUP React, LevelUP Móvil, CasosPrueba, Departamento T7 y este portafolio. Las capturas muestran aplicaciones ejecutadas localmente o material del propietario, con el origen y las limitaciones descritos en [fuentes](docs/CONTENIDO-FUENTES.md). La publicación en Vercel y la conexión del CMS siguen pendientes.
+El sitio incluye siete fichas bilingües: BecasFind, SIVIS, LevelUP React, LevelUP Móvil, CasosPrueba, Departamento T7 y este portafolio. Las capturas muestran aplicaciones ejecutadas localmente o material del propietario, con el origen y las limitaciones descritos en [fuentes](docs/CONTENIDO-FUENTES.md). Vercel está conectado a GitHub y la publicación obtiene su contenido desde Sanity.
 
 ## Arquitectura
 
