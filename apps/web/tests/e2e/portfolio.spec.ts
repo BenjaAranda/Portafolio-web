@@ -169,10 +169,12 @@ test('project index, localized navigation and 404', async ({ page }) => {
   const response = await page.goto('/en/projects/does-not-exist');
   expect(response?.status()).toBe(404);
 });
-test('preview is not indexed and does not offer fictional contacts', async ({ page, request }) => {
+test('preview is not indexed and only offers the verified email', async ({ page, request }) => {
   await page.goto('/es');
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
-  expect(await page.locator('a[href^="mailto:"]').count()).toBe(0);
+  await expect(
+    page.locator('a[href="mailto:benjamin.aranda.dev@gmail.com"]'),
+  ).toHaveCount(1);
   expect(await (await request.get('/robots.txt')).text()).toContain('Disallow: /');
   expect((await request.post('/api/revalidate', { data: { _type: 'project' } })).status()).toBe(
     503,
