@@ -28,14 +28,14 @@ test('email cannot inject mailto headers', () => {
   assert.equal(safeEmail('hello@example.com'), 'hello@example.com');
   assert.equal(safeEmail('hello@example.com?bcc=other@example.com'), undefined);
 });
-test('initial data has reviewed projects and no invented contact details', () => {
+test('initial data has reviewed projects and user-supplied contact details', () => {
   assert.doesNotThrow(() => portfolioSchema.parse(seed));
   assert.deepEqual(
     seed.projects.map((project) => project.slug),
     ['becasfind', 'sivis', 'levelup-react', 'levelup-mobile', 'casos-prueba', 'departamento-t7', 'portafolio-web'],
   );
   assert.equal(seed.projects[0].repository, 'https://github.com/BenjaAranda/BecasFind');
-  assert.equal(seed.settings?.email, undefined);
+  assert.equal(seed.settings?.email, 'benjamin.aranda.dev@gmail.com');
   assert.equal(seed.projects[3].repository, 'https://github.com/BenjaAranda/AplicacionesMoviles');
   assert.equal(seed.projects[4].repository, 'https://github.com/Joaquin-Dev369/CasosPrueba');
   assert.equal(seed.projects[5].repository, 'https://github.com/BenjaAranda/DepartamentoT7');

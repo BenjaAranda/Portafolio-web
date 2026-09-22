@@ -3,6 +3,7 @@ import type { Portfolio } from './model';
 export const seed: Portfolio = {
   settings: {
     name: 'Benjamín Aranda',
+    email: 'benjamin.aranda.dev@gmail.com',
     linkedin: 'https://www.linkedin.com/in/benjaminarandadev/',
     github: 'https://github.com/BenjaAranda',
   },
