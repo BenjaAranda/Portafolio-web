@@ -5,7 +5,7 @@
 1. Crear un proyecto Sanity Free, dataset público `production`, y conservar solo el administrador autorizado. Activar segundo factor en el proveedor de identidad.
 2. Copiar `apps/studio/.env.example` a `.env.local` en esa misma carpeta y completar el ID del proyecto.
 3. Ejecutar `npm run studio`. Añadir el origen local exacto en CORS cuando Sanity lo solicite. No usar comodines con credenciales.
-4. Para una instancia nueva, ejecutar una sola vez `npm run import:seed --workspace @portfolio/studio`. Importa los contenidos revisados y sus imágenes locales. Conserva cualquier documento que ya exista con el mismo ID y nunca reemplaza cambios editoriales. Revisar los documentos publicados en Studio y completar correo y CV cuando estén disponibles.
+4. Para una instancia nueva, ejecutar una sola vez `npm run import:seed --workspace @portfolio/studio`. Importa los contenidos revisados y sus imágenes locales. Conserva cualquier documento que ya exista con el mismo ID y nunca reemplaza cambios editoriales. Revisar los documentos publicados en Studio; el correo y el CV en español actuales ya están cargados en el dataset de producción.
 5. Desplegar Studio con `npm run deploy --workspace @portfolio/studio`. Ese comando publica el administrador en Sanity; requiere login.
 
 El ID de proyecto es público. Las contraseñas, tokens y secretos no deben guardarse en documentos del CMS ni en Git.
@@ -53,4 +53,4 @@ Opcional: configurar `CLOUDFLARE_ANALYTICS_TOKEN`. Se carga solo con `SITE_READY
 
 ## Pendientes antes de producción
 
-Completar el correo y CV públicos cuando estén disponibles, revisar la versión inglesa y el contenido editorial, conectar GitHub a Vercel para despliegues por `push`, decidir dominio definitivo y hacer una revisión final antes de activar `SITE_READY=true`. Hay un respaldo de Sanity en `backups/` (excluido de Git). Noindex es una indicación a buscadores y no un control de acceso; usar Deployment Protection de Vercel si se necesita una preview privada.
+Preparar el CV en inglés, revisar la versión inglesa y el contenido editorial, conectar GitHub a Vercel para despliegues por `push`, decidir dominio definitivo y hacer una revisión final antes de activar `SITE_READY=true`. Hay un respaldo de Sanity en `backups/` (excluido de Git). Noindex es una indicación a buscadores y no un control de acceso; usar Deployment Protection de Vercel si se necesita una preview privada.

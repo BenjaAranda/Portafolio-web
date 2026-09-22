@@ -26,7 +26,7 @@
 
 - [x] Corregir avisos altos de dependencias indirectas mediante actualizaciones acotadas; auditoría reducida de 13 a 6 avisos moderados.
 - [ ] Resolver aviso de uuid vía typeid-js y sus dependientes del editor (6 avisos moderados). Verificar compatibilidad antes de cambiar de versión principal.
-- [x] Nombre profesional y enlaces reales de LinkedIn/GitHub. Correo y CV pendientes.
+- [x] Nombre profesional, correo, CV en español y enlaces reales de LinkedIn/GitHub.
 - [x] Siete casos bilingües: BecasFind, SIVIS, LevelUP React, LevelUP Móvil, CasosPrueba, Departamento T7 y Portafolio Web, con capturas identificadas por su origen.
 - [x] Revisar dependencias y configuración de BecasFind, ScraperBecasFind, LevelUP React, backend Java, app Android, backend Flask y CasosPrueba; incorporar Playwright y el stack omitido.
 - [x] Volver a ejecutar los frontends BecasFind, LevelUP React y Departamento T7; compilar e instalar LevelUP Móvil en emulador y renovar capturas.
@@ -36,7 +36,7 @@
 - [x] Leer LinkedIn mediante sesión disponible: perfil, educación, experiencias, ocho credenciales y aptitudes.
 - [x] Reorganizar stack, retirar eslóganes ES/EN e incorporar logos y certificados desplegables.
 - [x] Incorporar la fotografía personal y el material de Departamento T7 entregados por el propietario.
-- [ ] CV ES/EN y revisión de traducciones.
+- [ ] CV en inglés y revisión de traducciones. El CV en español ya está publicado.
 - [x] Práctica MasterBase, fechas y tres cursos sustentados por el informe y sus certificados.
 - [x] Incorporar enlaces publicados de EF SET, MCCR y validación de Duoc; conservar evidencias locales MasterBase.
 - [ ] Recibir archivos o enlaces de los cursos Santander si se desea mostrar el documento.

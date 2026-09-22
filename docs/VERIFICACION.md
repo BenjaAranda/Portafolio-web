@@ -61,6 +61,6 @@ Rediseño aprobado de perfil junior: presentación personal, proyectos, capacida
 ## Pendientes y límites
 
 - La auditoría npm se redujo de 13 avisos a 6 moderados, sin altos ni críticos. Se fijaron overrides acotados: `@vercel/frameworks` usa `js-yaml@3.15.2` y `smol-toml@1.8.0`; `@module-federation/dts-plugin` usa `adm-zip@0.6.1`. El lockfile y el árbol instalado reflejan los cambios. Los avisos restantes derivan de `uuid<11.1.1` vía `typeid-js` en las herramientas de Sanity. No se forzó un cambio mayor de uuid ni una bajada de Sanity. Revisar estos overrides cuando los paquetes ascendentes incorporen las correcciones; una auditoría sin avisos tampoco sustituye pruebas de seguridad.
-- Las pruebas actuales verifican las imágenes locales reales, pero no CV, despliegues de proyectos ni el ciclo remoto del CMS. Tampoco sustituyen revisión manual con lector de pantalla ni Safari real.
+- Las pruebas actuales verifican las imágenes locales reales. El CV en español responde como PDF desde Sanity y el ciclo remoto del webhook se comprobó con respuesta 200; aún falta automatizar esas comprobaciones y revisar con lector de pantalla y Safari real.
 - No hay despliegue en Vercel, conexión de cuenta CMS ni dominio configurado.
 - `node_modules.incomplete` conserva una instalación fallida previa, está excluida de Git y no se utiliza. No contiene código fuente del proyecto.

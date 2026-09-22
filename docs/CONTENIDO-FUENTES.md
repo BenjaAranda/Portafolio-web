@@ -1,5 +1,10 @@
 # Contenido incorporado el 19 de septiembre de 2026
 
+## Contacto y CV
+
+- Correo profesional facilitado directamente por Benjamín: `benjamin.aranda.dev@gmail.com`.
+- CV en español `CV-BenjaminAranda-2026.pdf`, facilitado por Benjamín y revisado visualmente antes de publicarlo como archivo en Sanity.
+
 ## Auditoría de repositorios y nuevas capturas · 20 de septiembre de 2026
 
 - Portafolio Web: proyecto personal de este repositorio. La captura de la ficha procede del inicio local a 1440×900. La ficha no anuncia una demo pública ni presenta la integración de Sanity o el despliegue Vercel como terminados.

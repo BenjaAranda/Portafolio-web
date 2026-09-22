@@ -10,7 +10,7 @@ Node.js 22 LTS (22.12 o superior), npm.
 2. `npm run dev`
 3. Abrir http://localhost:3000/es
 
-La vista local usa contenido contrastado con los repositorios públicos y materiales facilitados por el propietario. No publica un correo ni un CV que aún no se han definido. Muestra un aviso de preparación y bloquea la indexación hasta completar la configuración.
+La vista local usa contenido contrastado con los repositorios públicos y materiales facilitados por el propietario. El correo profesional está verificado y el CV en español se administra como archivo en Sanity. El sitio mantiene el aviso de preparación y bloquea la indexación hasta completar la revisión final.
 
 ## Comandos
 
