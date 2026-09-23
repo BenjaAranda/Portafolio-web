@@ -1,5 +1,14 @@
 # Contenido incorporado el 19 de septiembre de 2026
 
+## Evidencias de proyectos y CV bilingüe · 23 de septiembre de 2026
+
+- BecasFind se amplió con el documento de requerimientos y la presentación EVA1 entregados por el propietario. Se incorporaron búsqueda libre, filtros por región/comuna, institución, NEM/PAES y RSH, paginación, estados de carga, vacío y error, ficha detallada y requisitos de seguridad. Las tres nuevas imágenes proceden de las láminas 10, 14 y 16; documentan recorrido del usuario, arquitectura planificada y atributos de calidad. La arquitectura MySQL/AWS de la presentación se identifica como planteamiento inicial y no sustituye la configuración PostgreSQL observada en el repositorio actual.
+- LevelUP React se amplió con `LevelUp-fullstackExamen.pptx`. Las cuatro nuevas imágenes muestran funcionalidades de tienda, CRUD administrativo, arquitectura backend y resultados de pruebas documentados. La ficha distingue entre lo mostrado en la presentación y las comprobaciones locales previas, sin afirmar pagos ni un despliegue productivo.
+- LevelUP Móvil se amplió con `PresentacionLevelUPGamerAPPMoviles.pptx`. Se documentaron MVVM, Jetpack Compose, Room, Navigation Compose, filtros, carrito, descuento Duoc, WhatsApp y calendario. Las tres nuevas imágenes proceden de las láminas 3, 5 y 10.
+- CasosPrueba se amplió con `ExamenAutomatizacionBenja.pptx`. Se documentaron Java 17, Selenium, Cucumber, Maven, Apache POI, pruebas data-driven, esperas explícitas, manejo de alertas, trazabilidad y capturas de evidencia. Las cuatro nuevas imágenes proceden de las láminas 5, 6, 7 y 10; el resultado principal de 18 escenarios y 152 pasos sigue respaldado por la ejecución local descrita más abajo.
+- Las catorce láminas se renderizaron localmente a 1280×720, se revisaron visualmente y se convirtieron a WebP. No se publicaron notas del presentador, datos privados ni instrucciones contenidas dentro de los archivos.
+- Se creó `CV-BenjaminAranda-2026-EN.pdf` a partir del CV español entregado por el propietario. Conserva una página, fotografía, columnas, períodos, experiencia, formación y certificaciones; únicamente se tradujo la redacción y se ajustó su longitud para mantener la composición. El archivo fue revisado como imagen y publicado en el campo `cvEn` de Sanity.
+
 ## Contacto y CV
 
 - Correo profesional facilitado directamente por Benjamín: `benjamin.aranda.dev@gmail.com`.

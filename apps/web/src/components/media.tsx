@@ -30,6 +30,20 @@ export function Media({
     '/projects/departamento-t7/inspeccion.webp': '2073 / 1300',
     '/projects/departamento-t7/exterior.webp': '1440 / 900',
     '/projects/portafolio-web/inicio.webp': '1440 / 900',
+    '/projects/becasfind/user-journey.webp': '16 / 9',
+    '/projects/becasfind/architecture-cloud.webp': '16 / 9',
+    '/projects/becasfind/value-security.webp': '16 / 9',
+    '/projects/levelup-react/store-features.webp': '16 / 9',
+    '/projects/levelup-react/admin-crud.webp': '16 / 9',
+    '/projects/levelup-react/backend-architecture.webp': '16 / 9',
+    '/projects/levelup-react/test-results.webp': '16 / 9',
+    '/projects/levelup-mobile/architecture.webp': '16 / 9',
+    '/projects/levelup-mobile/core-features.webp': '16 / 9',
+    '/projects/levelup-mobile/native-resources.webp': '16 / 9',
+    '/projects/casos-prueba/business-flow.webp': '16 / 9',
+    '/projects/casos-prueba/traceability.webp': '16 / 9',
+    '/projects/casos-prueba/gherkin-cases.webp': '16 / 9',
+    '/projects/casos-prueba/quality-metrics.webp': '16 / 9',
   };
   return (
     <div

@@ -42,20 +42,20 @@ export const seed: Portfolio = {
       category: { es: 'Proyecto de título', en: 'Capstone project' },
       year: '2026',
       summary: {
-        es: 'Buscador de becas estudiantiles con filtros, favoritos y recomendaciones por perfil.',
-        en: 'Student scholarship search with filters, favourites and profile-based recommendations.',
+        es: 'Plataforma para centralizar becas chilenas y encontrar beneficios mediante búsqueda, filtros por perfil y fichas detalladas.',
+        en: 'A platform that centralizes Chilean scholarships and finds relevant funding through search, profile filters and detailed listings.',
       },
       problem: {
-        es: 'La información sobre beneficios estudiantiles está dispersa.',
-        en: 'Information about student funding is scattered.',
+        es: 'La información de becas estatales, municipales e institucionales está repartida entre múltiples portales. Comparar requisitos como NEM, PAES, tramo del Registro Social de Hogares y ubicación obliga al estudiante a revisar fuentes por separado, con riesgo de perder oportunidades o postular a beneficios incompatibles.',
+        en: 'Information about national, municipal and institutional scholarships is spread across multiple portals. Comparing requirements such as grades, PAES scores, household income band and location forces students to check sources separately, increasing the risk of missing opportunities or applying for incompatible funding.',
       },
       role: {
         es: 'Desarrollé funcionalidades de frontend y backend, y trabajé en la preparación, recopilación e importación de datos de becas. Proyecto de título realizado en equipo entre marzo y julio de 2026.',
         en: 'I developed frontend and backend features and worked on scholarship data preparation, collection and import. A team capstone project developed between March and July 2026.',
       },
       solution: {
-        es: 'Frontend React, TypeScript, Vite y Tailwind CSS conectado a una API Spring Boot con Spring Security, JPA y PostgreSQL. Incluye administración, importación CSV y pruebas E2E con Playwright. El proceso de recopilación usa Python y Scrapy en un repositorio complementario.',
-        en: 'React, TypeScript, Vite and Tailwind CSS frontend connected to a Spring Boot API with Spring Security, JPA and PostgreSQL. Includes administration, CSV imports and Playwright E2E tests. Scholarship collection uses Python and Scrapy in a companion repository.',
+        es: 'Frontend React, TypeScript, Vite y Tailwind CSS conectado a una API Spring Boot con Spring Security, JPA y PostgreSQL. El catálogo contempla búsqueda libre, combinación y limpieza de filtros, paginación, estados de carga, resultados vacíos, manejo de errores y una ficha con requisitos y enlace oficial. Incluye administración, importación CSV y pruebas E2E con Playwright; la recopilación usa Python y Scrapy en un repositorio complementario.',
+        en: 'React, TypeScript, Vite and Tailwind CSS frontend connected to a Spring Boot API with Spring Security, JPA and PostgreSQL. The catalogue covers free-text search, combinable and removable filters, pagination, loading, empty and error states, plus a detailed listing with requirements and the official application link. It includes administration, CSV imports and Playwright E2E tests; collection uses Python and Scrapy in a companion repository.',
       },
       technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Spring Boot', 'PostgreSQL', 'Playwright', 'Python', 'Scrapy'],
       repository: 'https://github.com/BenjaAranda/BecasFind',
@@ -65,6 +65,33 @@ export const seed: Portfolio = {
           es: 'Inicio de BecasFind, capturado desde el frontend del repositorio en un entorno local.',
           en: 'BecasFind home page, captured from the repository frontend in a local environment.',
         },
+      },
+      gallery: [
+        {
+          url: '/projects/becasfind/user-journey.webp',
+          alt: {
+            es: 'Recorrido inicial del estudiante: búsqueda dispersa, comparación manual y riesgo de perder una beca.',
+            en: 'Initial student journey: scattered searches, manual comparison and the risk of missing a scholarship.',
+          },
+        },
+        {
+          url: '/projects/becasfind/architecture-cloud.webp',
+          alt: {
+            es: 'Arquitectura planteada para BecasFind con frontend React, backend Java, Maven y servicios AWS.',
+            en: 'Proposed BecasFind architecture with a React frontend, Java backend, Maven and AWS services.',
+          },
+        },
+        {
+          url: '/projects/becasfind/value-security.webp',
+          alt: {
+            es: 'Propuesta de valor y atributos de calidad: precisión de filtros, rapidez, integridad y aislamiento de la base de datos.',
+            en: 'Value proposition and quality attributes: filter accuracy, speed, integrity and database isolation.',
+          },
+        },
+      ],
+      results: {
+        es: 'Los requerimientos documentan nueve flujos funcionales y siete atributos no funcionales, con trazabilidad desde el problema hasta la arquitectura. La portada mostrada proviene del frontend ejecutado localmente; las láminas de la galería registran la etapa de análisis y planificación, por lo que se presentan como diseño del proyecto y no como evidencia de despliegue productivo.',
+        en: 'The requirements document nine functional flows and seven non-functional attributes, tracing the problem through to the architecture. The main screenshot comes from the locally run frontend; gallery slides document the analysis and planning stage, so they are presented as project design rather than evidence of a production deployment.',
       },
       lessons: {
         es: 'Unir búsqueda, perfiles y preparación de datos. El repositorio contiene pruebas Playwright de portada, inicio de sesión, búsqueda y detalle de beca; no se presentan aquí como pruebas aprobadas en esta revisión. Proyecto en equipo; el repositorio atribuye infraestructura y despliegue a José Naour.',
@@ -141,8 +168,8 @@ export const seed: Portfolio = {
       title: { es: 'LevelUP React', en: 'LevelUP React' },
       category: { es: 'Proyecto académico', en: 'Academic project' },
       summary: {
-        es: 'Tienda gamer en React con navegación por categorías, carrito, cuenta de usuario y vistas de administración.',
-        en: 'React gaming store with category navigation, a cart, user accounts and administration views.',
+        es: 'E-commerce gamer full stack con catálogo, carrito, autenticación, rutas protegidas y panel de administración.',
+        en: 'Full-stack gaming e-commerce with a catalogue, cart, authentication, protected routes and an administration panel.',
       },
       problem: {
         es: 'Migrar una tienda construida en HTML a una aplicación React con componentes reutilizables y navegación entre páginas.',
@@ -153,8 +180,8 @@ export const seed: Portfolio = {
         en: 'Academic full-stack development project hosted on my GitHub. The repository contains the React and Vite migration, store views and automated tests.',
       },
       solution: {
-        es: 'Componentes React con React Router y Bootstrap. Contextos para autenticación y carrito, cliente Axios hacia una API Java/Spring Boot en un repositorio complementario, y pruebas con Vitest y Testing Library.',
-        en: 'React components with React Router and Bootstrap. Authentication and cart contexts, an Axios client for a Java/Spring Boot API in a companion repository, and tests with Vitest and Testing Library.',
+        es: 'Componentes React con React Router y React-Bootstrap, contextos para autenticación y carrito, y cliente Axios. El backend complementario usa Java 21, Spring Boot 3.4, controladores REST bajo /api/v1, Spring Data JPA/Hibernate, PostgreSQL y autenticación stateless con JWT. La interfaz incorpora búsqueda, filtros, control de stock, checkout y CRUD de productos, categorías, usuarios y órdenes.',
+        en: 'React components with React Router and React-Bootstrap, authentication and cart contexts, and an Axios client. The companion backend uses Java 21, Spring Boot 3.4, REST controllers under /api/v1, Spring Data JPA/Hibernate, PostgreSQL and stateless JWT authentication. The interface includes search, filters, stock control, checkout and CRUD flows for products, categories, users and orders.',
       },
       results: {
         es: 'El código incluye pruebas de autenticación, rutas protegidas, carrito, checkout y componentes. La captura corresponde al frontend ejecutado localmente; no implica una tienda publicada ni valida pagos o servicios backend.',
@@ -169,6 +196,36 @@ export const seed: Portfolio = {
           en: 'LevelUP React home page with its gaming banner and categories, captured locally without the backend.',
         },
       },
+      gallery: [
+        {
+          url: '/projects/levelup-react/store-features.webp',
+          alt: {
+            es: 'Vistas del catálogo, buscador y carrito de LevelUP React.',
+            en: 'LevelUP React catalogue, search and cart views.',
+          },
+        },
+        {
+          url: '/projects/levelup-react/admin-crud.webp',
+          alt: {
+            es: 'Panel de administración con gestión de productos, categorías, usuarios, órdenes y stock crítico.',
+            en: 'Administration panel covering products, categories, users, orders and low-stock management.',
+          },
+        },
+        {
+          url: '/projects/levelup-react/backend-architecture.webp',
+          alt: {
+            es: 'Arquitectura backend con Java, Spring Boot, controladores, servicios, repositorios, JPA y JWT.',
+            en: 'Backend architecture using Java, Spring Boot, controllers, services, repositories, JPA and JWT.',
+          },
+        },
+        {
+          url: '/projects/levelup-react/test-results.webp',
+          alt: {
+            es: 'Resultados documentados de las pruebas unitarias ejecutadas con Vitest y React Testing Library.',
+            en: 'Documented unit test results from Vitest and React Testing Library.',
+          },
+        },
+      ],
     },
     {
       _id: 'levelup-mobile',
@@ -178,8 +235,8 @@ export const seed: Portfolio = {
       title: { es: 'LevelUP Móvil', en: 'LevelUP Mobile' },
       category: { es: 'Aplicación Android · Equipo', en: 'Android app · Team project' },
       summary: {
-        es: 'Versión Android de LevelUP Gamer con catálogo, carrito, cuenta y navegación nativa.',
-        en: 'Android version of LevelUP Gamer with a catalogue, cart, account and native navigation.',
+        es: 'Versión Android de LevelUP Gamer con arquitectura MVVM, catálogo, carrito, cuenta, Room e integraciones nativas.',
+        en: 'Android version of LevelUP Gamer with MVVM architecture, a catalogue, cart, account, Room and native integrations.',
       },
       problem: {
         es: 'Llevar la tienda LevelUP a una experiencia móvil con pantallas y almacenamiento propios de Android.',
@@ -190,8 +247,8 @@ export const seed: Portfolio = {
         en: 'Academic team project with Joaquín Robles and Martín Tobar, according to the README. The repository does not break down individual screen ownership.',
       },
       solution: {
-        es: 'App Kotlin con Jetpack Compose y Material 3. Navigation Compose organiza las pantallas de productos, carrito, registro, cuenta y checkout; Room almacena datos locales y Retrofit/OkHttp consulta una API Flask separada. Incluye una llamada demostrativa a PokeAPI.',
-        en: 'Kotlin app using Jetpack Compose and Material 3. Navigation Compose links product, cart, registration, account and checkout screens; Room stores local data, while Retrofit/OkHttp calls a separate Flask API. It also includes a PokeAPI demonstration.',
+        es: 'App Kotlin con Jetpack Compose y Material 3 organizada con MVVM. Navigation Compose conecta catálogo, filtros por categoría y precio, carrito con descuento Duoc, registro, cuenta y checkout. Room estructura entidades, DAO y base local; Retrofit/OkHttp consulta una API Flask separada. También integra soporte por WhatsApp y calendario para eventos del blog.',
+        en: 'Kotlin app using Jetpack Compose and Material 3, organized with MVVM. Navigation Compose connects the catalogue, category and price filters, a cart with a Duoc discount, registration, account and checkout. Room structures entities, DAOs and the local database; Retrofit/OkHttp calls a separate Flask API. It also integrates WhatsApp support and calendar events from the blog.',
       },
       results: {
         es: 'Compilé e instalé el APK en un emulador Android. La captura muestra la portada real; el catálogo no cargó porque la API de productos configurada para localhost:5000 no estaba disponible. No se verificaron compras ni autenticación de extremo a extremo.',
@@ -206,6 +263,29 @@ export const seed: Portfolio = {
           en: 'LevelUP Mobile home screen running in an Android emulator, showing the banner, navigation and product section without data from the local API.',
         },
       },
+      gallery: [
+        {
+          url: '/projects/levelup-mobile/architecture.webp',
+          alt: {
+            es: 'Arquitectura móvil MVVM con Kotlin, Jetpack Compose, Room y Navigation Compose.',
+            en: 'Mobile MVVM architecture with Kotlin, Jetpack Compose, Room and Navigation Compose.',
+          },
+        },
+        {
+          url: '/projects/levelup-mobile/core-features.webp',
+          alt: {
+            es: 'Pantallas de catálogo, carrito y creación de cuenta de LevelUP Móvil.',
+            en: 'LevelUP Mobile catalogue, cart and account creation screens.',
+          },
+        },
+        {
+          url: '/projects/levelup-mobile/native-resources.webp',
+          alt: {
+            es: 'Integraciones nativas con WhatsApp para soporte y calendario para eventos.',
+            en: 'Native integrations with WhatsApp for support and the calendar for events.',
+          },
+        },
+      ],
     },
     {
       _id: 'casos-prueba',
@@ -227,8 +307,8 @@ export const seed: Portfolio = {
         en: 'Academic project with Joaquín Robles. The presentation names both members and GitHub records contributions from my account to Joaquín’s repository; I do not claim sole authorship of the suite.',
       },
       solution: {
-        es: 'Escenarios Gherkin ejecutados con Java, Cucumber, Selenium WebDriver y Maven. Apache POI lee casos de transferencia desde Excel; los hooks adjuntan capturas cuando falla un escenario y Masterthought genera un reporte HTML.',
-        en: 'Gherkin scenarios run with Java, Cucumber, Selenium WebDriver and Maven. Apache POI reads transfer cases from Excel; hooks attach screenshots on scenario failure and Masterthought generates an HTML report.',
+        es: 'Escenarios Gherkin ejecutados con Java 17, Cucumber, Selenium WebDriver y Maven. Apache POI lee usuarios, cuentas y montos desde Excel para pruebas data-driven; hooks adjuntan capturas en pasos críticos y fallos, y Masterthought genera el reporte HTML. La suite incorporó esperas explícitas y manejo defensivo de alertas para reducir fallos intermitentes.',
+        en: 'Gherkin scenarios run with Java 17, Cucumber, Selenium WebDriver and Maven. Apache POI reads users, accounts and amounts from Excel for data-driven tests; hooks attach screenshots at critical steps and on failure, while Masterthought generates the HTML report. The suite added explicit waits and defensive alert handling to reduce intermittent failures.',
       },
       results: {
         es: 'Ejecuté la suite en un navegador sin ventanas visibles: 18 escenarios y 152 pasos aprobados en el sitio de demostración. La captura muestra el reporte generado en esta revisión. Para la prueba local fue necesario aceptar el certificado HTTPS no confiable de la demo; el cambio quedó solo en la copia de investigación.',
@@ -243,6 +323,36 @@ export const seed: Portfolio = {
           en: 'HTML report generated after running CasosPrueba locally: 18 scenarios and 152 steps passed.',
         },
       },
+      gallery: [
+        {
+          url: '/projects/casos-prueba/business-flow.webp',
+          alt: {
+            es: 'Flujo automatizado de inicio de sesión, navegación, carga de datos, transferencia y validación de saldos.',
+            en: 'Automated login, navigation, data entry, transfer and balance validation flow.',
+          },
+        },
+        {
+          url: '/projects/casos-prueba/traceability.webp',
+          alt: {
+            es: 'Matriz que vincula requerimientos, funcionalidades y escenarios de prueba automatizados.',
+            en: 'Traceability matrix linking requirements, features and automated test scenarios.',
+          },
+        },
+        {
+          url: '/projects/casos-prueba/gherkin-cases.webp',
+          alt: {
+            es: 'Escenarios Gherkin para autenticación y contacto dentro de la suite BDD.',
+            en: 'Gherkin scenarios for authentication and contact flows in the BDD suite.',
+          },
+        },
+        {
+          url: '/projects/casos-prueba/quality-metrics.webp',
+          alt: {
+            es: 'Resumen de métricas de la ejecución documentada para login, transferencias, búsqueda, feedback y cierre de sesión.',
+            en: 'Quality metrics summary for the documented login, transfer, search, feedback and logout execution.',
+          },
+        },
+      ],
     },
     {
       _id: 'departamento-t7',
