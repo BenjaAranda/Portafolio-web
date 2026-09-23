@@ -196,6 +196,54 @@ test('project pages provide a clear route back home without arrow icons', async 
   await expect(page.getByRole('link', { name: 'Volver al inicio', exact: true })).toBeVisible();
   await expect(page.locator('.case-navigation svg')).toHaveCount(0);
 });
+test('project images open at full size without a separate gallery button', async ({ page }) => {
+  await page.goto('/es/proyectos/becasfind');
+  const imageLinks = page.locator('.project-figure .project-image-link');
+  await expect(imageLinks).toHaveCount(4);
+  await expect(page.getByText('Abrir imagen completa', { exact: true })).toHaveCount(0);
+  for (const link of await imageLinks.all()) {
+    const href = await link.getAttribute('href');
+    expect(href).toBeTruthy();
+    await expect(link.locator('img')).toHaveCount(1);
+  }
+});
+test('returning home restores the previous portfolio position', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 760 });
+  await page.goto('/es');
+  const card = page
+    .locator('#proyectos .project-card')
+    .filter({ has: page.getByRole('heading', { name: 'BecasFind', exact: true }) });
+  await card.scrollIntoViewIfNeeded();
+  await page.evaluate(() => window.scrollBy(0, 120));
+  const previous = await page.evaluate(() => window.scrollY);
+  expect(previous).toBeGreaterThan(300);
+  await card.getByRole('link', { name: 'Explorar caso', exact: true }).click();
+  await expect(page).toHaveURL(/\/es\/proyectos\/becasfind$/);
+  await page.getByRole('link', { name: 'Volver al inicio', exact: true }).click();
+  await expect(page).toHaveURL(/\/es$/);
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(previous - 8);
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeLessThan(previous + 8);
+});
+test('English portfolio exposes the translated CV and no development banner', async ({ page }) => {
+  await page.goto('/en');
+  await expect(page.getByText('Development preview', { exact: false })).toHaveCount(0);
+  const cvLinks = page.getByRole('link', { name: 'View CV', exact: true });
+  expect(await cvLinks.count()).toBeGreaterThan(0);
+  for (const link of await cvLinks.all()) {
+    await expect(link).toHaveAttribute('href', /cdn\.sanity\.io\/files\/.*\.pdf/);
+  }
+});
+test('mobile stack cards and all-projects action stay compact', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/es');
+  const button = await page.locator('.all-projects-button').boundingBox();
+  expect(button).not.toBeNull();
+  expect(button!.width).toBeLessThan(220);
+  const stackHeights = await page
+    .locator('#capacidades .capability-row')
+    .evaluateAll((items) => items.map((item) => item.getBoundingClientRect().height));
+  expect(Math.max(...stackHeights)).toBeLessThan(270);
+});
 test('preview is not indexed and only offers the verified email', async ({ page, request }) => {
   await page.goto('/es');
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
