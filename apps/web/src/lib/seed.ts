@@ -395,10 +395,10 @@ export const seed: Portfolio = {
       _id: 'tools',
       title: { es: 'Herramientas y metodología', en: 'Tools and methodology' },
       description: {
-        es: 'Control de versiones, entorno de desarrollo y trabajo colaborativo.',
-        en: 'Version control, development environment and collaborative work.',
+        es: 'Control de versiones, asistentes de desarrollo, terminal y trabajo colaborativo.',
+        en: 'Version control, development assistants, terminal and collaborative work.',
       },
-      technologies: ['Git', 'GitHub', 'Vite', 'Scrum'],
+      technologies: ['Git', 'GitHub', 'Vite', 'Scrum', 'Codex', 'OpenCode', 'Warp'],
     },
     {
       _id: 'learning',

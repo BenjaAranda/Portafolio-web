@@ -237,7 +237,12 @@ export function Home({ data, locale }: { data: Portfolio; locale: Locale }) {
             ? 'Tecnologías utilizadas en proyectos y formación. El estudio en curso se indica por separado.'
             : 'Technologies used in projects and training. Current study is listed separately.'}
         </p>
-        <div className="capability-list">
+        <div
+          className="capability-list"
+          role="region"
+          aria-label={es ? 'Tecnologías por categoría' : 'Technologies by category'}
+          tabIndex={0}
+        >
           {establishedSkills.map((skill) => (
             <article className="capability-row" key={skill._id}>
               <div>
