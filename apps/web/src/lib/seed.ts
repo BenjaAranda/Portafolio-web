@@ -68,30 +68,30 @@ export const seed: Portfolio = {
       },
       gallery: [
         {
-          url: '/projects/becasfind/user-journey.webp',
+          url: '/projects/becasfind/catalogo.webp',
           alt: {
-            es: 'Recorrido inicial del estudiante: búsqueda dispersa, comparación manual y riesgo de perder una beca.',
-            en: 'Initial student journey: scattered searches, manual comparison and the risk of missing a scholarship.',
+            es: 'Buscador de BecasFind ejecutado localmente, con filtros por RSH, NEM, región, tipo, institución y categoría.',
+            en: 'Locally running BecasFind catalogue with filters for household income band, grades, region, scholarship type, institution and category.',
           },
         },
         {
-          url: '/projects/becasfind/architecture-cloud.webp',
+          url: '/projects/becasfind/detalle.webp',
           alt: {
-            es: 'Arquitectura planteada para BecasFind con frontend React, backend Java, Maven y servicios AWS.',
-            en: 'Proposed BecasFind architecture with a React frontend, Java backend, Maven and AWS services.',
+            es: 'Ficha local de una beca con institución, cobertura, fechas, requisitos y acceso a la convocatoria oficial.',
+            en: 'Local scholarship detail page showing institution, coverage, dates, requirements and a link to the official call.',
           },
         },
         {
-          url: '/projects/becasfind/value-security.webp',
+          url: '/projects/becasfind/admin-beca.webp',
           alt: {
-            es: 'Propuesta de valor y atributos de calidad: precisión de filtros, rapidez, integridad y aislamiento de la base de datos.',
-            en: 'Value proposition and quality attributes: filter accuracy, speed, integrity and database isolation.',
+            es: 'Formulario administrativo local para crear una beca y registrar sus fechas, requisitos y descripciones.',
+            en: 'Local administration form for creating a scholarship and recording its dates, requirements and descriptions.',
           },
         },
       ],
       results: {
-        es: 'Los requerimientos documentan nueve flujos funcionales y siete atributos no funcionales, con trazabilidad desde el problema hasta la arquitectura. La portada mostrada proviene del frontend ejecutado localmente; las láminas de la galería registran la etapa de análisis y planificación, por lo que se presentan como diseño del proyecto y no como evidencia de despliegue productivo.',
-        en: 'The requirements document nine functional flows and seven non-functional attributes, tracing the problem through to the architecture. The main screenshot comes from the locally run frontend; gallery slides document the analysis and planning stage, so they are presented as project design rather than evidence of a production deployment.',
+        es: 'El informe final documenta 67 casos de prueba y una matriz de trazabilidad. Las imágenes seleccionadas muestran la portada, el catálogo, el detalle y la administración en un entorno local; no se publican credenciales, conexiones de base de datos ni datos de usuarios.',
+        en: 'The final report documents 67 test cases and a traceability matrix. The selected images show the landing page, catalogue, detail view and administration in a local environment; credentials, database connections and user data are not published.',
       },
       lessons: {
         es: 'Unir búsqueda, perfiles y preparación de datos. El repositorio contiene pruebas Playwright de portada, inicio de sesión, búsqueda y detalle de beca; no se presentan aquí como pruebas aprobadas en esta revisión. Proyecto en equipo; el repositorio atribuye infraestructura y despliegue a José Naour.',
@@ -184,8 +184,8 @@ export const seed: Portfolio = {
         en: 'React components with React Router and React-Bootstrap, authentication and cart contexts, and an Axios client. The companion backend uses Java 21, Spring Boot 3.4, REST controllers under /api/v1, Spring Data JPA/Hibernate, PostgreSQL and stateless JWT authentication. The interface includes search, filters, stock control, checkout and CRUD flows for products, categories, users and orders.',
       },
       results: {
-        es: 'El código incluye pruebas de autenticación, rutas protegidas, carrito, checkout y componentes. La captura corresponde al frontend ejecutado localmente; no implica una tienda publicada ni valida pagos o servicios backend.',
-        en: 'The code includes tests for authentication, protected routes, cart, checkout and components. The screenshot shows the frontend running locally; it does not imply a live store or validation of payments or backend services.',
+        es: 'El código incluye pruebas de autenticación, rutas protegidas, carrito, checkout y componentes. Las capturas muestran el frontend, el panel administrativo y la documentación OpenAPI en entornos locales; no implican una tienda publicada ni validan pagos reales.',
+        en: 'The code includes tests for authentication, protected routes, cart, checkout and components. The screenshots show the frontend, administration panel and OpenAPI documentation in local environments; they do not imply a live store or validate real payments.',
       },
       technologies: ['React', 'JavaScript', 'Vite', 'Bootstrap', 'Axios', 'Vitest', 'Spring Boot'],
       repository: 'https://github.com/BenjaAranda/LevelUP-react',
@@ -198,31 +198,24 @@ export const seed: Portfolio = {
       },
       gallery: [
         {
-          url: '/projects/levelup-react/store-features.webp',
+          url: '/projects/levelup-react/catalogo.webp',
           alt: {
-            es: 'Vistas del catálogo, buscador y carrito de LevelUP React.',
-            en: 'LevelUP React catalogue, search and cart views.',
+            es: 'Catálogo local de LevelUP React con búsqueda, filtros de categoría y precio, stock y acciones de carrito.',
+            en: 'Local LevelUP React catalogue with search, category and price filters, stock and cart actions.',
           },
         },
         {
-          url: '/projects/levelup-react/admin-crud.webp',
+          url: '/projects/levelup-react/administracion.webp',
           alt: {
             es: 'Panel de administración con gestión de productos, categorías, usuarios, órdenes y stock crítico.',
             en: 'Administration panel covering products, categories, users, orders and low-stock management.',
           },
         },
         {
-          url: '/projects/levelup-react/backend-architecture.webp',
+          url: '/projects/levelup-react/api-openapi.webp',
           alt: {
-            es: 'Arquitectura backend con Java, Spring Boot, controladores, servicios, repositorios, JPA y JWT.',
-            en: 'Backend architecture using Java, Spring Boot, controllers, services, repositories, JPA and JWT.',
-          },
-        },
-        {
-          url: '/projects/levelup-react/test-results.webp',
-          alt: {
-            es: 'Resultados documentados de las pruebas unitarias ejecutadas con Vitest y React Testing Library.',
-            en: 'Documented unit test results from Vitest and React Testing Library.',
+            es: 'Documentación OpenAPI local del backend Spring Boot con endpoints versionados de ventas, productos y autenticación.',
+            en: 'Local OpenAPI documentation for the Spring Boot backend, showing versioned sales, product and authentication endpoints.',
           },
         },
       ],
@@ -251,8 +244,8 @@ export const seed: Portfolio = {
         en: 'Kotlin app using Jetpack Compose and Material 3, organized with MVVM. Navigation Compose connects the catalogue, category and price filters, a cart with a Duoc discount, registration, account and checkout. Room structures entities, DAOs and the local database; Retrofit/OkHttp calls a separate Flask API. It also integrates WhatsApp support and calendar events from the blog.',
       },
       results: {
-        es: 'Compilé e instalé el APK en un emulador Android. La captura muestra la portada real; el catálogo no cargó porque la API de productos configurada para localhost:5000 no estaba disponible. No se verificaron compras ni autenticación de extremo a extremo.',
-        en: 'I built and installed the APK on an Android emulator. The screenshot shows the actual home screen; the catalogue did not load because the product API configured at localhost:5000 was unavailable. Purchases and authentication were not verified end to end.',
+        es: 'Las capturas aportadas muestran la portada, el filtrado de productos y el carrito en Android. En mi verificación independiente compilé e instalé el APK, pero la API local configurada en localhost:5000 no estuvo disponible; por eso no afirmo una compra o autenticación validada de extremo a extremo.',
+        en: 'The supplied screenshots show the Android home screen, product filtering and cart. In my independent review I built and installed the APK, but the local API configured at localhost:5000 was unavailable, so I do not claim end-to-end purchase or authentication validation.',
       },
       technologies: ['Kotlin', 'Jetpack Compose', 'Material 3', 'Room', 'Retrofit', 'Flask'],
       repository: 'https://github.com/BenjaAranda/AplicacionesMoviles',
@@ -265,24 +258,17 @@ export const seed: Portfolio = {
       },
       gallery: [
         {
-          url: '/projects/levelup-mobile/architecture.webp',
+          url: '/projects/levelup-mobile/filtros.webp',
           alt: {
-            es: 'Arquitectura móvil MVVM con Kotlin, Jetpack Compose, Room y Navigation Compose.',
-            en: 'Mobile MVVM architecture with Kotlin, Jetpack Compose, Room and Navigation Compose.',
+            es: 'Pantalla Android de productos con buscador, filtros de orden, categoría y precio, y navegación inferior.',
+            en: 'Android product screen with search, order, category and price filters, plus bottom navigation.',
           },
         },
         {
-          url: '/projects/levelup-mobile/core-features.webp',
+          url: '/projects/levelup-mobile/carrito.webp',
           alt: {
-            es: 'Pantallas de catálogo, carrito y creación de cuenta de LevelUP Móvil.',
-            en: 'LevelUP Mobile catalogue, cart and account creation screens.',
-          },
-        },
-        {
-          url: '/projects/levelup-mobile/native-resources.webp',
-          alt: {
-            es: 'Integraciones nativas con WhatsApp para soporte y calendario para eventos.',
-            en: 'Native integrations with WhatsApp for support and the calendar for events.',
+            es: 'Carrito de LevelUP Móvil con cantidades, precio unitario, subtotal y eliminación de productos.',
+            en: 'LevelUP Mobile cart with quantities, unit price, subtotal and product removal.',
           },
         },
       ],
@@ -325,10 +311,10 @@ export const seed: Portfolio = {
       },
       gallery: [
         {
-          url: '/projects/casos-prueba/business-flow.webp',
+          url: '/projects/casos-prueba/altoro-demo.webp',
           alt: {
-            es: 'Flujo automatizado de inicio de sesión, navegación, carga de datos, transferencia y validación de saldos.',
-            en: 'Automated login, navigation, data entry, transfer and balance validation flow.',
+            es: 'Sitio bancario Altoro Mutual, identificado explícitamente como demostración, usado como objetivo de la suite automatizada.',
+            en: 'Altoro Mutual banking site, explicitly labelled as a demo, used as the target for the automated suite.',
           },
         },
         {
@@ -336,13 +322,6 @@ export const seed: Portfolio = {
           alt: {
             es: 'Matriz que vincula requerimientos, funcionalidades y escenarios de prueba automatizados.',
             en: 'Traceability matrix linking requirements, features and automated test scenarios.',
-          },
-        },
-        {
-          url: '/projects/casos-prueba/gherkin-cases.webp',
-          alt: {
-            es: 'Escenarios Gherkin para autenticación y contacto dentro de la suite BDD.',
-            en: 'Gherkin scenarios for authentication and contact flows in the BDD suite.',
           },
         },
         {
@@ -408,6 +387,13 @@ export const seed: Portfolio = {
           alt: {
             es: 'Vista exterior isométrica de Departamento T7, capturada tras ejecutar localmente el simulador web.',
             en: 'Isometric exterior view of Departamento T7, captured from the locally running web simulator.',
+          },
+        },
+        {
+          url: '/projects/departamento-t7/referencia-plano.webp',
+          alt: {
+            es: 'Referencia isométrica entregada para modelar la distribución, terminaciones y equipamiento del departamento T7.',
+            en: 'Supplied isometric reference used to model the T7 apartment layout, finishes and fixtures.',
           },
         },
       ],

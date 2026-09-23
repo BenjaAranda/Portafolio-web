@@ -973,30 +973,34 @@ main {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
   margin-top: 32px;
-  align-items: start;
+  align-items: stretch;
+  grid-auto-rows: 1fr;
 }
 .credential-card {
-  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 18px;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 12px;
   min-width: 0;
   background: #fff;
 }
 .credential-issuer {
   display: flex;
   align-items: center;
-  gap: 14px;
-  min-height: 48px;
+  gap: 10px;
+  min-height: 40px;
   font-size: 13px;
   color: var(--muted);
 }
 .credential-card h3 {
-  margin-top: 22px;
-  font-size: 19px;
-  line-height: 1.4;
+  margin-top: 12px;
+  font-size: 18px;
+  line-height: 1.32;
 }
 .credential-dates {
-  margin: 18px 0 12px;
+  margin: 12px 0 8px;
   font-size: 13px;
 }
 .credential-dates > div {
@@ -1016,7 +1020,7 @@ main {
   font-size: 12px;
   overflow-wrap: anywhere;
   color: var(--muted);
-  margin-bottom: 12px;
+  margin: 4px 0 6px;
 }
 .credential-card .text-link {
   font-size: 14px;
@@ -1290,20 +1294,15 @@ main {
   margin-top: 16px;
 }
 .credential-grid {
-  grid-auto-rows: auto;
-  align-items: start;
+  grid-auto-rows: 1fr;
+  align-items: stretch;
 }
 .credential-card {
-  display: flex;
-  flex-direction: column;
-  border-radius: 12px;
-}
-.credential-card h3 {
-  min-height: 0;
+  height: 100%;
 }
 .credential-card-actions {
-  margin-top: 0;
-  padding-top: 4px;
+  margin-top: auto;
+  padding-top: 6px;
 }
 .credential-card-actions .text-link {
   font-weight: 650;
@@ -1688,21 +1687,24 @@ main {
   }
 
   .credential-grid {
-    display: flex;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: min(82vw, 318px);
+    grid-auto-rows: 1fr;
+    align-items: stretch;
     margin-top: 22px;
     margin-right: -14px;
   }
 
   .credential-card {
-    flex: 0 0 min(82vw, 318px);
-    height: auto;
+    width: 100%;
+    height: 100%;
     padding: 16px;
     scroll-snap-align: start;
   }
 
   .credential-card h3 {
-    min-height: 0;
     margin-top: 14px;
     font-size: 17px;
   }

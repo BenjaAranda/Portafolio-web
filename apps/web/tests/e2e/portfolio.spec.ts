@@ -146,6 +146,23 @@ test('certificates expand and institutional logos load', async ({ page }) => {
   await expect(page.locator('body')).not.toContainText('Menos tareas repetitivas');
 });
 
+test('credential cards keep equal heights without excessive internal spacing', async ({ page }) => {
+  for (const viewport of [
+    { width: 1440, height: 900 },
+    { width: 390, height: 844 },
+  ]) {
+    await page.setViewportSize(viewport);
+    await page.goto('/es#certificaciones');
+    const cards = page.locator('.credential-card');
+    await expect(cards).toHaveCount(9);
+    const heights = await cards.evaluateAll((items) =>
+      items.map((item) => item.getBoundingClientRect().height),
+    );
+    expect(Math.max(...heights) - Math.min(...heights)).toBeLessThan(2);
+    expect(Math.max(...heights)).toBeLessThan(viewport.width > 700 ? 360 : 340);
+  }
+});
+
 test('all documented projects have real images and bilingual detail pages', async ({ page }) => {
   for (const locale of ['es', 'en']) {
     for (const slug of ['becasfind', 'sivis', 'levelup-react', 'levelup-mobile', 'casos-prueba', 'departamento-t7', 'portafolio-web']) {
