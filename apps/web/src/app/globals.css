@@ -94,13 +94,6 @@ main {
 .skip-link:focus {
   top: 20px;
 }
-.preview-banner {
-  text-align: center;
-  padding: 8px 16px;
-  font-size: 11px;
-  background: var(--soft);
-  color: var(--muted);
-}
 .header {
   border-bottom: 1px solid var(--line);
   background: white;
@@ -595,7 +588,7 @@ main {
   object-fit: contain;
 }
 .project-figure {
-  margin: 32px 0;
+  margin: 26px 0;
 }
 .project-figure figcaption {
   margin-top: 12px;
@@ -604,15 +597,26 @@ main {
   line-height: 1.7;
   color: var(--muted);
 }
-.project-figure > .text-link {
-  margin-top: 8px;
-}
 .project-figure .media {
   background: #fff;
   border: 1px solid var(--line);
 }
+.project-image-link {
+  display: block;
+  cursor: zoom-in;
+}
+.project-image-link:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+}
+.project-image-link .media {
+  margin-top: 0;
+}
 .project-card .media {
   margin: 0;
+}
+.project-card .media img {
+  object-fit: cover;
 }
 .project-card .media-mobile-card {
   background: #191622;
@@ -1286,21 +1290,20 @@ main {
   margin-top: 16px;
 }
 .credential-grid {
-  grid-auto-rows: 1fr;
-  align-items: stretch;
+  grid-auto-rows: auto;
+  align-items: start;
 }
 .credential-card {
   display: flex;
-  height: 100%;
   flex-direction: column;
   border-radius: 12px;
 }
 .credential-card h3 {
-  min-height: 54px;
+  min-height: 0;
 }
 .credential-card-actions {
-  margin-top: auto;
-  padding-top: 8px;
+  margin-top: 0;
+  padding-top: 4px;
 }
 .credential-card-actions .text-link {
   font-weight: 650;
@@ -1431,10 +1434,6 @@ main {
     width: calc(100% - 28px);
   }
 
-  .preview-banner {
-    padding-block: 6px;
-  }
-
   .nav-shell {
     min-height: 68px;
   }
@@ -1541,9 +1540,12 @@ main {
   }
 
   .all-projects-button {
-    width: 100%;
-    min-height: 46px;
-    padding-block: 11px;
+    width: auto;
+    min-height: 40px;
+    padding: 9px 14px;
+    border-color: #7aa7a3;
+    background: #e6f2f0;
+    color: #164e52;
   }
 
   #proyectos .project-grid,
@@ -1613,16 +1615,18 @@ main {
   }
 
   .capability-list {
-    grid-auto-columns: minmax(78vw, 296px);
+    display: flex;
+    align-items: flex-start;
     margin-top: 20px;
     margin-right: -14px;
   }
 
   .capability-row {
-    min-height: 240px;
+    flex: 0 0 min(84vw, 328px);
+    min-height: 0;
     justify-content: flex-start;
-    gap: 14px;
-    padding: 18px;
+    gap: 10px;
+    padding: 14px;
     border: 1px solid var(--line);
     border-radius: 12px;
     background: #fff;
@@ -1638,23 +1642,27 @@ main {
   }
 
   .capability-row p {
-    margin-top: 6px;
-    font-size: 13px;
-    line-height: 1.55;
+    margin-top: 4px;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .capability-row .capability-tools {
+    gap: 5px;
   }
 
   .technology-tag {
-    min-height: 29px;
-    padding: 4px 8px 4px 5px;
-    font-size: 12px;
+    min-height: 25px;
+    padding: 3px 7px 3px 4px;
+    font-size: 11px;
   }
 
   .technology-icon,
   .technology-fallback,
   .technology-tag img {
-    width: 20px;
-    height: 20px;
-    flex-basis: 20px;
+    width: 17px;
+    height: 17px;
+    flex-basis: 17px;
   }
 
   .learning-panel,
@@ -1680,13 +1688,16 @@ main {
   }
 
   .credential-grid {
-    grid-auto-columns: minmax(78vw, 296px);
+    display: flex;
+    align-items: flex-start;
     margin-top: 22px;
     margin-right: -14px;
   }
 
   .credential-card {
-    padding: 18px;
+    flex: 0 0 min(82vw, 318px);
+    height: auto;
+    padding: 16px;
     scroll-snap-align: start;
   }
 
