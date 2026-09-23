@@ -28,7 +28,7 @@ test('header remains visible and layouts fit narrow phones and tablets', async (
     await expect
       .poll(async () =>
         page
-          .locator('header')
+          .locator('header.header')
           .evaluate((element) => Math.round(element.getBoundingClientRect().top)),
       )
       .toBe(0);
@@ -52,6 +52,9 @@ test('junior profile exposes projects, skills and honest certification state', a
     .poll(() => portrait.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth > 0))
     .toBe(true);
   await expect(page.locator('#proyectos h2')).toHaveText('Proyectos');
+  await expect(page.locator('#perfil')).toContainText('automatización de procesos');
+  await expect(page.locator('#perfil')).not.toContainText('Android');
+  await expect(page.locator('#perfil')).not.toContainText('MasterBase');
   await expect(page.locator('#capacidades h2')).toHaveText('Stack tecnológico');
   await expect(page.locator('#certificaciones')).toContainText('Smartview Avanzado');
   await expect(page.locator('.credential-card')).toHaveCount(9);
@@ -62,7 +65,7 @@ test('junior profile exposes projects, skills and honest certification state', a
   await expect(page.locator('#trayectoria')).toContainText('Mar. – jul. 2026');
 });
 
-test('social logos load and six project cards form an even responsive grid', async ({ page }) => {
+test('social logos load and selected project cards form an even responsive grid', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/es');
   for (const icon of await page
@@ -77,7 +80,15 @@ test('social logos load and six project cards form an even responsive grid', asy
   for (const route of ['/es', '/es/proyectos']) {
     await page.goto(route);
     const cards = page.locator('.project-grid .project-card');
-    await expect(cards).toHaveCount(route === '/es' ? 6 : 7);
+    await expect(cards).toHaveCount(route === '/es' ? 4 : 7);
+    if (route === '/es') {
+      await expect(cards.locator('h3')).toHaveText([
+        'BecasFind',
+        'SIVIS',
+        'LevelUP React',
+        'CasosPrueba',
+      ]);
+    }
     const positions = await cards.evaluateAll((elements) =>
       elements.map((element) => {
         const { x, y, width, height } = element.getBoundingClientRect();
@@ -86,14 +97,10 @@ test('social logos load and six project cards form an even responsive grid', asy
     );
     expect(Math.abs(positions[0].y - positions[1].y)).toBeLessThan(2);
     expect(Math.abs(positions[2].y - positions[3].y)).toBeLessThan(2);
-    expect(Math.abs(positions[4].y - positions[5].y)).toBeLessThan(2);
     expect(Math.abs(positions[0].x - positions[2].x)).toBeLessThan(2);
-    expect(Math.abs(positions[0].x - positions[4].x)).toBeLessThan(2);
     expect(Math.abs(positions[1].x - positions[3].x)).toBeLessThan(2);
-    expect(Math.abs(positions[1].x - positions[5].x)).toBeLessThan(2);
     expect(Math.abs(positions[0].height - positions[1].height)).toBeLessThan(2);
     expect(Math.abs(positions[2].height - positions[3].height)).toBeLessThan(2);
-    expect(Math.abs(positions[4].height - positions[5].height)).toBeLessThan(2);
     await page.setViewportSize({ width: 390, height: 844 });
     const mobile = await cards.evaluateAll((elements) =>
       elements.map((element) => element.getBoundingClientRect().x),
@@ -132,7 +139,7 @@ test('all documented projects have real images and bilingual detail pages', asyn
   for (const locale of ['es', 'en']) {
     for (const slug of ['becasfind', 'sivis', 'levelup-react', 'levelup-mobile', 'casos-prueba', 'departamento-t7', 'portafolio-web']) {
       await page.goto(`/${locale}/${locale === 'es' ? 'proyectos' : 'projects'}/${slug}`);
-      const images = page.locator('.case-page img');
+      const images = page.locator('.case-page .media img');
       expect(await images.count()).toBeGreaterThan(0);
       for (const image of await images.all()) {
         await image.scrollIntoViewIfNeeded();
@@ -168,6 +175,15 @@ test('project index, localized navigation and 404', async ({ page }) => {
   await expect(page).toHaveURL(/\/en\/projects$/);
   const response = await page.goto('/en/projects/does-not-exist');
   expect(response?.status()).toBe(404);
+});
+test('project pages provide a clear route back home without arrow icons', async ({ page }) => {
+  await page.goto('/es/proyectos');
+  const home = page.getByRole('link', { name: 'Volver al inicio', exact: true });
+  await expect(home).toBeVisible();
+  await expect(home.locator('svg')).toHaveCount(0);
+  await page.goto('/es/proyectos/becasfind');
+  await expect(page.getByRole('link', { name: 'Volver al inicio', exact: true })).toBeVisible();
+  await expect(page.locator('.case-navigation svg')).toHaveCount(0);
 });
 test('preview is not indexed and only offers the verified email', async ({ page, request }) => {
   await page.goto('/es');
