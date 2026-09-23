@@ -56,6 +56,10 @@ test('junior profile exposes projects, skills and honest certification state', a
   await expect(page.locator('#perfil')).not.toContainText('Android');
   await expect(page.locator('#perfil')).not.toContainText('MasterBase');
   await expect(page.locator('#capacidades h2')).toHaveText('Stack tecnológico');
+  await expect(page.locator('#capacidades')).toContainText('Codex');
+  await expect(page.locator('#capacidades')).toContainText('OpenCode');
+  await expect(page.locator('#capacidades')).toContainText('Warp');
+  await expect(page.locator('#capacidades .technology-fallback')).toHaveCount(0);
   await expect(page.locator('#certificaciones')).toContainText('Smartview Avanzado');
   await expect(page.locator('.credential-card')).toHaveCount(9);
   await expect(
@@ -103,9 +107,16 @@ test('social logos load and selected project cards form an even responsive grid'
     expect(Math.abs(positions[2].height - positions[3].height)).toBeLessThan(2);
     await page.setViewportSize({ width: 390, height: 844 });
     const mobile = await cards.evaluateAll((elements) =>
-      elements.map((element) => element.getBoundingClientRect().x),
+      elements.map((element) => {
+        const { x, y, width } = element.getBoundingClientRect();
+        return { x, y, width };
+      }),
     );
-    expect(mobile.every((x) => Math.abs(x - mobile[0]) < 2)).toBe(true);
+    expect(mobile.every(({ y }) => Math.abs(y - mobile[0].y) < 2)).toBe(true);
+    expect(mobile[1].x).toBeGreaterThan(mobile[0].x + mobile[0].width);
+    expect(
+      await page.locator('.project-grid').evaluate((element) => element.scrollWidth > element.clientWidth),
+    ).toBe(true);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
       true,
     );
