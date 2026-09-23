@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getPortfolio, siteReady } from '@/lib/content';
 import { isLocale, privacyPath, projectPath, visibleProjects } from '@/lib/model';
 import { copy } from '@/lib/i18n';
 import { EmptyProjects, Eyebrow, ProjectCard } from '@/components/portfolio';
+import { ReturnHomeLink } from '@/components/portfolio-navigation';
 type Props = { params: Promise<{ locale: string; section: string }> };
 function sectionType(locale: string, section: string) {
   if (locale === 'es')
@@ -47,17 +47,21 @@ export default async function Page({ params }: Props) {
           {siteReady && process.env.CLOUDFLARE_ANALYTICS_TOKEN ? c.analyticsOn : c.analyticsOff}
         </p>
         <p>{c.hosting}</p>
-        <Link className="text-link" href={`/${locale}`}>
+        <ReturnHomeLink className="text-link" locale={locale} href={`/${locale}`}>
           {c.home}
-        </Link>
+        </ReturnHomeLink>
       </article>
     );
   const projects = visibleProjects(await getPortfolio(), locale);
   return (
     <section className="shell index-page">
-      <Link className="button button-outline page-home-button" href={`/${locale}`}>
+      <ReturnHomeLink
+        className="button button-outline page-home-button"
+        locale={locale}
+        href={`/${locale}`}
+      >
         {c.home}
-      </Link>
+      </ReturnHomeLink>
       <Eyebrow number="01">{c.selected}</Eyebrow>
       <h1>{c.projectTitle}</h1>
       <p className="section-intro">{c.projectIntro}</p>

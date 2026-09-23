@@ -1,11 +1,13 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Script from 'next/script';
+import { Suspense } from 'react';
 import { getPortfolio, siteOrigin, siteReady } from '@/lib/content';
 import { isLocale, local, safeUrl } from '@/lib/model';
 import { copy } from '@/lib/i18n';
 import { Navigation } from '@/components/navigation';
 import { Footer } from '@/components/portfolio';
+import { PortfolioScrollRestorer } from '@/components/portfolio-navigation';
 import '../globals.css';
 
 type Props = { children: React.ReactNode; params: Promise<{ locale: string }> };
@@ -38,17 +40,12 @@ export default async function Layout({ children, params }: Props) {
         <a className="skip-link" href="#main">
           {copy[locale].skip}
         </a>
-        {!siteReady && (
-          <aside
-            className="preview-banner"
-            aria-label={locale === 'es' ? 'Estado de publicación' : 'Publishing status'}
-          >
-            {copy[locale].preview}
-          </aside>
-        )}
         <Navigation locale={locale} name={data.settings?.name} cv={cv} />
         <main id="main">{children}</main>
         <Footer locale={locale} name={data.settings?.name} />
+        <Suspense fallback={null}>
+          <PortfolioScrollRestorer locale={locale} />
+        </Suspense>
         {analytics && (
           <Script
             src="https://static.cloudflareinsights.com/beacon.min.js"

@@ -17,6 +17,7 @@ import { Media } from './media';
 import { BrandMark } from './brand-mark';
 import { Credentials } from './credentials';
 import { Technology } from './technology';
+import { PortfolioLink } from './portfolio-navigation';
 
 export function Eyebrow({ children }: { number?: string; children: React.ReactNode }) {
   return <p className="eyebrow">{children}</p>;
@@ -58,18 +59,24 @@ export function ProjectCard({ project, locale }: { project: Project; locale: Loc
   return (
     <article className="project-card">
       {project.image ? (
-        <Link href={projectPath(locale, project.slug)} tabIndex={-1} aria-hidden="true">
+        <PortfolioLink
+          href={projectPath(locale, project.slug)}
+          locale={locale}
+          tabIndex={-1}
+          aria-hidden="true"
+        >
           <Media
             image={project.image}
             locale={locale}
             sizes="(max-width: 960px) 100vw, 50vw"
             className={project.slug === 'levelup-mobile' ? 'media-mobile-card' : ''}
           />
-        </Link>
+        </PortfolioLink>
       ) : (
-        <Link
+        <PortfolioLink
           className="project-cover"
           href={projectPath(locale, project.slug)}
+          locale={locale}
           tabIndex={-1}
           aria-hidden="true"
         >
@@ -78,7 +85,7 @@ export function ProjectCard({ project, locale }: { project: Project; locale: Loc
           <span className="cover-caption">
             {locale === 'es' ? 'Explora el proyecto' : 'Explore the project'}
           </span>
-        </Link>
+        </PortfolioLink>
       )}
       <div className="project-card-content">
         <div className="project-meta mono">
@@ -86,7 +93,9 @@ export function ProjectCard({ project, locale }: { project: Project; locale: Loc
           <span>{project.year}</span>
         </div>
         <h3>
-          <Link href={projectPath(locale, project.slug)}>{local(project.title, locale)}</Link>
+          <PortfolioLink href={projectPath(locale, project.slug)} locale={locale}>
+            {local(project.title, locale)}
+          </PortfolioLink>
         </h3>
         <p>{local(project.summary, locale)}</p>
         <div className="tags">
@@ -95,9 +104,13 @@ export function ProjectCard({ project, locale }: { project: Project; locale: Loc
           ))}
         </div>
         <div className="project-card-footer">
-          <Link href={projectPath(locale, project.slug)} className="text-link">
+          <PortfolioLink
+            href={projectPath(locale, project.slug)}
+            locale={locale}
+            className="text-link"
+          >
             {c.case}
-          </Link>
+          </PortfolioLink>
           <External href={project.repository} className="project-repository" icon="github">
             GitHub
           </External>
@@ -171,9 +184,9 @@ export function Home({ data, locale }: { data: Portfolio; locale: Locale }) {
               <p className="profile-location">{local(data.profile?.location, locale)}</p>
             ) : null}
             <div className="profile-actions">
-              <Link className="button button-dark" href={projectPath(locale)}>
+              <PortfolioLink className="button button-dark" href={projectPath(locale)} locale={locale}>
                 {c.viewProjects}
-              </Link>
+              </PortfolioLink>
               {cv ? (
                 <a className="text-link" href={cv} target="_blank" rel="noreferrer">
                   {c.cv}
@@ -211,9 +224,13 @@ export function Home({ data, locale }: { data: Portfolio; locale: Locale }) {
       <section id="proyectos" className="profile-section shell">
         <div className="profile-section-heading">
           <h2>{c.projects}</h2>
-          <Link className="all-projects-button" href={projectPath(locale)}>
+          <PortfolioLink
+            className="all-projects-button"
+            href={projectPath(locale)}
+            locale={locale}
+          >
             {c.allProjects}
-          </Link>
+          </PortfolioLink>
         </div>
         <p className="profile-section-description">
           {es

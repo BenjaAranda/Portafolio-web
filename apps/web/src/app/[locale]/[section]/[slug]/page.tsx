@@ -8,6 +8,7 @@ import { External, Eyebrow } from '@/components/portfolio';
 import { Media } from '@/components/media';
 import { Technology } from '@/components/technology';
 import { isAllowedMedia } from '@/lib/media-url';
+import { ReturnHomeLink } from '@/components/portfolio-navigation';
 type Props = { params: Promise<{ locale: string; section: string; slug: string }> };
 async function getProject(params: Props['params']) {
   const { locale, section, slug } = await params;
@@ -48,9 +49,9 @@ export default async function Page({ params }: Props) {
   return (
     <article className="shell case-page">
       <nav className="case-navigation" aria-label={locale === 'es' ? 'Proyecto' : 'Project'}>
-        <Link className="button button-outline" href={`/${locale}`}>
+        <ReturnHomeLink className="button button-outline" locale={locale} href={`/${locale}`}>
           {c.home}
-        </Link>
+        </ReturnHomeLink>
         <Link className="text-link" href={projectPath(locale)}>
           {c.back}
         </Link>
@@ -72,7 +73,19 @@ export default async function Page({ params }: Props) {
       </div>
       {project.image && (
         <figure className="project-figure">
-          <Media image={project.image} locale={locale} priority fullSize />
+          <a
+            className="project-image-link"
+            href={project.image.url}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={
+              locale === 'es'
+                ? `Abrir imagen completa de ${local(project.title, locale)}`
+                : `Open full-size image of ${local(project.title, locale)}`
+            }
+          >
+            <Media image={project.image} locale={locale} priority fullSize />
+          </a>
           <figcaption>{local(project.image.alt, locale)}</figcaption>
         </figure>
       )}
@@ -97,11 +110,20 @@ export default async function Page({ params }: Props) {
         ?.filter((image) => isAllowedMedia(image.url))
         .map((image, i) => (
           <figure className="project-figure" key={`${image.url}-${i}`}>
-            <Media image={image} locale={locale} fullSize />
-            <figcaption>{local(image.alt, locale)}</figcaption>
-            <a className="text-link" href={image.url} target="_blank" rel="noreferrer">
-              {locale === 'es' ? 'Abrir imagen completa' : 'Open full image'}
+            <a
+              className="project-image-link"
+              href={image.url}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={
+                locale === 'es'
+                  ? `Abrir imagen completa: ${local(image.alt, locale)}`
+                  : `Open full-size image: ${local(image.alt, locale)}`
+              }
+            >
+              <Media image={image} locale={locale} fullSize />
             </a>
+            <figcaption>{local(image.alt, locale)}</figcaption>
           </figure>
         ))}
     </article>
