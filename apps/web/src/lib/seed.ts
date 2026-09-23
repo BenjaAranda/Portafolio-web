@@ -8,18 +8,21 @@ export const seed: Portfolio = {
     github: 'https://github.com/BenjaAranda',
   },
   profile: {
-    role: { es: 'Analista Programador · Full Stack', en: 'Software Developer · Full Stack' },
+    role: {
+      es: 'Analista Programador · Desarrollo Full Stack',
+      en: 'Software Developer · Full-Stack Development',
+    },
     headline: {
-      es: 'Analista Programador. Desarrollo web y automatización.',
-      en: 'Software developer. Web development and automation.',
+      es: 'Desarrollo Full Stack, automatización y análisis de datos.',
+      en: 'Full-stack development, automation and data analysis.',
     },
     introduction: {
-        es: 'Desarrollo aplicaciones web y Android con Java, Spring Boot, React, TypeScript y Kotlin. También he trabajado en pruebas automatizadas y procesos con MasterBase.',
-        en: 'I develop web and Android applications with Java, Spring Boot, React, TypeScript and Kotlin. I have also worked on automated testing and MasterBase workflows.',
+      es: 'Analista Programador titulado de Duoc UC, con experiencia práctica en desarrollo web Full Stack, automatización de procesos y pruebas de software. Trabajo con Java, Spring Boot, React, TypeScript, SQL y APIs REST.',
+      en: 'Duoc UC graduate in software development with practical experience in full-stack web development, process automation and software testing. I work with Java, Spring Boot, React, TypeScript, SQL and REST APIs.',
     },
     bio: {
-        es: 'Analista Programador titulado de Duoc UC. Proyectos en desarrollo Full Stack, Android y pruebas de software. Certificación MasterBase Certified Creator e inglés B2 acreditado por EF SET. Actualmente estudio análisis de datos, SQL y Power BI de forma autodidacta.',
-        en: 'Duoc UC Analista Programador graduate. Projects in full-stack development, Android and software testing. MasterBase Certified Creator and EF SET certified B2 English. Currently studying data analysis, SQL and Power BI independently.',
+      es: 'Me interesa desarrollar soluciones claras y mantenibles, desde interfaces web y servicios backend hasta flujos automatizados. He trabajado en proyectos académicos y personales, además de experiencia práctica modelando procesos, validando datos y documentando resultados. Actualmente profundizo mis conocimientos en SQL, Excel, Power BI y análisis de datos.',
+      en: 'I am interested in building clear, maintainable solutions, from web interfaces and backend services to automated workflows. My background includes academic and personal projects as well as practical experience modelling processes, validating data and documenting results. I am currently developing my skills in SQL, Excel, Power BI and data analysis.',
     },
     location: { es: 'Valparaíso, Chile', en: 'Valparaíso, Chile' },
     photo: {
@@ -170,7 +173,7 @@ export const seed: Portfolio = {
     {
       _id: 'levelup-mobile',
       slug: 'levelup-mobile',
-      featured: true,
+      featured: false,
       year: '2025',
       title: { es: 'LevelUP Móvil', en: 'LevelUP Mobile' },
       category: { es: 'Aplicación Android · Equipo', en: 'Android app · Team project' },
@@ -244,7 +247,7 @@ export const seed: Portfolio = {
     {
       _id: 'departamento-t7',
       slug: 'departamento-t7',
-      featured: true,
+      featured: false,
       year: '2026',
       title: { es: 'Departamento T7', en: 'Departamento T7' },
       category: { es: 'Simulación 3D', en: '3D simulation' },
@@ -354,10 +357,10 @@ export const seed: Portfolio = {
     },
     {
       _id: 'mobile',
-      title: { es: 'Android', en: 'Android' },
+      title: { es: 'Desarrollo móvil', en: 'Mobile development' },
       description: {
-        es: 'Interfaces nativas, navegación, persistencia local y consumo de APIs.',
-        en: 'Native interfaces, navigation, local persistence and API consumption.',
+        es: 'Interfaces móviles, navegación, persistencia local y consumo de APIs.',
+        en: 'Mobile interfaces, navigation, local persistence and API consumption.',
       },
       technologies: ['Kotlin', 'Jetpack Compose', 'Material 3', 'Navigation Compose', 'Room', 'Retrofit'],
     },
