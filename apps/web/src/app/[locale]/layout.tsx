@@ -38,7 +38,14 @@ export default async function Layout({ children, params }: Props) {
         <a className="skip-link" href="#main">
           {copy[locale].skip}
         </a>
-        {!siteReady && <div className="preview-banner">{copy[locale].preview}</div>}
+        {!siteReady && (
+          <aside
+            className="preview-banner"
+            aria-label={locale === 'es' ? 'Estado de publicación' : 'Publishing status'}
+          >
+            {copy[locale].preview}
+          </aside>
+        )}
         <Navigation locale={locale} name={data.settings?.name} cv={cv} />
         <main id="main">{children}</main>
         <Footer locale={locale} name={data.settings?.name} />

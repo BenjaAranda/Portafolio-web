@@ -1138,6 +1138,317 @@ main {
     gap: 14px;
   }
 }
+
+/* Portfolio refinement: evidence-led projects, a separated learning track and compact timelines. */
+.button,
+.cv-link,
+.all-projects-button {
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+.button:hover,
+.cv-link:hover,
+.all-projects-button:hover {
+  transform: translateY(-2px) scale(1.025);
+  box-shadow: 0 12px 26px rgb(20 77 79 / 16%);
+  text-decoration: none;
+}
+.button-outline {
+  border-color: var(--line);
+  background: #fff;
+  color: var(--ink);
+}
+.button-outline:hover {
+  border-color: var(--accent);
+  background: #f5fbfa;
+}
+.all-projects-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 14px 24px;
+  border: 1px solid #176d72;
+  border-radius: 8px;
+  background: #176d72;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+}
+.page-home-button {
+  margin-bottom: 26px;
+}
+.index-page > .page-home-button + .eyebrow {
+  margin-top: 0;
+}
+.case-navigation {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px 24px;
+}
+.case-navigation .text-link {
+  font-weight: 650;
+}
+.project-card {
+  background: #fff;
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease,
+    border-color 200ms ease;
+}
+.project-card:hover,
+.project-card:focus-within {
+  transform: translateY(-5px) scale(1.008);
+  border-color: #8cbab5;
+  box-shadow: 0 20px 42px rgb(23 77 85 / 14%);
+}
+.project-card .media img {
+  transition: transform 260ms ease;
+}
+.project-card:hover .media img,
+.project-card:focus-within .media img {
+  transform: scale(1.025);
+}
+.project-card h3 a:hover {
+  color: var(--accent);
+}
+.project-card-footer {
+  border-top: 1px solid var(--line);
+  margin-top: 22px;
+}
+.project-card-footer .text-link,
+.project-repository {
+  font-weight: 650;
+}
+.technology-tag {
+  min-height: 32px;
+  padding: 5px 10px 5px 7px;
+  border: 1px solid #d9e5e5;
+  border-radius: 999px;
+  background: #f7faf9;
+  color: #244b50;
+  font-size: 13px;
+  line-height: 1.2;
+}
+.technology-icon,
+.technology-fallback {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+}
+.technology-icon {
+  display: block;
+}
+.technology-fallback {
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  background: #d9ece8;
+  color: #165c5f;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.capability-tools {
+  gap: 10px;
+}
+.capability-tools .technology-tag {
+  color: #244b50;
+  font-weight: 650;
+}
+.learning-panel {
+  display: grid;
+  grid-template-columns: minmax(190px, 0.72fr) minmax(0, 1.8fr);
+  gap: 32px;
+  margin-top: 36px;
+  padding: 28px;
+  border: 1px solid #9ec8c2;
+  border-left: 6px solid var(--accent);
+  border-radius: 12px;
+  background: #eaf5f2;
+}
+.learning-panel-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.learning-marker {
+  width: 14px;
+  height: 14px;
+  margin-top: 5px;
+  border: 3px solid var(--accent);
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 5px rgb(23 109 114 / 10%);
+}
+.learning-label {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+}
+.learning-panel h3 {
+  margin-top: 5px;
+  font-size: 22px;
+}
+.learning-panel-content > div > p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.75;
+}
+.learning-panel-content .capability-tools {
+  margin-top: 16px;
+}
+.credential-grid {
+  grid-auto-rows: 1fr;
+  align-items: stretch;
+}
+.credential-card {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  border-radius: 12px;
+}
+.credential-card h3 {
+  min-height: 54px;
+}
+.credential-card-actions {
+  margin-top: auto;
+  padding-top: 8px;
+}
+.credential-card-actions .text-link {
+  font-weight: 650;
+}
+.journey-groups {
+  display: grid;
+  gap: 42px;
+  margin-top: 34px;
+}
+.journey-group {
+  display: grid;
+  grid-template-columns: minmax(170px, 0.45fr) minmax(0, 1.55fr);
+  gap: 34px;
+}
+.journey-group-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  padding-top: 4px;
+}
+.journey-group-heading h3 {
+  font-size: 22px;
+}
+.journey-group-mark {
+  width: 13px;
+  height: 13px;
+  margin-top: 7px;
+  border-radius: 3px;
+  background: var(--accent);
+  box-shadow: 6px 6px 0 #cce5e1;
+}
+.journey-group--experience .journey-group-mark {
+  border-radius: 50%;
+  background: #355f79;
+  box-shadow: 6px 6px 0 #d6e2e9;
+}
+.journey-list {
+  position: relative;
+  display: grid;
+  gap: 18px;
+  padding-left: 28px;
+}
+.journey-list::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 5px;
+  width: 2px;
+  background: #cfe0e1;
+}
+.journey-card {
+  position: relative;
+  padding: 22px 24px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+}
+.journey-card::before {
+  content: '';
+  position: absolute;
+  top: 28px;
+  left: -29px;
+  width: 11px;
+  height: 11px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 1px #8eb9b4;
+}
+.journey-title {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+.journey-title h4 {
+  font-size: 19px;
+  line-height: 1.35;
+}
+.journey-period {
+  display: inline-block;
+  margin-top: 7px;
+  padding: 4px 8px;
+  border-radius: 5px;
+  background: #eaf3f2;
+  color: #17636a;
+  font-size: 12px;
+  font-weight: 700;
+}
+.journey-organization {
+  margin-top: 7px;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 650;
+}
+.journey-description {
+  max-width: 72ch;
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+@media (max-width: 760px) {
+  .all-projects-button {
+    width: 100%;
+  }
+  .learning-panel,
+  .journey-group {
+    grid-template-columns: 1fr;
+  }
+  .learning-panel {
+    gap: 22px;
+    padding: 24px 20px;
+  }
+  .journey-group {
+    gap: 18px;
+  }
+  .journey-list {
+    padding-left: 22px;
+  }
+  .journey-card {
+    padding: 20px;
+  }
+  .journey-card::before {
+    left: -23px;
+  }
+  .credential-card h3 {
+    min-height: 0;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

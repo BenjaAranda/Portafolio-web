@@ -5,7 +5,6 @@ import { useRef, useState } from 'react';
 import { copy } from '@/lib/i18n';
 import type { Locale } from '@/lib/model';
 import { privacyPath, projectPath } from '@/lib/routing';
-import { Arrow } from './icons';
 
 export function Navigation({
   locale,
@@ -87,7 +86,6 @@ export function Navigation({
           {cv && (
             <a className="cv-link" href={cv} target="_blank" rel="noreferrer">
               {c.cv}
-              <Arrow diagonal />
             </a>
           )}
           <button
@@ -112,13 +110,11 @@ export function Navigation({
           {links.map((link) => (
             <Link key={link.href} href={link.href} onClick={() => setOpen(false)}>
               {link.label}
-              <Arrow />
             </Link>
           ))}
           {cv && (
             <a href={cv} target="_blank" rel="noreferrer">
               {c.cv}
-              <Arrow diagonal />
             </a>
           )}
         </nav>

@@ -11,7 +11,7 @@ import {
   type Portfolio,
   type Project,
 } from '@/lib/model';
-import { Arrow, SocialIcon } from './icons';
+import { SocialIcon } from './icons';
 import { CopyEmail } from './copy-email';
 import { Media } from './media';
 import { BrandMark } from './brand-mark';
@@ -37,7 +37,6 @@ export function External({
     <a href={url} target="_blank" rel="noreferrer" className={className}>
       {icon ? <SocialIcon network={icon} /> : null}
       {children}
-      <Arrow diagonal />
     </a>
   ) : null;
 }
@@ -87,10 +86,7 @@ export function ProjectCard({ project, locale }: { project: Project; locale: Loc
           <span>{project.year}</span>
         </div>
         <h3>
-          <Link href={projectPath(locale, project.slug)}>
-            {local(project.title, locale)}
-            <Arrow diagonal />
-          </Link>
+          <Link href={projectPath(locale, project.slug)}>{local(project.title, locale)}</Link>
         </h3>
         <p>{local(project.summary, locale)}</p>
         <div className="tags">
@@ -101,7 +97,6 @@ export function ProjectCard({ project, locale }: { project: Project; locale: Loc
         <div className="project-card-footer">
           <Link href={projectPath(locale, project.slug)} className="text-link">
             {c.case}
-            <Arrow />
           </Link>
           <External href={project.repository} className="project-repository" icon="github">
             GitHub
@@ -112,12 +107,56 @@ export function ProjectCard({ project, locale }: { project: Project; locale: Loc
   );
 }
 
+function JourneyGroup({
+  label,
+  items,
+  locale,
+  kind,
+}: {
+  label: string;
+  items: Portfolio['education'];
+  locale: Locale;
+  kind: 'education' | 'experience';
+}) {
+  return (
+    <section className={`journey-group journey-group--${kind}`} aria-labelledby={`journey-${kind}`}>
+      <header className="journey-group-heading">
+        <span className="journey-group-mark" aria-hidden="true" />
+        <h3 id={`journey-${kind}`}>{label}</h3>
+      </header>
+      <div className="journey-list">
+        {items.map((item) => (
+          <article key={item._id} className="journey-card">
+            <div className="journey-card-heading">
+              <div className="journey-title">
+                <BrandMark name={item.organization} />
+                <div>
+                  <h4>{local(item.title, locale)}</h4>
+                  <p className="journey-period">{local(item.period, locale)}</p>
+                  <p className="journey-organization">{item.organization}</p>
+                </div>
+              </div>
+            </div>
+            <p className="journey-description">{local(item.description, locale)}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export function Home({ data, locale }: { data: Portfolio; locale: Locale }) {
   const c = copy[locale];
   const es = locale === 'es';
   const projects = visibleProjects(data, locale);
   const selected = projects.filter((project) => project.featured);
-  const featured = (selected.length ? selected : projects).slice(0, 6);
+  const featured = (selected.length ? selected : projects).slice(0, 4);
+  const establishedSkills = data.skills.filter(
+    (skill) => !skill.learning && local(skill.title, locale),
+  );
+  const learningSkills = data.skills.filter(
+    (skill) => skill.learning && local(skill.title, locale),
+  );
   const cv = safeUrl(locale === 'es' ? data.settings?.cvEs : data.settings?.cvEn);
   return (
     <div className="profile-portfolio">
@@ -172,7 +211,7 @@ export function Home({ data, locale }: { data: Portfolio; locale: Locale }) {
       <section id="proyectos" className="profile-section shell">
         <div className="profile-section-heading">
           <h2>{c.projects}</h2>
-          <Link className="text-link" href={projectPath(locale)}>
+          <Link className="all-projects-button" href={projectPath(locale)}>
             {c.allProjects}
           </Link>
         </div>
@@ -199,25 +238,43 @@ export function Home({ data, locale }: { data: Portfolio; locale: Locale }) {
             : 'Technologies used in projects and training. Current study is listed separately.'}
         </p>
         <div className="capability-list">
-          {data.skills
-            .filter((skill) => local(skill.title, locale))
-            .map((skill) => (
-              <article
-                className={`capability-row${skill.learning ? ' capability-learning' : ''}`}
-                key={skill._id}
-              >
-                <div>
-                  <h3>{local(skill.title, locale)}</h3>
-                  <p>{local(skill.description, locale)}</p>
-                </div>
-                <div className="capability-tools">
-                  {skill.technologies.map((tech) => (
-                    <Technology key={tech} name={tech} />
-                  ))}
-                </div>
-              </article>
-            ))}
+          {establishedSkills.map((skill) => (
+            <article className="capability-row" key={skill._id}>
+              <div>
+                <h3>{local(skill.title, locale)}</h3>
+                <p>{local(skill.description, locale)}</p>
+              </div>
+              <div className="capability-tools">
+                {skill.technologies.map((tech) => (
+                  <Technology key={tech} name={tech} />
+                ))}
+              </div>
+            </article>
+          ))}
         </div>
+        {learningSkills.length ? (
+          <aside className="learning-panel" aria-label={es ? 'En aprendizaje' : 'Currently learning'}>
+            <div className="learning-panel-heading">
+              <span className="learning-marker" aria-hidden="true" />
+              <div>
+                <p className="learning-label">{es ? 'Formación actual' : 'Current studies'}</p>
+                <h3>{es ? 'En aprendizaje' : 'Currently learning'}</h3>
+              </div>
+            </div>
+            <div className="learning-panel-content">
+              {learningSkills.map((skill) => (
+                <div key={skill._id}>
+                  <p>{local(skill.description, locale)}</p>
+                  <div className="capability-tools">
+                    {skill.technologies.map((tech) => (
+                      <Technology key={tech} name={tech} />
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </aside>
+        ) : null}
       </section>
       <section id="certificaciones" className="profile-section shell">
         <h2>{es ? 'Certificaciones' : 'Certifications'}</h2>
@@ -233,26 +290,24 @@ export function Home({ data, locale }: { data: Portfolio; locale: Locale }) {
       </section>
       <section id="trayectoria" className="profile-section shell">
         <h2>{es ? 'Formación y trayectoria' : 'Education and experience'}</h2>
-        <div className="education-list">
-          {[
-            { label: c.education, items: data.education },
-            { label: c.experience, items: data.experience },
-          ].map((group) =>
-            group.items.map((item) => (
-              <article key={item._id} className="education-row">
-                <div>
-                  <p className="education-kind">{group.label}</p>
-                  <BrandMark name={item.organization} />
-                  <h3>{local(item.title, locale)}</h3>
-                  <p>{item.organization}</p>
-                </div>
-                <div>
-                  <p className="education-period">{local(item.period, locale)}</p>
-                  <p>{local(item.description, locale)}</p>
-                </div>
-              </article>
-            )),
-          )}
+        <p className="profile-section-description">
+          {es
+            ? 'Educación y experiencia presentadas por separado, con cada período junto a su cargo o formación.'
+            : 'Education and experience are shown separately, with each period next to its role or qualification.'}
+        </p>
+        <div className="journey-groups">
+          <JourneyGroup
+            label={c.education}
+            items={data.education}
+            locale={locale}
+            kind="education"
+          />
+          <JourneyGroup
+            label={c.experience}
+            items={data.experience}
+            locale={locale}
+            kind="experience"
+          />
         </div>
       </section>
       <Contact data={data} locale={locale} />
@@ -275,7 +330,6 @@ export function Contact({ data, locale }: { data: Portfolio; locale: Locale }) {
             <div>
               <a className="email-link" href={`mailto:${email}`}>
                 {email}
-                <Arrow diagonal />
               </a>
               <CopyEmail email={email} locale={locale} />
             </div>
@@ -314,7 +368,6 @@ export function Footer({ locale, name }: { locale: Locale; name?: string | null 
       </span>
       <Link href={privacyPath(locale)}>
         {copy[locale].privacy}
-        <Arrow diagonal />
       </Link>
     </footer>
   );

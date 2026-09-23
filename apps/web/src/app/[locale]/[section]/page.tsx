@@ -5,7 +5,6 @@ import { getPortfolio, siteReady } from '@/lib/content';
 import { isLocale, privacyPath, projectPath, visibleProjects } from '@/lib/model';
 import { copy } from '@/lib/i18n';
 import { EmptyProjects, Eyebrow, ProjectCard } from '@/components/portfolio';
-import { Arrow } from '@/components/icons';
 type Props = { params: Promise<{ locale: string; section: string }> };
 function sectionType(locale: string, section: string) {
   if (locale === 'es')
@@ -50,13 +49,15 @@ export default async function Page({ params }: Props) {
         <p>{c.hosting}</p>
         <Link className="text-link" href={`/${locale}`}>
           {c.home}
-          <Arrow />
         </Link>
       </article>
     );
   const projects = visibleProjects(await getPortfolio(), locale);
   return (
     <section className="shell index-page">
+      <Link className="button button-outline page-home-button" href={`/${locale}`}>
+        {c.home}
+      </Link>
       <Eyebrow number="01">{c.selected}</Eyebrow>
       <h1>{c.projectTitle}</h1>
       <p className="section-intro">{c.projectIntro}</p>

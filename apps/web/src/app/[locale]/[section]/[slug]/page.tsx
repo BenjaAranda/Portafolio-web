@@ -6,7 +6,7 @@ import { isLocale, local, projectPath, visibleProjects, type Locale } from '@/li
 import { copy } from '@/lib/i18n';
 import { External, Eyebrow } from '@/components/portfolio';
 import { Media } from '@/components/media';
-import { Arrow } from '@/components/icons';
+import { Technology } from '@/components/technology';
 import { isAllowedMedia } from '@/lib/media-url';
 type Props = { params: Promise<{ locale: string; section: string; slug: string }> };
 async function getProject(params: Props['params']) {
@@ -47,10 +47,14 @@ export default async function Page({ params }: Props) {
   const c = copy[locale];
   return (
     <article className="shell case-page">
-      <Link className="text-link" href={projectPath(locale)}>
-        <Arrow style={{ transform: 'rotate(180deg)' }} />
-        {c.back}
-      </Link>
+      <nav className="case-navigation" aria-label={locale === 'es' ? 'Proyecto' : 'Project'}>
+        <Link className="button button-outline" href={`/${locale}`}>
+          {c.home}
+        </Link>
+        <Link className="text-link" href={projectPath(locale)}>
+          {c.back}
+        </Link>
+      </nav>
       <Eyebrow>
         {local(project.category, locale) || 'SOFTWARE'}
         {project.year && ` / ${project.year}`}
@@ -59,7 +63,7 @@ export default async function Page({ params }: Props) {
       <p className="case-lead">{local(project.summary, locale)}</p>
       <div className="tags">
         {project.technologies?.map((t) => (
-          <span key={t}>{t}</span>
+          <Technology key={t} name={t} />
         ))}
       </div>
       <div className="case-links">
