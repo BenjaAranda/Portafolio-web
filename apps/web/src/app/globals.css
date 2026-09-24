@@ -618,6 +618,12 @@ main {
 .project-card .media img {
   object-fit: cover;
 }
+.project-card .media-contain-card {
+  background: #fff;
+}
+.project-card .media-contain-card img {
+  object-fit: contain;
+}
 .project-card .media-mobile-card {
   background: #191622;
 }
@@ -980,7 +986,7 @@ main {
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 14px;
+  padding: 10px;
   border: 1px solid var(--line);
   border-radius: 12px;
   min-width: 0;
@@ -990,17 +996,17 @@ main {
   display: flex;
   align-items: center;
   gap: 8px;
-  min-height: 34px;
+  min-height: 30px;
   font-size: 13px;
   color: var(--muted);
 }
 .credential-card h3 {
-  margin-top: 8px;
+  margin-top: 6px;
   font-size: 18px;
   line-height: 1.32;
 }
 .credential-dates {
-  margin: 8px 0 6px;
+  margin: 6px 0 4px;
   font-size: 13px;
 }
 .credential-dates > div {
@@ -1008,7 +1014,7 @@ main {
   flex-wrap: wrap;
   gap: 8px 20px;
   justify-content: space-between;
-  margin-top: 6px;
+  margin-top: 4px;
 }
 .credential-dates dt {
   color: var(--muted);
@@ -1020,11 +1026,11 @@ main {
   font-size: 12px;
   overflow-wrap: anywhere;
   color: var(--muted);
-  margin: 4px 0 6px;
+  margin: 2px 0 4px;
 }
 .credential-card .text-link {
   font-size: 14px;
-  min-height: 40px;
+  min-height: 36px;
 }
 .certificate-preview {
   margin-top: 12px;
@@ -1598,6 +1604,23 @@ main {
     font-size: 18px;
   }
 
+  #proyectos .project-grid {
+    display: flex;
+    align-items: stretch;
+  }
+
+  #proyectos .project-grid > .project-card {
+    flex: 0 0 min(82vw, 310px);
+  }
+
+  #proyectos .project-grid > .all-projects-end {
+    flex: 0 0 112px;
+    align-self: center;
+    min-height: 44px;
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+
   .project-card .media {
     aspect-ratio: 16 / 9;
   }
@@ -1720,17 +1743,17 @@ main {
   .credential-card {
     width: 100%;
     height: 100%;
-    padding: 12px;
+    padding: 8px;
     scroll-snap-align: start;
   }
 
   .credential-card h3 {
-    margin-top: 8px;
+    margin-top: 5px;
     font-size: 17px;
   }
 
   .credential-dates {
-    margin-block: 8px 6px;
+    margin-block: 5px 3px;
   }
 
   .journey-groups {

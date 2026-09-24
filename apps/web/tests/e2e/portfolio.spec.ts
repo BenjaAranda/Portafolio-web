@@ -93,7 +93,7 @@ test('social logos load and selected project cards form an even responsive grid'
         'CasosPrueba',
       ]);
       const endLink = page.locator('#proyectos .all-projects-end');
-      await expect(endLink).toHaveText('Todos los proyectos');
+      await expect(endLink).toHaveText('Ver más');
       const endLinkDesktop = await endLink.boundingBox();
       const lastCardDesktop = await cards.last().boundingBox();
       expect(endLinkDesktop).not.toBeNull();
@@ -125,6 +125,8 @@ test('social logos load and selected project cards form an even responsive grid'
       const endLinkMobile = await page.locator('#proyectos .all-projects-end').boundingBox();
       expect(endLinkMobile).not.toBeNull();
       expect(endLinkMobile!.x).toBeGreaterThan(mobile.at(-1)!.x + mobile.at(-1)!.width);
+      expect(endLinkMobile!.width).toBeLessThan(150);
+      expect(endLinkMobile!.height).toBeLessThan(60);
     }
     expect(
       await page.locator('.project-grid').evaluate((element) => element.scrollWidth > element.clientWidth),
@@ -171,8 +173,17 @@ test('credential cards keep equal heights without excessive internal spacing', a
       items.map((item) => item.getBoundingClientRect().height),
     );
     expect(Math.max(...heights) - Math.min(...heights)).toBeLessThan(2);
-    expect(Math.max(...heights)).toBeLessThan(viewport.width > 700 ? 330 : 310);
+    expect(Math.max(...heights)).toBeLessThan(viewport.width > 700 ? 225 : 220);
   }
+});
+
+test('SIVIS preview keeps the complete image visible', async ({ page }) => {
+  await page.goto('/es');
+  const preview = page
+    .locator('#proyectos .project-card')
+    .filter({ hasText: 'SIVIS' })
+    .locator('.media img');
+  await expect(preview).toHaveCSS('object-fit', 'contain');
 });
 
 test('all documented projects have real images and bilingual detail pages', async ({ page }) => {

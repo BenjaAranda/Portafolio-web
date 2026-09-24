@@ -56,6 +56,12 @@ export function EmptyProjects({ locale }: { locale: Locale }) {
 
 export function ProjectCard({ project, locale }: { project: Project; locale: Locale }) {
   const c = copy[locale];
+  const mediaClassName = [
+    project.slug === 'levelup-mobile' ? 'media-mobile-card' : '',
+    project.slug === 'sivis' ? 'media-contain-card' : '',
+  ]
+    .filter(Boolean)
+    .join(' ');
   return (
     <article className="project-card">
       {project.image ? (
@@ -69,7 +75,7 @@ export function ProjectCard({ project, locale }: { project: Project; locale: Loc
             image={project.image}
             locale={locale}
             sizes="(max-width: 960px) 100vw, 50vw"
-            className={project.slug === 'levelup-mobile' ? 'media-mobile-card' : ''}
+            className={mediaClassName}
           />
         </PortfolioLink>
       ) : (
@@ -247,7 +253,7 @@ export function Home({ data, locale }: { data: Portfolio; locale: Locale }) {
               href={projectPath(locale)}
               locale={locale}
             >
-              {c.allProjects}
+              {es ? 'Ver más' : 'See more'}
             </PortfolioLink>
           </div>
         ) : (
