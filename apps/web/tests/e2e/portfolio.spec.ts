@@ -177,13 +177,15 @@ test('credential cards keep equal heights without excessive internal spacing', a
   }
 });
 
-test('SIVIS preview keeps the complete image visible', async ({ page }) => {
-  await page.goto('/es');
-  const preview = page
-    .locator('#proyectos .project-card')
-    .filter({ hasText: 'SIVIS' })
-    .locator('.media img');
-  await expect(preview).toHaveCSS('object-fit', 'contain');
+test('all project previews keep their complete images visible', async ({ page }) => {
+  for (const route of ['/es', '/es/proyectos']) {
+    await page.goto(route);
+    const previews = page.locator('.project-card .media img');
+    expect(await previews.count()).toBe(route === '/es' ? 4 : 7);
+    for (const preview of await previews.all()) {
+      await expect(preview).toHaveCSS('object-fit', 'contain');
+    }
+  }
 });
 
 test('all documented projects have real images and bilingual detail pages', async ({ page }) => {

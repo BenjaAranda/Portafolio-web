@@ -616,20 +616,13 @@ main {
   margin: 0;
 }
 .project-card .media img {
-  object-fit: cover;
-}
-.project-card .media-contain-card {
-  background: #fff;
-}
-.project-card .media-contain-card img {
   object-fit: contain;
 }
 .project-card .media-mobile-card {
   background: #191622;
 }
 .project-card .media-mobile-card img {
-  object-fit: cover;
-  object-position: center 16%;
+  object-fit: contain;
 }
 .case-page > .eyebrow {
   margin-top: 32px;
