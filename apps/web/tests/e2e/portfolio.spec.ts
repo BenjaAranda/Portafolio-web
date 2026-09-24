@@ -92,6 +92,13 @@ test('social logos load and selected project cards form an even responsive grid'
         'LevelUP React',
         'CasosPrueba',
       ]);
+      const endLink = page.locator('#proyectos .all-projects-end');
+      await expect(endLink).toHaveText('Todos los proyectos');
+      const endLinkDesktop = await endLink.boundingBox();
+      const lastCardDesktop = await cards.last().boundingBox();
+      expect(endLinkDesktop).not.toBeNull();
+      expect(lastCardDesktop).not.toBeNull();
+      expect(endLinkDesktop!.y).toBeGreaterThan(lastCardDesktop!.y + lastCardDesktop!.height);
     }
     const positions = await cards.evaluateAll((elements) =>
       elements.map((element) => {
@@ -114,6 +121,11 @@ test('social logos load and selected project cards form an even responsive grid'
     );
     expect(mobile.every(({ y }) => Math.abs(y - mobile[0].y) < 2)).toBe(true);
     expect(mobile[1].x).toBeGreaterThan(mobile[0].x + mobile[0].width);
+    if (route === '/es') {
+      const endLinkMobile = await page.locator('#proyectos .all-projects-end').boundingBox();
+      expect(endLinkMobile).not.toBeNull();
+      expect(endLinkMobile!.x).toBeGreaterThan(mobile.at(-1)!.x + mobile.at(-1)!.width);
+    }
     expect(
       await page.locator('.project-grid').evaluate((element) => element.scrollWidth > element.clientWidth),
     ).toBe(true);
@@ -159,7 +171,7 @@ test('credential cards keep equal heights without excessive internal spacing', a
       items.map((item) => item.getBoundingClientRect().height),
     );
     expect(Math.max(...heights) - Math.min(...heights)).toBeLessThan(2);
-    expect(Math.max(...heights)).toBeLessThan(viewport.width > 700 ? 360 : 340);
+    expect(Math.max(...heights)).toBeLessThan(viewport.width > 700 ? 330 : 310);
   }
 });
 
@@ -169,6 +181,12 @@ test('all documented projects have real images and bilingual detail pages', asyn
       await page.goto(`/${locale}/${locale === 'es' ? 'proyectos' : 'projects'}/${slug}`);
       const images = page.locator('.case-page .media img');
       expect(await images.count()).toBeGreaterThan(0);
+      if (slug === 'sivis') {
+        await expect(images).toHaveCount(7);
+        await expect(page.locator('.case-page')).toContainText(
+          locale === 'es' ? '4 a 5 semanas' : 'four to five weeks',
+        );
+      }
       for (const image of await images.all()) {
         await image.scrollIntoViewIfNeeded();
         await expect
@@ -253,7 +271,9 @@ test('English portfolio exposes the translated CV and no development banner', as
 test('mobile stack cards and all-projects action stay compact', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/es');
-  const button = await page.locator('.all-projects-button').boundingBox();
+  const button = await page
+    .locator('.profile-section-heading .all-projects-button')
+    .boundingBox();
   expect(button).not.toBeNull();
   expect(button!.width).toBeLessThan(220);
   const stackHeights = await page

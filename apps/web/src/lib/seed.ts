@@ -106,30 +106,30 @@ export const seed: Portfolio = {
       title: { es: 'SIVIS', en: 'SIVIS' },
       category: { es: 'Práctica profesional', en: 'Professional internship' },
       summary: {
-        es: 'Gestión de visitas y accesos: del registro de una visita a la notificación automática al residente.',
-        en: 'Visitor and access management, from visitor registration to automated resident notifications.',
+        es: 'MVP no-code para digitalizar el control de visitas residenciales: pre-registro, pases QR, validación en portería, estados y notificaciones.',
+        en: 'A no-code MVP for digitising residential visitor access: pre-registration, QR passes, reception validation, status tracking and notifications.',
       },
       problem: {
-        es: 'Coordinar residentes, recepción y administración durante el registro, autorización, ingreso y salida de visitantes.',
-        en: 'Coordinating residents, reception and administration through visitor registration, authorization, arrival and departure.',
+        es: 'El proceso tradicional dependía de libros físicos o planillas aisladas, llamadas por citófono y validaciones visuales. Esto generaba demoras, poca trazabilidad para auditorías, riesgo de suplantación y una comunicación fragmentada entre residentes y portería.',
+        en: 'The traditional process relied on paper logbooks or isolated spreadsheets, intercom calls and visual checks. This caused delays, poor audit traceability, impersonation risks and fragmented communication between residents and reception staff.',
       },
       role: {
-        es: 'Diseñé y configuré el MVP en MasterBase durante mi práctica: puntos de acceso, vistas, bases de datos y procesos automáticos. Documenté la solución y sus flujos.',
-        en: 'I designed and configured the MVP in MasterBase during my internship: access points, views, databases and automated processes. I documented the solution and its workflows.',
+        es: 'Durante mi práctica profesional en MasterBase analicé el problema, diseñé y configuré el MVP. Construí Access Points para Administración, Residente y Recepción; modelé bases relacionales en SmartData; preparé SmartViews, formularios y procesos automáticos; y documenté la arquitectura y el flujo operativo.',
+        en: 'During my professional internship at MasterBase, I analysed the problem and designed and configured the MVP. I built Access Points for Administration, Residents and Reception, modelled relational data in SmartData, prepared SmartViews, forms and automated processes, and documented the architecture and operating flow.',
       },
       solution: {
-        es: 'Portales diferenciados para residentes, recepción y administración. El flujo principal registra la visita, envía un pase QR, procesa el ingreso y notifica al residente. El diagrama también contempla visitas frecuentes, salidas y recepción de paquetes.',
-        en: 'Separate portals for residents, reception and administration. The main workflow registers a visit, emails a QR pass, records arrival and notifies the resident. The process diagram also covers recurring visitors, departures and parcel reception.',
+        es: 'La solución separa las tareas por rol mediante portales para residentes, recepción y administración. También contempla visitas frecuentes, listas negras, salidas, historial de accesos y recepción de paquetes.\n\nEn el flujo principal, el residente completa el pre-registro; un proceso guarda la visita en la base maestra, confirma el agendamiento y envía por correo un pase QR. En portería se verifica el pase, se registra el ingreso, se actualiza el estado y se notifica al residente. La arquitectura se configuró dentro del ecosistema SaaS de MasterBase, sin servidores dedicados para este MVP.',
+        en: 'The solution separates tasks by role through portals for residents, reception staff and administrators. It also covers recurring visitors, blocklists, departures, access history and parcel reception.\n\nIn the main flow, the resident completes pre-registration; a process stores the visit in the master database, confirms the booking and emails a QR pass. Reception staff verify the pass, record arrival, update its status and notify the resident. The architecture was configured within the MasterBase SaaS ecosystem, without dedicated servers for this MVP.',
       },
       results: {
-        es: 'MVP documentado en el informe de práctica con capturas del registro, envío del pase y confirmación de ingreso. Las imágenes públicas muestran los portales sin registros personales; no se publican correos, códigos QR ni datos de visitantes.',
-        en: 'MVP documented in the internship report with evidence of registration, pass delivery and arrival confirmation. Public images show the portals without personal records; emails, QR codes and visitor data are not published.',
+        es: 'El informe de práctica documenta una primera versión funcional estimada en 4 a 5 semanas de configuración y pruebas QA, con 12 figuras que recorren los portales, el pre-registro, las automatizaciones y las confirmaciones. La evidencia pública se limita a interfaces vacías o anonimizadas: se excluyen correos, códigos QR, identificadores internos y datos de visitantes.',
+        en: 'The internship report documents a first functional version estimated at four to five weeks of configuration and QA, with 12 figures covering the portals, pre-registration, automations and confirmations. Public evidence is limited to empty or anonymised interfaces: emails, QR codes, internal identifiers and visitor data are excluded.',
       },
       lessons: {
-        es: 'Modelar estados, permisos y notificaciones como un flujo completo, combinando lógica de negocio y herramientas de automatización no-code.',
-        en: 'Modelling states, permissions and notifications as a complete workflow, combining business logic with no-code automation tools.',
+        es: 'Aprendí a traducir una operación real a estados, permisos, datos relacionales y notificaciones coordinadas. El proyecto reforzó mi capacidad para combinar análisis funcional, diseño de procesos, seguridad de la información y automatización no-code/low-code.',
+        en: 'I learned to translate a real operation into coordinated states, permissions, relational data and notifications. The project strengthened my ability to combine functional analysis, process design, information security and no-code/low-code automation.',
       },
-      technologies: ['MasterBase', 'SmartView', 'SmartData', 'Automatización', 'HTML'],
+      technologies: ['MasterBase', 'SmartView', 'SmartData', 'No-Code/Low-Code', 'HTML', 'QR'],
       image: {
         url: '/projects/sivis/residente.webp',
         alt: {
@@ -150,6 +150,27 @@ export const seed: Portfolio = {
           alt: {
             es: 'Portal de administración: historial y gestión de bloqueos.',
             en: 'Administration portal: history and access blocking.',
+          },
+        },
+        {
+          url: '/projects/sivis/pre-registro.webp',
+          alt: {
+            es: 'Formulario vacío de pre-registro SIVIS para datos del invitado, fecha de llegada y datos del residente.',
+            en: 'Empty SIVIS pre-registration form for visitor details, arrival date and resident details.',
+          },
+        },
+        {
+          url: '/projects/sivis/visita-agendada.webp',
+          alt: {
+            es: 'Confirmación de SIVIS tras agendar una visita y generar el pase de acceso; la barra de cuenta fue retirada por privacidad.',
+            en: 'SIVIS confirmation after scheduling a visitor and generating the access pass; the account toolbar was removed for privacy.',
+          },
+        },
+        {
+          url: '/projects/sivis/ingreso-completado.webp',
+          alt: {
+            es: 'Confirmación de ingreso completado con los registros de acceso y las notificaciones activadas.',
+            en: 'Completed arrival confirmation with access records and notifications activated.',
           },
         },
         {

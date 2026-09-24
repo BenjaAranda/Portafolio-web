@@ -242,6 +242,13 @@ export function Home({ data, locale }: { data: Portfolio; locale: Locale }) {
             {featured.map((project) => (
               <ProjectCard key={project._id} project={project} locale={locale} />
             ))}
+            <PortfolioLink
+              className="all-projects-button all-projects-end"
+              href={projectPath(locale)}
+              locale={locale}
+            >
+              {c.allProjects}
+            </PortfolioLink>
           </div>
         ) : (
           <EmptyProjects locale={locale} />
