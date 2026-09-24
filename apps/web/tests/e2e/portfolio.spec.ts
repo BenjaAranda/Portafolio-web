@@ -174,6 +174,17 @@ test('certificates expand and institutional logos load', async ({ page }) => {
   await expect(page.locator('body')).not.toContainText('Menos tareas repetitivas');
 });
 
+test('IBM certification displays its issuer mark', async ({ page }) => {
+  await page.goto('/es#certificaciones');
+  const ibm = page
+    .locator('.credential-card')
+    .filter({ has: page.getByRole('heading', { name: 'SQL and Relational Databases 101' }) });
+  const mark = ibm.locator('.credential-issuer img');
+  await expect(mark).toHaveAttribute('src', '/brands/ibm.svg');
+  await mark.scrollIntoViewIfNeeded();
+  await expect.poll(() => mark.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth > 0)).toBe(true);
+});
+
 test('credential cards keep equal heights without excessive internal spacing', async ({ page }) => {
   for (const viewport of [
     { width: 1440, height: 900 },
@@ -304,13 +315,24 @@ test('desktop and mobile navigation include education', async ({ page }) => {
   await expect(page.locator('#mobile-nav').getByRole('link', { name: 'Formación' })).toBeVisible();
 });
 test('mobile stack cards and all-projects action stay compact', async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('/es');
-  const button = await page
-    .locator('.profile-section-heading .all-projects-button')
-    .boundingBox();
-  expect(button).not.toBeNull();
-  expect(button!.width).toBeLessThan(220);
+  for (const width of [320, 390]) {
+    await page.setViewportSize({ width, height: 844 });
+    await page.goto('/es');
+    const heading = await page.locator('#proyectos .profile-section-heading').boundingBox();
+    const button = await page
+      .locator('.profile-section-heading .all-projects-button')
+      .boundingBox();
+    expect(heading).not.toBeNull();
+    expect(button).not.toBeNull();
+    expect(button!.width).toBeLessThan(220);
+    expect(Math.abs(button!.x + button!.width - heading!.x - heading!.width)).toBeLessThan(2);
+    const colors = await page.evaluate(() => {
+      const profile = getComputedStyle(document.querySelector('.profile-stage')!);
+      const buttons = [...document.querySelectorAll<HTMLAnchorElement>('#proyectos .all-projects-button')];
+      return { profile: profile.backgroundColor, buttons: buttons.map((item) => getComputedStyle(item).backgroundColor) };
+    });
+    expect(colors.buttons).toEqual([colors.profile, colors.profile]);
+  }
   const stackHeights = await page
     .locator('#capacidades .capability-row')
     .evaluateAll((items) => items.map((item) => item.getBoundingClientRect().height));

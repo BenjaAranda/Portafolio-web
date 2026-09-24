@@ -6,6 +6,7 @@ const marks: Record<string, string> = {
   'MasterBase®': 'masterbase',
   'Santander Open Academy': 'santander',
   'EF SET': 'efset',
+  'IBM Skills Network': 'ibm',
   SIVIS: 'sivis',
   'LevelUP React': 'levelup',
 };
@@ -14,7 +15,7 @@ export function BrandMark({ name }: { name: string }) {
   return mark ? (
     <Image
       className="brand-mark"
-      src={`/brands/${mark}.webp`}
+      src={`/brands/${mark}.${mark === 'ibm' ? 'svg' : 'webp'}`}
       alt=""
       width={48}
       height={48}
