@@ -2,6 +2,7 @@ import type { Locale, Portfolio } from '@/lib/model';
 import { local, safeUrl } from '@/lib/model';
 import { isAllowedMedia } from '@/lib/media-url';
 import { formatCredentialDate } from '@/lib/dates';
+import { safeDocumentUrl } from '@/lib/document-url';
 import { BrandMark } from './brand-mark';
 import { Media } from './media';
 
@@ -16,7 +17,9 @@ export function Credentials({
   return (
     <div className="credential-grid">
       {items.map((cert) => {
-        const url = safeUrl(cert.url) || safeUrl(cert.file);
+        const verificationUrl = safeUrl(cert.url);
+        const certificateUrl = safeDocumentUrl(cert.file);
+        const primaryUrl = verificationUrl || certificateUrl;
         return (
           <article className="credential-card" key={cert._id}>
             <div className="credential-card-main">
@@ -44,8 +47,8 @@ export function Credentials({
               ) : null}
             </div>
             <div className="credential-card-actions">
-              {url ? (
-                <a className="text-link" href={url} target="_blank" rel="noreferrer">
+              {primaryUrl ? (
+                <a className="text-link" href={primaryUrl} target="_blank" rel="noreferrer">
                   {cert.issuer === 'Duoc UC'
                     ? es
                       ? 'Validar con el ID'
@@ -53,6 +56,11 @@ export function Credentials({
                     : es
                       ? 'Ver credencial'
                       : 'View credential'}
+                </a>
+              ) : null}
+              {verificationUrl && certificateUrl ? (
+                <a className="text-link" href={certificateUrl} target="_blank" rel="noreferrer">
+                  {es ? 'Abrir certificado' : 'Open certificate'}
                 </a>
               ) : null}
               {cert.image && isAllowedMedia(cert.image.url) ? (

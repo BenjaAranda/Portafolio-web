@@ -13,6 +13,7 @@ import { isAllowedMedia, isLocalMedia } from '../src/lib/media-url';
 import { existsSync } from 'node:fs';
 import { formatCredentialDate } from '../src/lib/dates';
 import { copy } from '../src/lib/i18n';
+import { safeDocumentUrl } from '../src/lib/document-url';
 test('only HTTPS external URLs without embedded credentials are accepted', () => {
   for (const value of [
     'javascript:alert(1)',
@@ -27,6 +28,17 @@ test('only HTTPS external URLs without embedded credentials are accepted', () =>
 test('email cannot inject mailto headers', () => {
   assert.equal(safeEmail('hello@example.com'), 'hello@example.com');
   assert.equal(safeEmail('hello@example.com?bcc=other@example.com'), undefined);
+});
+test('reviewed local PDFs are accepted without allowing arbitrary relative paths', () => {
+  assert.equal(
+    safeDocumentUrl('/documents/cv-benjamin-aranda-2026-es.pdf'),
+    '/documents/cv-benjamin-aranda-2026-es.pdf',
+  );
+  assert.equal(
+    safeDocumentUrl('/credentials/sql-and-relational-databases-101.pdf'),
+    '/credentials/sql-and-relational-databases-101.pdf',
+  );
+  assert.equal(safeDocumentUrl('/documents/../secret.pdf'), undefined);
 });
 test('initial data has reviewed projects and user-supplied contact details', () => {
   assert.doesNotThrow(() => portfolioSchema.parse(seed));
@@ -85,13 +97,16 @@ test('missing translation never silently falls back to Spanish', () => {
 });
 
 test('LinkedIn credentials, experience and literal copy are preserved', () => {
-  assert.equal(seed.certifications.length, 9);
+  assert.equal(seed.certifications.length, 10);
   assert.equal(seed.experience.length, 4);
   assert.equal(seed.certifications.find((c) => c._id === 'mccr')?.expires, '2027-06');
   assert.equal(seed.skills.filter((s) => s.learning).length, 1);
   assert.match(seed.experience[0].period?.es || '', /jul/);
   for (const cert of seed.certifications) {
     if (cert.image) assert.ok(existsSync(new URL(`../public${cert.image.url}`, import.meta.url)));
+    if (cert.file?.startsWith('/')) {
+      assert.ok(existsSync(new URL(`../public${cert.file}`, import.meta.url)));
+    }
   }
   const text = JSON.stringify({ seed, copy });
   for (const phrase of [

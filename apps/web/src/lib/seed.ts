@@ -6,6 +6,8 @@ export const seed: Portfolio = {
     email: 'benjamin.aranda.dev@gmail.com',
     linkedin: 'https://www.linkedin.com/in/benjaminarandadev/',
     github: 'https://github.com/BenjaAranda',
+    cvEs: '/documents/cv-benjamin-aranda-2026-es.pdf',
+    cvEn: '/documents/cv-benjamin-aranda-2026-en.pdf',
   },
   profile: {
     role: {
@@ -586,6 +588,15 @@ export const seed: Portfolio = {
     },
   ],
   certifications: [
+    {
+      _id: 'ibm-sql-relational-databases',
+      title: 'SQL and Relational Databases 101',
+      issuer: 'IBM Skills Network',
+      date: '2026-09',
+      credentialId: 'f0d0dbf99cbe43dda89d4f9f9f2f9d26',
+      url: 'https://courses.cognitiveclass.ai/certificates/f0d0dbf99cbe43dda89d4f9f9f2f9d26',
+      file: '/credentials/sql-and-relational-databases-101.pdf',
+    },
     {
       _id: 'excel-avanzado',
       title: 'Excel – de intermedio a avanzado',

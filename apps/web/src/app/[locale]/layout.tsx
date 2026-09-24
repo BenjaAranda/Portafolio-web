@@ -3,7 +3,8 @@ import { notFound } from 'next/navigation';
 import Script from 'next/script';
 import { Suspense } from 'react';
 import { getPortfolio, siteOrigin, siteReady } from '@/lib/content';
-import { isLocale, local, safeUrl } from '@/lib/model';
+import { isLocale, local } from '@/lib/model';
+import { safeDocumentUrl } from '@/lib/document-url';
 import { copy } from '@/lib/i18n';
 import { Navigation } from '@/components/navigation';
 import { Footer } from '@/components/portfolio';
@@ -32,7 +33,7 @@ export default async function Layout({ children, params }: Props) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const data = await getPortfolio();
-  const cv = safeUrl(locale === 'es' ? data.settings?.cvEs : data.settings?.cvEn);
+  const cv = safeDocumentUrl(locale === 'es' ? data.settings?.cvEs : data.settings?.cvEn);
   const analytics = siteReady && process.env.CLOUDFLARE_ANALYTICS_TOKEN;
   return (
     <html lang={locale}>

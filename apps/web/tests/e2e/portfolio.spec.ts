@@ -23,8 +23,14 @@ test('header remains visible and layouts fit narrow phones and tablets', async (
   for (const width of [320, 390, 768, 1024, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/es');
-    if (width <= 960) await page.getByRole('button', { name: 'Abrir navegación' }).click();
-    await page.locator('header').getByRole('link', { name: 'Stack', exact: true }).click();
+    if (width <= 960) {
+      await page.getByRole('button', { name: 'Abrir navegación' }).click();
+      const mobileNav = page.locator('#mobile-nav');
+      await expect(mobileNav).toBeVisible();
+      await mobileNav.locator('a[href$="#capacidades"]').click();
+    } else {
+      await page.locator('.desktop-nav').getByRole('link', { name: 'Stack', exact: true }).click();
+    }
     await expect
       .poll(async () =>
         page
@@ -61,7 +67,15 @@ test('junior profile exposes projects, skills and honest certification state', a
   await expect(page.locator('#capacidades')).toContainText('Warp');
   await expect(page.locator('#capacidades .technology-fallback')).toHaveCount(0);
   await expect(page.locator('#certificaciones')).toContainText('Smartview Avanzado');
-  await expect(page.locator('.credential-card')).toHaveCount(9);
+  await expect(page.locator('.credential-card')).toHaveCount(10);
+  await expect(page.locator('#certificaciones')).toContainText('SQL and Relational Databases 101');
+  const sqlCertificate = page
+    .locator('.credential-card')
+    .filter({ hasText: 'SQL and Relational Databases 101' });
+  await expect(sqlCertificate.getByRole('link', { name: 'Abrir certificado' })).toHaveAttribute(
+    'href',
+    /\.pdf$/,
+  );
   await expect(
     page.locator('#certificaciones a[href="https://cert.efset.org/NEyEWs"]'),
   ).toBeVisible();
@@ -168,7 +182,7 @@ test('credential cards keep equal heights without excessive internal spacing', a
     await page.setViewportSize(viewport);
     await page.goto('/es#certificaciones');
     const cards = page.locator('.credential-card');
-    await expect(cards).toHaveCount(9);
+    await expect(cards).toHaveCount(10);
     const heights = await cards.evaluateAll((items) =>
       items.map((item) => item.getBoundingClientRect().height),
     );
@@ -280,6 +294,14 @@ test('English portfolio exposes the translated CV and no development banner', as
   for (const link of await cvLinks.all()) {
     await expect(link).toHaveAttribute('href', /cdn\.sanity\.io\/files\/.*\.pdf/);
   }
+});
+test('desktop and mobile navigation include education', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/es');
+  await expect(page.locator('.desktop-nav').getByRole('link', { name: 'Formación' })).toBeVisible();
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.getByRole('button', { name: 'Abrir navegación' }).click();
+  await expect(page.locator('#mobile-nav').getByRole('link', { name: 'Formación' })).toBeVisible();
 });
 test('mobile stack cards and all-projects action stay compact', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });

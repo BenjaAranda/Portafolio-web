@@ -35,6 +35,10 @@ export function Navigation({
       href: `/${locale}#certificaciones`,
       label: locale === 'es' ? 'Certificaciones' : 'Certifications',
     },
+    {
+      href: `/${locale}#trayectoria`,
+      label: locale === 'es' ? 'Formación' : 'Education',
+    },
     { href: `/${locale}#contacto`, label: c.contact },
   ];
   return (

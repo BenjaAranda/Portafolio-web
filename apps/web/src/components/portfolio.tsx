@@ -18,6 +18,7 @@ import { BrandMark } from './brand-mark';
 import { Credentials } from './credentials';
 import { Technology } from './technology';
 import { PortfolioLink } from './portfolio-navigation';
+import { safeDocumentUrl } from '@/lib/document-url';
 
 export function Eyebrow({ children }: { number?: string; children: React.ReactNode }) {
   return <p className="eyebrow">{children}</p>;
@@ -170,7 +171,7 @@ export function Home({ data, locale }: { data: Portfolio; locale: Locale }) {
   const learningSkills = data.skills.filter(
     (skill) => skill.learning && local(skill.title, locale),
   );
-  const cv = safeUrl(locale === 'es' ? data.settings?.cvEs : data.settings?.cvEn);
+  const cv = safeDocumentUrl(locale === 'es' ? data.settings?.cvEs : data.settings?.cvEn);
   return (
     <div className="profile-portfolio">
       <div className="profile-stage">

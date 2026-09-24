@@ -7,6 +7,7 @@
     "build": "sanity build",
     "deploy": "sanity deploy",
     "import:seed": "sanity exec scripts/import-seed.ts --with-user-token",
+    "sync:career": "sanity exec scripts/sync-career-assets.ts --with-user-token",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

@@ -39,6 +39,26 @@ async function image(value: Image | null | undefined, key?: string) {
   };
 }
 
+async function file(value: string | null | undefined) {
+  if (!value) return undefined;
+  if (!value.startsWith('/') || value.includes('..')) {
+    throw new Error(`Ruta de documento no local: ${value}`);
+  }
+  const path = resolve(mediaRoot, value.slice(1));
+  if (!path.startsWith(mediaRoot) || !existsSync(path)) {
+    throw new Error(`No se encontró el documento público: ${value}`);
+  }
+  let assetId = uploaded.get(path);
+  if (!assetId) {
+    const asset = await client.assets.upload('file', createReadStream(path), {
+      filename: basename(path),
+    });
+    assetId = asset._id;
+    uploaded.set(path, assetId);
+  }
+  return { _type: 'file', asset: { _type: 'reference', _ref: assetId } };
+}
+
 async function createMissing(id: string, type: string, build: () => Promise<Record<string, unknown>>) {
   // Public datasets hide IDs containing dots from anonymous readers.
   if (id.includes('.')) throw new Error(`ID no público: ${id}`);
@@ -56,7 +76,14 @@ async function main() {
   }
   if (!existsSync(mediaRoot)) throw new Error(`No existe el directorio de imágenes: ${mediaRoot}`);
 
-  await createMissing('siteSettings', 'siteSettings', async () => ({ ...seed.settings }));
+  await createMissing('siteSettings', 'siteSettings', async () => ({
+    name: seed.settings?.name,
+    email: seed.settings?.email,
+    github: seed.settings?.github,
+    linkedin: seed.settings?.linkedin,
+    cvEs: await file(seed.settings?.cvEs),
+    cvEn: await file(seed.settings?.cvEn),
+  }));
   await createMissing('profile', 'profile', async () => ({
     role: localized(seed.profile?.role, 'localizedString'),
     headline: localized(seed.profile?.headline, 'localizedText'),
@@ -120,6 +147,7 @@ async function main() {
       expires: credential.expires,
       credentialId: credential.credentialId,
       url: credential.url,
+      file: await file(credential.file),
       image: await image(credential.image),
       order: index,
     }));
