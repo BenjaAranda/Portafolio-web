@@ -1082,7 +1082,8 @@ main {
   font-size: 12px;
   overflow-wrap: anywhere;
   color: var(--muted);
-  margin: 2px 0 4px;
+  flex-basis: 100%;
+  margin: 0;
 }
 .credential-card .text-link {
   font-size: 13px;
@@ -1129,6 +1130,11 @@ main {
   border: 1px solid #aebfc7;
   border-radius: 12px;
   background: #fff;
+  box-shadow: 0 3px 12px rgb(36 55 70 / 5%);
+}
+.capability-row:last-child {
+  border-bottom: 1px solid #aebfc7;
+  padding-bottom: 20px;
 }
 .capability-row:nth-child(even) {
   background: #fff;
@@ -1298,11 +1304,11 @@ main {
   font-weight: 650;
 }
 .technology-tag {
-  min-height: 24px;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
+  min-height: 30px;
+  padding: 3px 8px;
+  border: 1px solid #d6e2e5;
+  border-radius: 8px;
+  background: #f7fafb;
   color: var(--ink);
   font-size: 13px;
   line-height: 1.2;
@@ -1327,7 +1333,7 @@ main {
   letter-spacing: -0.02em;
 }
 .capability-tools {
-  gap: 10px 16px;
+  gap: 8px;
 }
 .capability-tools .technology-tag {
   color: var(--ink);
@@ -1386,9 +1392,9 @@ main {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 2px 14px;
+  gap: 4px 14px;
   margin-top: auto;
-  padding-top: 5px;
+  padding-top: 8px;
   border-top: 1px solid #e9eff1;
 }
 .credential-card-actions:empty {
@@ -1786,6 +1792,10 @@ main {
     scroll-snap-align: start;
   }
 
+  .capability-row:last-child {
+    padding-bottom: 18px;
+  }
+
   .capability-row:nth-child(even) {
     background: #fff;
   }
@@ -1801,12 +1811,12 @@ main {
   }
 
   .capability-row .capability-tools {
-    gap: 10px 12px;
+    gap: 7px;
   }
 
   .technology-tag {
-    min-height: 22px;
-    padding: 0;
+    min-height: 25px;
+    padding: 2px 6px;
     font-size: 12px;
   }
 

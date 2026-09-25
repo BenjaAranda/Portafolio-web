@@ -42,11 +42,11 @@ export function Credentials({
                   </div>
                 ) : null}
               </dl>
+            </div>
+            <div className="credential-card-actions">
               {cert.credentialId ? (
                 <p className="credential-id">ID: {cert.credentialId}</p>
               ) : null}
-            </div>
-            <div className="credential-card-actions">
               {primaryUrl ? (
                 <a className="text-link" href={primaryUrl} target="_blank" rel="noreferrer">
                   {cert.issuer === 'Duoc UC'

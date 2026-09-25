@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="32" viewBox="0 0 1200 1600" fill="none">
+  <defs>
+    <linearGradient id="back" x1="650" y1="0" x2="1248" y2="1507" gradientUnits="userSpaceOnUse"><stop stop-color="#E6AD10"/><stop offset="1" stop-color="#C87E0E"/></linearGradient>
+    <linearGradient id="middle" x1="325" y1="400" x2="906" y2="1562" gradientUnits="userSpaceOnUse"><stop stop-color="#F6D751"/><stop offset="1" stop-color="#E6AD10"/></linearGradient>
+    <linearGradient id="front" x1="0" y1="800" x2="320" y2="1582" gradientUnits="userSpaceOnUse"><stop stop-color="#F9E589"/><stop offset="1" stop-color="#F6D751"/></linearGradient>
+  </defs>
+  <path d="M716.75 0h416.5C1170.1 0 1200 29.9 1200 66.75v1466.5c0 36.85-29.9 66.75-66.75 66.75h-416.5c-36.85 0-66.75-29.9-66.75-66.75V66.75C650 29.9 679.9 0 716.75 0Z" fill="url(#back)"/>
+  <path d="M391.67 400h416.66c36.82 0 66.67 29.85 66.67 66.67V1600H325V466.67c0-36.82 29.85-66.67 66.67-66.67Z" fill="url(#middle)"/>
+  <path d="M66.67 800h416.66c36.82 0 66.67 29.85 66.67 66.67V1600H66.67C29.85 1600 0 1570.15 0 1533.33V866.67C0 829.85 29.85 800 66.67 800Z" fill="url(#front)"/>
+</svg>

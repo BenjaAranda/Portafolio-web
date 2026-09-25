@@ -47,12 +47,12 @@ const localIcons: Record<string, string> = {
   Vite: '/brands/tech/vitejs.webp',
   Vitest: '/brands/tech/vitest.webp',
   MasterBase: '/brands/masterbase.webp',
+  'Power BI': '/brands/tech/power-bi.svg',
 };
 
 const simpleIcons: Record<string, SimpleIcon> = {
   'Tailwind CSS': siTailwindcss,
   PostgreSQL: siPostgresql,
-  SQL: siPostgresql,
   Python: siPython,
   Scrapy: siScrapy,
   Axios: siAxios,
@@ -84,16 +84,16 @@ const simpleIcons: Record<string, SimpleIcon> = {
   Warp: siWarp,
 };
 
-type CustomIcon = 'api' | 'automation' | 'codex' | 'csv' | 'excel' | 'powerbi' | 'testing';
+type CustomIcon = 'api' | 'automation' | 'codex' | 'csv' | 'database' | 'excel' | 'testing';
 
 const customIcons: Record<string, CustomIcon> = {
   Automatización: 'automation',
   Codex: 'codex',
   CSV: 'csv',
-  'Data analysis': 'powerbi',
+  SQL: 'database',
+  'Data analysis': 'automation',
   Excel: 'excel',
   Playwright: 'testing',
-  'Power BI': 'powerbi',
   Retrofit: 'api',
   SmartData: 'automation',
   SmartView: 'automation',
@@ -132,13 +132,12 @@ function CustomTechnologyIcon({ icon }: { icon: CustomIcon }) {
     );
   }
 
-  if (icon === 'powerbi') {
+  if (icon === 'database') {
     return (
       <svg {...common}>
-        <rect width="4" height="9" x="2" y="13" rx="2" fill="#f2c811" />
-        <rect width="4" height="14" x="7.5" y="8" rx="2" fill="#e8b10b" />
-        <rect width="4" height="19" x="13" y="3" rx="2" fill="#dca60a" />
-        <rect width="4" height="12" x="18.5" y="10" rx="2" fill="#f6d33c" />
+        <ellipse cx="12" cy="5" rx="9" ry="3" fill="#36758b" />
+        <path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5" fill="#36758b" />
+        <path d="M3 10c0 1.7 4 3 9 3s9-1.3 9-3M3 16c0 1.7 4 3 9 3s9-1.3 9-3" fill="none" stroke="#e8f4f6" strokeWidth="1.4" />
       </svg>
     );
   }

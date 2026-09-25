@@ -523,10 +523,10 @@ export const seed: Portfolio = {
       _id: 'learning',
       title: { es: 'En aprendizaje', en: 'Currently learning' },
       description: {
-        es: 'Formación autodidacta en análisis de datos y visualización.',
-        en: 'Independent study in data analysis and visualization.',
+        es: 'Formación autodidacta en Python, análisis de datos y visualización.',
+        en: 'Independent study in Python, data analysis and visualization.',
       },
-      technologies: ['Power BI', 'Data analysis'],
+      technologies: ['Python', 'Power BI', 'Data analysis'],
       learning: true,
     },
   ],

@@ -199,7 +199,21 @@ test('credential cards keep equal heights without excessive internal spacing', a
     );
     expect(Math.max(...heights) - Math.min(...heights)).toBeLessThan(2);
     expect(Math.max(...heights)).toBeLessThan(viewport.width > 700 ? 225 : 220);
+    await expect(cards.locator('.credential-card-actions')).toHaveCount(10);
   }
+});
+
+test('stack tools have distinct labels and learning icons', async ({ page }) => {
+  await page.goto('/es#capacidades');
+  const stack = page.locator('#capacidades');
+  const sql = stack.locator('.technology-tag').filter({ hasText: /^SQL$/ });
+  const postgres = stack.locator('.technology-tag').filter({ hasText: /^PostgreSQL$/ });
+  await expect(sql.locator('svg')).toBeVisible();
+  expect(await sql.locator('svg').innerHTML()).not.toBe(await postgres.locator('svg').innerHTML());
+  await expect(stack.locator('.learning-panel .technology-tag').filter({ hasText: /^Python$/ })).toBeVisible();
+  await expect(stack.locator('.learning-panel .technology-tag').filter({ hasText: /^Power BI$/ }).locator('img')).toHaveAttribute('src', '/brands/tech/power-bi.svg');
+  expect(await stack.locator('.capability-row:last-child').evaluate((element) => getComputedStyle(element).borderBottomWidth)).toBe('1px');
+  expect(await sql.evaluate((element) => getComputedStyle(element).borderTopWidth)).toBe('1px');
 });
 
 test('all project previews keep their complete images visible', async ({ page }) => {
