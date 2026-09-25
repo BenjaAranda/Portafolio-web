@@ -333,10 +333,23 @@ test('mobile stack cards and all-projects action stay compact', async ({ page })
     });
     expect(colors.buttons).toEqual([colors.profile, colors.profile]);
   }
-  const stackHeights = await page
+  const stackCards = await page
     .locator('#capacidades .capability-row')
-    .evaluateAll((items) => items.map((item) => item.getBoundingClientRect().height));
-  expect(Math.max(...stackHeights)).toBeLessThan(270);
+    .evaluateAll((items) => items.map((item) => {
+      const card = item.getBoundingClientRect();
+      const heading = item.firstElementChild!.getBoundingClientRect();
+      const tools = item.querySelector('.capability-tools')!.getBoundingClientRect();
+      return {
+        width: card.width,
+        height: card.height,
+        toolsGap: tools.top - heading.bottom,
+        clipped: item.scrollHeight > item.clientHeight,
+      };
+    }));
+  expect(stackCards).toHaveLength(7);
+  expect(stackCards.every(({ width, height }) => Math.abs(width - height) < 2)).toBe(true);
+  expect(stackCards.every(({ toolsGap }) => toolsGap < 20)).toBe(true);
+  expect(stackCards.every(({ clipped }) => !clipped)).toBe(true);
 });
 test('preview is not indexed and only offers the verified email', async ({ page, request }) => {
   await page.goto('/es');

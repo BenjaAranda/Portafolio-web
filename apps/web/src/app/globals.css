@@ -1072,25 +1072,29 @@ main {
 .capability-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 40px;
+  gap: 16px;
 }
 .capability-row {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 28px 0;
-  border-radius: 0;
+  justify-content: flex-start;
+  gap: 14px;
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
 }
 .capability-row:nth-child(even) {
-  background: transparent;
+  background: #fff;
 }
 .capability-row h3 {
-  font-size: 21px;
+  font-size: 18px;
 }
 .capability-tools {
   justify-content: flex-start;
+  align-content: flex-start;
 }
 .capability-learning {
   grid-column: 1/-1;
@@ -1247,12 +1251,12 @@ main {
   font-weight: 650;
 }
 .technology-tag {
-  min-height: 32px;
-  padding: 5px 10px 5px 7px;
-  border: 1px solid #d9e5e5;
-  border-radius: 999px;
-  background: #f7faf9;
-  color: #244b50;
+  min-height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink);
   font-size: 13px;
   line-height: 1.2;
 }
@@ -1276,11 +1280,11 @@ main {
   letter-spacing: -0.02em;
 }
 .capability-tools {
-  gap: 10px;
+  gap: 10px 16px;
 }
 .capability-tools .technology-tag {
-  color: #244b50;
-  font-weight: 650;
+  color: var(--ink);
+  font-weight: 600;
 }
 .learning-panel {
   display: grid;
@@ -1288,10 +1292,10 @@ main {
   gap: 32px;
   margin-top: 36px;
   padding: 28px;
-  border: 1px solid #9ec8c2;
-  border-left: 6px solid var(--accent);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
   border-radius: 12px;
-  background: #eaf5f2;
+  background: #fff;
 }
 .learning-panel-heading {
   display: flex;
@@ -1690,17 +1694,19 @@ main {
 
   .capability-list {
     display: flex;
-    align-items: flex-start;
+    align-items: stretch;
     margin-top: 20px;
     margin-right: -14px;
   }
 
   .capability-row {
-    flex: 0 0 min(84vw, 328px);
+    flex: 0 0 min(84vw, 276px);
+    width: min(84vw, 276px);
+    aspect-ratio: 1;
     min-height: 0;
     justify-content: flex-start;
-    gap: 10px;
-    padding: 14px;
+    gap: 14px;
+    padding: 18px;
     border: 1px solid var(--line);
     border-radius: 12px;
     background: #fff;
@@ -1708,7 +1714,7 @@ main {
   }
 
   .capability-row:nth-child(even) {
-    background: var(--soft);
+    background: #fff;
   }
 
   .capability-row h3 {
@@ -1722,13 +1728,13 @@ main {
   }
 
   .capability-row .capability-tools {
-    gap: 5px;
+    gap: 10px 12px;
   }
 
   .technology-tag {
-    min-height: 25px;
-    padding: 3px 7px 3px 4px;
-    font-size: 11px;
+    min-height: 22px;
+    padding: 0;
+    font-size: 12px;
   }
 
   .technology-icon,
