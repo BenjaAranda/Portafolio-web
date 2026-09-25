@@ -230,7 +230,8 @@ export function Home({ data, locale }: { data: Portfolio; locale: Locale }) {
             href={projectPath(locale)}
             locale={locale}
           >
-            {c.allProjects}
+            <span className="all-projects-label-desktop">{c.allProjects}</span>
+            <span className="all-projects-label-mobile">{es ? 'Ver todos' : 'View all'}</span>
           </PortfolioLink>
         </div>
         <p className="profile-section-description">

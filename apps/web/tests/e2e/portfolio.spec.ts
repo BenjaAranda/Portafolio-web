@@ -319,12 +319,15 @@ test('mobile stack cards and all-projects action stay compact', async ({ page })
     await page.setViewportSize({ width, height: 844 });
     await page.goto('/es');
     const heading = await page.locator('#proyectos .profile-section-heading').boundingBox();
+    const title = await page.locator('#proyectos .profile-section-heading h2').boundingBox();
     const button = await page
       .locator('.profile-section-heading .all-projects-button')
       .boundingBox();
     expect(heading).not.toBeNull();
     expect(button).not.toBeNull();
-    expect(button!.width).toBeLessThan(220);
+    expect(title).not.toBeNull();
+    expect(button!.width).toBeLessThan(125);
+    expect(Math.abs(button!.y + button!.height / 2 - title!.y - title!.height / 2)).toBeLessThan(3);
     expect(Math.abs(button!.x + button!.width - heading!.x - heading!.width)).toBeLessThan(2);
     const colors = await page.evaluate(() => {
       const profile = getComputedStyle(document.querySelector('.profile-stage')!);
@@ -350,6 +353,19 @@ test('mobile stack cards and all-projects action stay compact', async ({ page })
   expect(stackCards.every(({ width, height }) => Math.abs(width - height) < 2)).toBe(true);
   expect(stackCards.every(({ toolsGap }) => toolsGap < 20)).toBe(true);
   expect(stackCards.every(({ clipped }) => !clipped)).toBe(true);
+});
+test('section navigation scrolls smoothly and indicates the active section', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/es');
+  await page.locator('.desktop-nav').getByRole('link', { name: 'Certificaciones' }).click();
+  await expect(page).toHaveURL(/#certificaciones$/);
+  await expect(page.locator('.desktop-nav [aria-current="location"]')).toHaveText('Certificaciones');
+  await expect.poll(() => page.locator('#certificaciones').evaluate((element) => element.getBoundingClientRect().top)).toBeLessThan(150);
+  await page.locator('#proyectos').scrollIntoViewIfNeeded();
+  await expect(page.locator('.desktop-nav [aria-current="location"]')).toHaveText('Proyectos');
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.getByRole('button', { name: 'Abrir navegación' }).click();
+  await expect(page.locator('#mobile-nav [aria-current="location"]')).toHaveText('Proyectos');
 });
 test('preview is not indexed and only offers the verified email', async ({ page, request }) => {
   await page.goto('/es');

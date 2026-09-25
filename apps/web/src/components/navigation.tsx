@@ -1,10 +1,19 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { copy } from '@/lib/i18n';
 import type { Locale } from '@/lib/model';
 import { privacyPath, projectPath } from '@/lib/routing';
+
+const sectionIds = [
+  'perfil',
+  'proyectos',
+  'capacidades',
+  'certificaciones',
+  'trayectoria',
+  'contacto',
+];
 
 export function Navigation({
   locale,
@@ -16,6 +25,7 @@ export function Navigation({
   cv?: string;
 }) {
   const [open, setOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
   const menuRef = useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
   const c = copy[locale];
@@ -41,6 +51,35 @@ export function Navigation({
     },
     { href: `/${locale}#contacto`, label: c.contact },
   ];
+  useEffect(() => {
+    if (pathname !== `/${locale}`) return;
+    let frame = 0;
+    const updateActive = () => {
+      const current = sectionIds
+        .filter((id) => {
+          const section = document.getElementById(id);
+          return section && section.getBoundingClientRect().top <= 150;
+        })
+        .at(-1);
+      setActiveSection(current || 'perfil');
+    };
+    const onScroll = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(updateActive);
+    };
+    updateActive();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('hashchange', onScroll);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('hashchange', onScroll);
+    };
+  }, [pathname, locale]);
+  const navigateToSection = (href: string) => {
+    setActiveSection(href.split('#')[1]);
+    setOpen(false);
+  };
   return (
     <header
       className="header"
@@ -70,7 +109,16 @@ export function Navigation({
         </Link>
         <nav aria-label={locale === 'es' ? 'Principal' : 'Main'} className="desktop-nav">
           {links.map((link) => (
-            <Link key={link.href} href={link.href}>
+            <Link
+              key={link.href}
+              href={link.href}
+              aria-current={
+                activeSection === link.href.split('#')[1] && pathname === `/${locale}`
+                  ? 'location'
+                  : undefined
+              }
+              onClick={() => navigateToSection(link.href)}
+            >
               {link.label}
             </Link>
           ))}
@@ -112,12 +160,21 @@ export function Navigation({
           aria-label={locale === 'es' ? 'Móvil' : 'Mobile'}
         >
           {links.map((link) => (
-            <Link key={link.href} href={link.href} onClick={() => setOpen(false)}>
+            <Link
+              key={link.href}
+              href={link.href}
+              aria-current={
+                activeSection === link.href.split('#')[1] && pathname === `/${locale}`
+                  ? 'location'
+                  : undefined
+              }
+              onClick={() => navigateToSection(link.href)}
+            >
               {link.label}
             </Link>
           ))}
           {cv && (
-            <a href={cv} target="_blank" rel="noreferrer">
+            <a className="mobile-cv-link" href={cv} target="_blank" rel="noreferrer">
               {c.cv}
             </a>
           )}
