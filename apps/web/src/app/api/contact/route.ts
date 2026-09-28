@@ -64,7 +64,13 @@ export async function POST(request: Request) {
       cache: 'no-store',
       signal: AbortSignal.timeout(10000),
     });
-    const result: unknown = await response.json();
+    const raw = await response.text();
+    let result: unknown;
+    try {
+      result = JSON.parse(raw);
+    } catch {
+      return Response.json({ error: 'delivery_failed', providerStatus: response.status, snippet: raw.slice(0, 250) }, { status: 502 });
+    }
     if (
       !response.ok ||
       typeof result !== 'object' ||
