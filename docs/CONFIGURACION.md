@@ -29,6 +29,14 @@ Vercel Hobby queda sujeto a sus condiciones personales/no comerciales y cuotas a
 
 El alias gratuito de producción es `https://benjamin-aranda.vercel.app`. `apps/web/vercel.json` lo reasigna automáticamente a cada despliegue y `SITE_URL` debe conservar ese mismo origen para metadata, sitemap y enlaces canónicos.
 
+## Formulario de contacto
+
+El formulario aparece en español e inglés y envía los mensajes directamente desde la página mediante FormSubmit, sin requerir un dominio propio ni una cuenta de correo transaccional. El destino fijo del servidor es `benjamin.aranda.dev@gmail.com`; `CONTACT_TO_EMAIL` permite cambiarlo si se necesita. El visitante no puede elegir el destinatario.
+
+Antes de publicar el envío, realizar una primera solicitud de prueba y abrir el enlace de activación que FormSubmit manda a ese buzón. Hasta confirmar el enlace, los mensajes quedan pendientes en el proveedor y no deben considerarse entregados. Después, probar desde la página publicada y verificar la llegada al buzón y el funcionamiento de «Responder». FormSubmit conserva los envíos durante 30 días según su documentación; la página de privacidad lo informa.
+
+El formulario incluye validación, un campo antispam y un límite básico por conexión. Este límite vive en cada instancia del servidor; para mayor volumen o protección más fuerte, configurar un límite compartido o un desafío antispam.
+
 ## Webhook
 
 En Sanity Manage, crear un webhook HTTPS dirigido a `https://TU-DOMINIO/api/revalidate`, dataset `production`, métodos Create/Update/Delete. Excluir drafts (dejar desactivada la opción de disparar por borradores).
