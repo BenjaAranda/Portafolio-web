@@ -76,7 +76,8 @@ export async function POST(request: Request) {
       return Response.json({ error: 'delivery_failed', provider: result }, { status: 502 });
     }
     return Response.json({ ok: true });
-  } catch {
-    return Response.json({ error: 'delivery_failed' }, { status: 502 });
+  } catch (error) {
+    console.error('Contact provider request failed', error);
+    return Response.json({ error: 'delivery_failed', detail: String(error) }, { status: 502 });
   }
 }
