@@ -72,7 +72,8 @@ export async function POST(request: Request) {
       !('success' in result) ||
       (result.success !== true && result.success !== 'true')
     ) {
-      return Response.json({ error: 'delivery_failed' }, { status: 502 });
+      console.error('Contact provider rejected message', response.status, result);
+      return Response.json({ error: 'delivery_failed', provider: result }, { status: 502 });
     }
     return Response.json({ ok: true });
   } catch {
