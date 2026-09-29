@@ -31,7 +31,7 @@ El alias gratuito de producción es `https://benjamin-aranda.vercel.app`. `apps/
 
 ## Formulario de contacto
 
-El formulario React envía mensajes mediante Formspree (`xvkglanb`) directamente desde el navegador. Incluye nombre, correo, asunto y mensaje, validación y estados de envío. El correo visible y copiable permanece como alternativa. El identificador del formulario es público; no requiere clave secreta ni dominio propio.
+El formulario React envía mensajes mediante Formspree (`xvkglanb`) directamente desde el navegador. Incluye nombre, correo, asunto y mensaje, validación y estados de envío. La dirección de correo abre la redacción de Gmail con el destinatario preparado; junto a ella se muestra una indicación y un botón explícito. También se conserva la opción de copiar el correo. El identificador del formulario es público; no requiere clave secreta ni dominio propio.
 
 La política CSP autoriza la conexión a `https://formspree.io`. Verificar en el panel de Formspree que las notificaciones están configuradas para el correo correcto y realizar un envío de prueba desde la página publicada antes de considerar la entrega confirmada.
 

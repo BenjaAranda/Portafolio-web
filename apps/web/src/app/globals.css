@@ -481,6 +481,25 @@ main {
   gap: 16px;
   overflow-wrap: anywhere;
 }
+.email-contact { min-width: 0; }
+.email-hint { margin: 6px 0 8px; color: var(--muted); font-size: 12px; }
+.email-actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.gmail-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 13px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 650;
+  text-decoration: none;
+  transition: background-color 160ms ease, transform 160ms ease;
+}
+.gmail-button:hover { filter: brightness(.94); transform: translateY(-1px); }
+.gmail-button:focus-visible, .email-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .text-button {
   border: 0;
   background: none;

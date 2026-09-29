@@ -10,7 +10,14 @@ test('contact form sends through Formspree and keeps email fallback', async ({ p
   });
   await page.goto('/es');
   const contact = page.locator('#contacto');
-  await expect(contact.getByRole('link', { name: /@/ })).toHaveAttribute('href', /^mailto:/);
+  await expect(contact.getByRole('link', { name: /@/ })).toHaveAttribute(
+    'href',
+    'https://mail.google.com/mail/?view=cm&fs=1&to=benjamin.aranda.dev%40gmail.com',
+  );
+  await expect(contact.getByRole('link', { name: 'Abrir en Gmail' })).toHaveAttribute(
+    'href',
+    'https://mail.google.com/mail/?view=cm&fs=1&to=benjamin.aranda.dev%40gmail.com',
+  );
   await contact.getByLabel('Nombre').fill('Nombre de prueba');
   await contact.getByLabel('Correo electrónico').fill('prueba@example.com');
   await contact.getByLabel('Asunto').fill('Prueba de contacto');
@@ -399,12 +406,12 @@ test('section navigation scrolls smoothly and indicates the active section', asy
   await page.getByRole('button', { name: 'Abrir navegación' }).click();
   await expect(page.locator('#mobile-nav [aria-current="location"]')).toHaveText('Proyectos');
 });
-test('preview is not indexed and only offers the verified email', async ({ page, request }) => {
+test('preview is not indexed and offers the verified email with Gmail action', async ({ page, request }) => {
   await page.goto('/es');
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
   await expect(
-    page.locator('a[href="mailto:benjamin.aranda.dev@gmail.com"]'),
-  ).toHaveCount(1);
+    page.locator('a[href="https://mail.google.com/mail/?view=cm&fs=1&to=benjamin.aranda.dev%40gmail.com"]'),
+  ).toHaveCount(2);
   expect(await (await request.get('/robots.txt')).text()).toContain('Disallow: /');
   expect((await request.post('/api/revalidate', { data: { _type: 'project' } })).status()).toBe(
     503,

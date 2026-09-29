@@ -350,6 +350,9 @@ export function Home({ data, locale }: { data: Portfolio; locale: Locale }) {
 export function Contact({ data, locale }: { data: Portfolio; locale: Locale }) {
   const c = copy[locale];
   const email = safeEmail(data.settings?.email);
+  const gmailHref = email
+    ? `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}`
+    : undefined;
   return (
     <section id="contacto" className="contact-section">
       <div className="shell">
@@ -359,11 +362,28 @@ export function Contact({ data, locale }: { data: Portfolio; locale: Locale }) {
         <p>{c.contactBody}</p>
         <div className="contact-actions">
           {email ? (
-            <div>
-              <a className="email-link" href={`mailto:${email}`}>
+            <div className="email-contact">
+              <a
+                className="email-link"
+                href={gmailHref}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {email}
               </a>
-              <CopyEmail email={email} locale={locale} />
+              <p className="email-hint">{c.gmailHint}</p>
+              <div className="email-actions">
+                <a
+                  className="gmail-button"
+                  href={gmailHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {c.gmailAction}
+                  <span aria-hidden="true"> ↗</span>
+                </a>
+                <CopyEmail email={email} locale={locale} />
+              </div>
             </div>
           ) : (
             <p className="contact-pending">
