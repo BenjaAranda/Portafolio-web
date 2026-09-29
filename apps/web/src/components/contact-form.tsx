@@ -1,12 +1,12 @@
 'use client';
 
-import { useState, type FormEvent } from 'react';
+import { useState } from 'react';
 import { copy } from '@/lib/i18n';
 import type { Locale } from '@/lib/model';
 
 type Fields = { name: string; email: string; subject: string; message: string; website: string };
 
-export function ContactForm({ locale }: { locale: Locale }) {
+export function ContactForm({ locale, recipient }: { locale: Locale; recipient: string }) {
   const c = copy[locale];
   const [fields, setFields] = useState<Fields>({
     name: '',
@@ -15,32 +15,14 @@ export function ContactForm({ locale }: { locale: Locale }) {
     message: '',
     website: '',
   });
-  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
-
-  async function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setStatus('sending');
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(fields),
-      });
-      if (!response.ok) throw new Error('send failed');
-      setFields({ name: '', email: '', subject: '', message: '', website: '' });
-      setStatus('sent');
-    } catch {
-      setStatus('error');
-    }
-  }
-
   const update = (key: keyof Fields, value: string) => {
     setFields((current) => ({ ...current, [key]: value }));
-    if (status !== 'sending') setStatus('idle');
   };
 
   return (
-    <form className="contact-form" onSubmit={submit}>
+    <form className="contact-form" method="POST" action={`https://formsubmit.co/${encodeURIComponent(recipient)}`}>
+      <input type="hidden" name="_next" value={`https://benjamin-aranda.vercel.app/${locale}#contacto-enviado`} />
+      <input type="hidden" name="_subject" value={`[Portafolio] ${fields.subject}`} />
       <div className="contact-form-heading">
         <h3>{c.contactFormTitle}</h3>
         <p>{c.contactFormIntro}</p>
@@ -98,7 +80,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
         <label>
           Website
           <input
-            name="website"
+            name="_honey"
             tabIndex={-1}
             autoComplete="off"
             value={fields.website}
@@ -107,12 +89,8 @@ export function ContactForm({ locale }: { locale: Locale }) {
         </label>
       </div>
       <div className="contact-form-footer">
-        <button className="button contact-submit" type="submit" disabled={status === 'sending'}>
-          {status === 'sending' ? c.contactSending : c.contactSend}
-        </button>
-        <p role="status" aria-live="polite" className={status === 'error' ? 'contact-feedback contact-feedback-error' : 'contact-feedback'}>
-          {status === 'sent' ? c.contactSent : status === 'error' ? c.contactFailed : ''}
-        </p>
+        <button className="button contact-submit" type="submit">{c.contactSend}</button>
+        <p id="contacto-enviado" role="status" className="contact-feedback">{c.contactSent}</p>
       </div>
     </form>
   );

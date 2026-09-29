@@ -31,11 +31,11 @@ El alias gratuito de producción es `https://benjamin-aranda.vercel.app`. `apps/
 
 ## Formulario de contacto
 
-El formulario aparece en español e inglés y envía los mensajes directamente desde la página mediante FormSubmit, sin requerir un dominio propio ni una cuenta de correo transaccional. El destino fijo del servidor es `benjamin.aranda.dev@gmail.com`; `CONTACT_TO_EMAIL` permite cambiarlo si se necesita. El visitante no puede elegir el destinatario.
+El formulario aparece en español e inglés y envía los mensajes directamente desde el navegador mediante FormSubmit, sin requerir un dominio propio ni una cuenta de correo transaccional. Su destino es el correo público validado de Sanity (`benjamin.aranda.dev@gmail.com`), que el visitante no puede modificar desde el formulario. El navegador sale brevemente al proveedor y vuelve a la sección de contacto tras un envío correcto.
 
-Antes de publicar el envío, realizar una primera solicitud de prueba y abrir el enlace de activación que FormSubmit manda a ese buzón. Hasta confirmar el enlace, los mensajes quedan pendientes en el proveedor y no deben considerarse entregados. Después, probar desde la página publicada y verificar la llegada al buzón y el funcionamiento de «Responder». FormSubmit conserva los envíos durante 30 días según su documentación; la página de privacidad lo informa.
+Antes de publicar el envío, realizar una primera solicitud de prueba y abrir el enlace de activación que FormSubmit manda a ese buzón. Hasta confirmar el enlace, los mensajes quedan pendientes en el proveedor y no deben considerarse entregados. La activación de `benjamin.aranda.dev@gmail.com` se completó el 28 de septiembre de 2026. Después de cada cambio de integración, probar desde la página publicada y verificar la llegada al buzón y el funcionamiento de «Responder». FormSubmit conserva los envíos durante 30 días según su documentación; la página de privacidad lo informa.
 
-El formulario incluye validación, un campo antispam y un límite básico por conexión. Este límite vive en cada instancia del servidor; para mayor volumen o protección más fuerte, configurar un límite compartido o un desafío antispam.
+El formulario incluye validación HTML, un campo antispam y el reCAPTCHA propio de FormSubmit. El envío desde la función de Vercel se descartó: Cloudflare devuelve una página de bloqueo HTTP 403 a esa función. No reintroducir un proxy servidor sin verificar primero el flujo publicado extremo a extremo.
 
 ## Webhook
 

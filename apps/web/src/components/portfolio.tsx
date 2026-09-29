@@ -385,7 +385,7 @@ export function Contact({ data, locale }: { data: Portfolio; locale: Locale }) {
             </div>
           </div>
         </div>
-        <ContactForm locale={locale} />
+        {email && <ContactForm locale={locale} recipient={email} />}
       </div>
     </section>
   );

@@ -550,20 +550,17 @@ main {
   background: var(--profile-background);
   color: #fff;
 }
-.contact-submit:hover:not(:disabled) {
+.contact-submit:hover {
   background: var(--accent);
 }
-.contact-submit:disabled {
-  opacity: 0.65;
-  cursor: wait;
-}
 .contact-feedback {
+  display: none;
   font-size: 13px;
   line-height: 1.5;
   color: var(--accent);
 }
-.contact-feedback-error {
-  color: #a62e2e;
+.contact-feedback:target {
+  display: block;
 }
 .contact-honeypot {
   position: absolute;
