@@ -12,6 +12,7 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
+    "@formspree/react": "^3.0.0",
     "@sanity/client": "8.6.2",
     "@sanity/webhook": "4.0.4",
     "next": "16.3.5",

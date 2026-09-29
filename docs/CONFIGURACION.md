@@ -31,9 +31,9 @@ El alias gratuito de producción es `https://benjamin-aranda.vercel.app`. `apps/
 
 ## Formulario de contacto
 
-El envío directo está desactivado temporalmente. FormSubmit respondió con una página de bloqueo HTTP 403 al servidor de Vercel y con HTTP 500 a los envíos HTML desde la página publicada. Su enlace de activación se confirmó, pero eso no resolvió la entrega. Se retiró el formulario que fallaba y se mantiene el correo visible con opción de copiarlo.
+El formulario React envía mensajes mediante Formspree (`xvkglanb`) directamente desde el navegador. Incluye nombre, correo, asunto y mensaje, validación y estados de envío. El correo visible y copiable permanece como alternativa. El identificador del formulario es público; no requiere clave secreta ni dominio propio.
 
-Para ofrecer un formulario funcional sin dominio propio hay que configurar un proveedor de correo o formularios con una cuenta autorizada y probar un envío real desde producción antes de volver a mostrarlo. No desplegar una interfaz que indique «mensaje enviado» basándose solo en una respuesta intermedia o no verificada.
+La política CSP autoriza la conexión a `https://formspree.io`. Verificar en el panel de Formspree que las notificaciones están configuradas para el correo correcto y realizar un envío de prueba desde la página publicada antes de considerar la entrega confirmada.
 
 ## Webhook
 

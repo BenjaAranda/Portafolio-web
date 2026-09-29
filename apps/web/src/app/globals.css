@@ -492,6 +492,55 @@ main {
   font-size: 13px;
   color: var(--accent);
 }
+.contact-form {
+  position: relative;
+  max-width: 760px;
+  margin-top: 30px;
+  padding: clamp(20px, 3vw, 32px);
+  background: #fff;
+  border: 1px solid #cddfdf;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgb(13 54 58 / 5%);
+}
+.contact-form h3 { font-size: 21px; }
+.contact-form > p { margin: 8px 0 22px; color: var(--muted); font-size: 14px; line-height: 1.6; }
+.contact-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.contact-field { display: flex; flex-direction: column; gap: 7px; margin-bottom: 16px; }
+.contact-field label { color: var(--ink); font-size: 13px; font-weight: 650; }
+.contact-field input, .contact-field textarea {
+  width: 100%;
+  border: 1px solid #c9d8d9;
+  border-radius: 9px;
+  background: #fff;
+  color: var(--ink);
+  padding: 11px 12px;
+  font: inherit;
+  font-size: 14px;
+}
+.contact-field textarea { resize: vertical; min-height: 132px; }
+.contact-field input:focus-visible, .contact-field textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.contact-honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.contact-submit {
+  border: 0;
+  border-radius: 9px;
+  padding: 12px 20px;
+  background: var(--accent);
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.contact-submit:disabled { opacity: .65; cursor: wait; }
+.contact-form .contact-form-note { margin: 12px 0 0; font-size: 12px; }
+.contact-form-error, .contact-form-success { margin: 14px 0; padding: 14px 16px; border-radius: 9px; font-size: 14px; }
+.contact-form-error { background: #fff1ef; color: #8e2e23; }
+.contact-form-success { max-width: 760px; margin-top: 30px; background: #edf8f2; color: #145c42; border: 1px solid #b9dfc9; }
+@media (max-width: 600px) {
+  .contact-form-grid { grid-template-columns: 1fr; gap: 0; }
+  .contact-form { margin-top: 24px; }
+  .contact-submit { width: 100%; }
+}
 .footer {
   display: flex;
   align-items: center;

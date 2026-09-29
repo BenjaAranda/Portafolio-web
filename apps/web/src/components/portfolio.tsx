@@ -13,6 +13,7 @@ import {
 } from '@/lib/model';
 import { SocialIcon } from './icons';
 import { CopyEmail } from './copy-email';
+import { ContactForm } from './contact-form';
 import { Media } from './media';
 import { BrandMark } from './brand-mark';
 import { Credentials } from './credentials';
@@ -382,6 +383,7 @@ export function Contact({ data, locale }: { data: Portfolio; locale: Locale }) {
             </External>
           </div>
         </div>
+        <ContactForm locale={locale} />
       </div>
     </section>
   );

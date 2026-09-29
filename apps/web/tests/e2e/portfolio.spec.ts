@@ -1,6 +1,24 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
+test('contact form sends through Formspree and keeps email fallback', async ({ page }) => {
+  await page.route('https://formspree.io/f/xvkglanb', async (route) => {
+    expect(route.request().method()).toBe('POST');
+    const body = route.request().postData() || '';
+    expect(body).toContain('Prueba de contacto');
+    await route.fulfill({ status: 200, contentType: 'application/json', body: '{"next":"/"}' });
+  });
+  await page.goto('/es');
+  const contact = page.locator('#contacto');
+  await expect(contact.getByRole('link', { name: /@/ })).toHaveAttribute('href', /^mailto:/);
+  await contact.getByLabel('Nombre').fill('Nombre de prueba');
+  await contact.getByLabel('Correo electrónico').fill('prueba@example.com');
+  await contact.getByLabel('Asunto').fill('Prueba de contacto');
+  await contact.getByLabel('Mensaje').fill('Este es un mensaje de prueba para el formulario.');
+  await contact.getByRole('button', { name: 'Enviar mensaje' }).click();
+  await expect(contact.locator('.contact-form-success')).toContainText('Mensaje enviado correctamente');
+});
+
 test('BecasFind has a working detail page and supplied links', async ({ page }) => {
   await page.goto('/es');
   await expect(
