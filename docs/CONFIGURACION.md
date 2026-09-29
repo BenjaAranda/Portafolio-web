@@ -31,11 +31,9 @@ El alias gratuito de producción es `https://benjamin-aranda.vercel.app`. `apps/
 
 ## Formulario de contacto
 
-El formulario aparece en español e inglés y envía los mensajes directamente desde el navegador mediante FormSubmit, sin requerir un dominio propio ni una cuenta de correo transaccional. Su destino es el correo público validado de Sanity (`benjamin.aranda.dev@gmail.com`), que el visitante no puede modificar desde el formulario. El navegador sale brevemente al proveedor y vuelve a la sección de contacto tras un envío correcto.
+El envío directo está desactivado temporalmente. FormSubmit respondió con una página de bloqueo HTTP 403 al servidor de Vercel y con HTTP 500 a los envíos HTML desde la página publicada. Su enlace de activación se confirmó, pero eso no resolvió la entrega. Se retiró el formulario que fallaba y se mantiene el correo visible con opción de copiarlo.
 
-Antes de publicar el envío, realizar una primera solicitud de prueba y abrir el enlace de activación que FormSubmit manda a ese buzón. Hasta confirmar el enlace, los mensajes quedan pendientes en el proveedor y no deben considerarse entregados. La activación de `benjamin.aranda.dev@gmail.com` se completó el 28 de septiembre de 2026. Después de cada cambio de integración, probar desde la página publicada y verificar la llegada al buzón y el funcionamiento de «Responder». FormSubmit conserva los envíos durante 30 días según su documentación; la página de privacidad lo informa.
-
-El formulario incluye validación HTML, un campo antispam y el reCAPTCHA propio de FormSubmit. El envío desde la función de Vercel se descartó: Cloudflare devuelve una página de bloqueo HTTP 403 a esa función. No reintroducir un proxy servidor sin verificar primero el flujo publicado extremo a extremo.
+Para ofrecer un formulario funcional sin dominio propio hay que configurar un proveedor de correo o formularios con una cuenta autorizada y probar un envío real desde producción antes de volver a mostrarlo. No desplegar una interfaz que indique «mensaje enviado» basándose solo en una respuesta intermedia o no verificada.
 
 ## Webhook
 

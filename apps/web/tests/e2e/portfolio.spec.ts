@@ -19,27 +19,6 @@ test('BecasFind has a working detail page and supplied links', async ({ page }) 
   );
 });
 
-test('contact form is bilingual, accessible and fits a narrow phone', async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
-  for (const [locale, name, subject] of [
-    ['es', 'Tu nombre', 'Asunto'],
-    ['en', 'Your name', 'Subject'],
-  ]) {
-    await page.goto(`/${locale}#contacto`);
-    const form = page.locator('#contacto form');
-    await expect(form).toHaveAttribute('method', 'POST');
-    await expect(form).toHaveAttribute('action', 'https://formsubmit.co/benjamin.aranda.dev%40gmail.com');
-    await expect(form.locator('input[name="_next"]')).toHaveValue(new RegExp(`/${locale}#contacto-enviado$`));
-    await expect(form.locator('input[name="_honey"]')).toHaveCount(1);
-    await expect(form.getByRole('textbox', { name })).toBeVisible();
-    await expect(form.getByRole('textbox', { name: subject })).toBeVisible();
-    await expect(form.getByRole('textbox', { name: locale === 'es' ? 'Mensaje' : 'Message' })).toBeVisible();
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  }
-  await page.goto('/es#contacto-enviado');
-  await expect(page.locator('#contacto-enviado')).toBeVisible();
-});
-
 test('header remains visible and layouts fit narrow phones and tablets', async ({ page }) => {
   for (const width of [320, 390, 768, 1024, 1440]) {
     await page.setViewportSize({ width, height: 900 });

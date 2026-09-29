@@ -35,14 +35,6 @@ export const copy = {
     contactTitle: 'Contacto profesional',
     contactBody:
       'Busco oportunidades junior en desarrollo de software, QA, automatización y análisis de datos.',
-    contactFormTitle: 'Hablemos de tu proyecto',
-    contactFormIntro: 'Cuéntame brevemente qué necesitas y te responderé por correo.',
-    contactName: 'Tu nombre',
-    contactEmail: 'Tu correo',
-    contactSubject: 'Asunto',
-    contactMessage: 'Mensaje',
-    contactSend: 'Enviar mensaje',
-    contactSent: 'Mensaje enviado. Gracias por contactarme.',
     contactPending: 'Los canales de contacto se incorporarán antes de publicar.',
     copyEmail: 'Copiar correo',
     copied: 'Correo copiado',
@@ -59,7 +51,7 @@ export const copy = {
     demo: 'Ver aplicación',
     privacyTitle: 'Privacidad',
     privacyBody:
-      'Este portafolio no tiene cuentas de visitantes. Si usas el formulario de contacto, tu nombre, correo y mensaje se envían a FormSubmit para entregarlos a mi buzón y responderte. FormSubmit conserva los envíos hasta 30 días. La dirección de conexión se usa temporalmente para limitar abusos. Los enlaces externos te llevan a servicios con sus propias políticas.',
+      'Este portafolio no tiene cuentas de visitantes ni formulario de contacto activo. Los enlaces externos te llevan a servicios con sus propias políticas. Si envías un correo, la información que compartas se recibe en el proveedor de correo del destinatario.',
     analyticsOn:
       'Se utiliza Cloudflare Web Analytics para conocer visitas y rendimiento de forma agregada, sin cookies analíticas ni seguimiento publicitario.',
     analyticsOff: 'La analítica de visitas no está activada en esta versión.',
@@ -105,14 +97,6 @@ export const copy = {
     contactTitle: 'Professional contact',
     contactBody:
       'Seeking junior opportunities in software development, QA, automation and data analysis.',
-    contactFormTitle: 'Let’s discuss your project',
-    contactFormIntro: 'Tell me briefly what you need and I’ll reply by email.',
-    contactName: 'Your name',
-    contactEmail: 'Your email',
-    contactSubject: 'Subject',
-    contactMessage: 'Message',
-    contactSend: 'Send message',
-    contactSent: 'Message sent. Thank you for reaching out.',
     contactPending: 'Contact channels will be added before publication.',
     copyEmail: 'Copy email',
     copied: 'Email copied',
@@ -129,7 +113,7 @@ export const copy = {
     demo: 'View application',
     privacyTitle: 'Privacy',
     privacyBody:
-      'This portfolio has no visitor accounts. If you use the contact form, your name, email address and message are sent to FormSubmit for delivery to my inbox and to reply to you. FormSubmit retains submissions for up to 30 days. Your connection address is used temporarily to limit abuse. External links take you to services with their own policies.',
+      'This portfolio has no visitor accounts or active contact form. External links take you to services with their own policies. If you send an email, the information you share is received by the recipient’s email provider.',
     analyticsOn:
       'Cloudflare Web Analytics is used to understand aggregate visits and performance, without analytics cookies or advertising tracking.',
     analyticsOff: 'Visitor analytics is not enabled in this version.',

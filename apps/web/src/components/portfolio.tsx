@@ -13,7 +13,6 @@ import {
 } from '@/lib/model';
 import { SocialIcon } from './icons';
 import { CopyEmail } from './copy-email';
-import { ContactForm } from './contact-form';
 import { Media } from './media';
 import { BrandMark } from './brand-mark';
 import { Credentials } from './credentials';
@@ -352,40 +351,37 @@ export function Contact({ data, locale }: { data: Portfolio; locale: Locale }) {
   const email = safeEmail(data.settings?.email);
   return (
     <section id="contacto" className="contact-section">
-      <div className="shell contact-layout">
-        <div className="contact-copy">
-          <div className="contact-heading">
-            <h2>{c.contactTitle}</h2>
-          </div>
-          <p>{c.contactBody}</p>
-          <div className="contact-actions">
-            {email ? (
-              <div>
-                <a className="email-link" href={`mailto:${email}`}>
-                  {email}
-                </a>
-                <CopyEmail email={email} locale={locale} />
-              </div>
-            ) : (
-              <p className="contact-pending">
-                {safeUrl(data.settings?.linkedin)
-                  ? locale === 'es'
-                    ? 'Puedes contactarme a través de LinkedIn.'
-                    : 'You can contact me through LinkedIn.'
-                  : c.contactPending}
-              </p>
-            )}
-            <div className="social-links">
-              <External href={data.settings?.github} icon="github">
-                GitHub
-              </External>
-              <External href={data.settings?.linkedin} icon="linkedin">
-                LinkedIn
-              </External>
+      <div className="shell">
+        <div className="contact-heading">
+          <h2>{c.contactTitle}</h2>
+        </div>
+        <p>{c.contactBody}</p>
+        <div className="contact-actions">
+          {email ? (
+            <div>
+              <a className="email-link" href={`mailto:${email}`}>
+                {email}
+              </a>
+              <CopyEmail email={email} locale={locale} />
             </div>
+          ) : (
+            <p className="contact-pending">
+              {safeUrl(data.settings?.linkedin)
+                ? locale === 'es'
+                  ? 'Puedes contactarme a través de LinkedIn.'
+                  : 'You can contact me through LinkedIn.'
+                : c.contactPending}
+            </p>
+          )}
+          <div className="social-links">
+            <External href={data.settings?.github} icon="github">
+              GitHub
+            </External>
+            <External href={data.settings?.linkedin} icon="linkedin">
+              LinkedIn
+            </External>
           </div>
         </div>
-        {email && <ContactForm locale={locale} recipient={email} />}
       </div>
     </section>
   );
