@@ -412,7 +412,10 @@ test('preview is not indexed and offers the verified email with Gmail action', a
   await expect(
     page.locator('a[href="https://mail.google.com/mail/?view=cm&fs=1&to=benjamin.aranda.dev%40gmail.com"]'),
   ).toHaveCount(2);
-  expect(await (await request.get('/robots.txt')).text()).toContain('Disallow: /');
+  const robots = await (await request.get('/robots.txt')).text();
+  expect(robots).toContain('User-Agent: LinkedInBot');
+  expect(robots).toContain('Allow: /');
+  expect(robots).toContain('Disallow: /');
   expect((await request.post('/api/revalidate', { data: { _type: 'project' } })).status()).toBe(
     503,
   );
