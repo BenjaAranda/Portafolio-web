@@ -5,6 +5,7 @@ import { formatCredentialDate } from '@/lib/dates';
 import { safeDocumentUrl } from '@/lib/document-url';
 import { BrandMark } from './brand-mark';
 import { Media } from './media';
+import { MobileCollection } from './mobile-collection';
 
 export function Credentials({
   items,
@@ -15,7 +16,7 @@ export function Credentials({
 }) {
   const es = locale === 'es';
   return (
-    <div className="credential-grid">
+    <MobileCollection kind="credentials" total={items.length} locale={locale}>
       {items.map((cert) => {
         const verificationUrl = safeUrl(cert.url);
         const certificateUrl = safeDocumentUrl(cert.file);
@@ -45,7 +46,10 @@ export function Credentials({
             </div>
             <div className="credential-card-actions">
               {cert.credentialId ? (
-                <p className="credential-id">ID: {cert.credentialId}</p>
+                <details className="credential-details">
+                  <summary>{es ? 'ID de la credencial' : 'Credential ID'}</summary>
+                  <p className="credential-id">{cert.credentialId}</p>
+                </details>
               ) : null}
               {primaryUrl ? (
                 <a className="text-link" href={primaryUrl} target="_blank" rel="noreferrer">
@@ -83,6 +87,6 @@ export function Credentials({
           </article>
         );
       })}
-    </div>
+    </MobileCollection>
   );
 }

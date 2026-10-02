@@ -1153,6 +1153,10 @@ main {
   flex-basis: 100%;
   margin: 0;
 }
+.collection-toggle { display: none; }
+.credential-details { width: 100%; font-size: 12px; color: var(--muted); }
+.credential-details summary { cursor: pointer; color: var(--accent); }
+.credential-details[open] .credential-id { margin-top: 6px; }
 .credential-card .text-link {
   font-size: 13px;
   min-height: 24px;
@@ -1740,22 +1744,18 @@ main {
   .capability-list,
   .credential-grid {
     display: grid;
-    grid-template-columns: none;
-    grid-auto-flow: column;
-    grid-auto-rows: 1fr;
-    gap: 14px;
-    overflow-x: auto;
-    overscroll-behavior-inline: contain;
-    padding: 2px 14px 16px 0;
-    scroll-padding-inline: 0 14px;
-    scroll-snap-type: inline mandatory;
-    scrollbar-width: thin;
+    grid-template-columns: minmax(0, 1fr);
+    grid-auto-flow: row;
+    grid-auto-rows: auto;
+    gap: 12px;
+    overflow: visible;
+    padding: 0;
   }
 
   #proyectos .project-grid,
   .index-page .project-grid {
-    grid-auto-columns: minmax(82vw, 310px);
-    margin-right: -14px;
+    grid-auto-columns: auto;
+    margin-right: 0;
   }
 
   #proyectos .project-grid > .project-card,
@@ -1765,39 +1765,33 @@ main {
     grid-column: auto;
     width: auto;
     max-width: none;
-    scroll-snap-align: start;
   }
 
   #proyectos .project-grid > .all-projects-end,
   .index-page .project-grid > .all-projects-end {
-    align-self: stretch;
+    justify-self: start;
+    align-self: start;
     min-width: 0;
-    min-height: 100%;
+    min-height: 44px;
     margin-top: 0;
     border-color: var(--profile-background);
     background: var(--profile-background);
     color: #fff;
-    font-size: 18px;
+    font-size: 13px;
   }
 
   #proyectos .project-grid {
-    display: flex;
-    align-items: stretch;
-  }
-
-  #proyectos .project-grid > .project-card {
-    flex: 0 0 min(82vw, 310px);
+    display: grid;
+    align-items: start;
   }
 
   #proyectos .project-grid > .all-projects-end {
-    flex: 0 0 112px;
-    align-self: center;
-    min-height: 48px;
+    min-height: 44px;
     padding: 10px 12px;
     border-radius: 14px;
     background: var(--profile-background);
     font-size: 13px;
-    box-shadow: 0 10px 24px rgb(36 55 70 / 22%);
+    box-shadow: none;
   }
 
   #proyectos .project-grid > .all-projects-end::after {
@@ -1840,28 +1834,26 @@ main {
   }
 
   .capability-list {
-    display: flex;
-    align-items: stretch;
+    display: grid;
+    align-items: start;
     margin-top: 20px;
-    margin-right: -14px;
+    margin-right: 0;
   }
 
   .capability-row {
-    flex: 0 0 min(84vw, 276px);
-    width: min(84vw, 276px);
-    aspect-ratio: 1;
+    width: 100%;
+    aspect-ratio: auto;
     min-height: 0;
     justify-content: flex-start;
-    gap: 14px;
-    padding: 18px;
+    gap: 10px;
+    padding: 14px;
     border: 1px solid #aebfc7;
     border-radius: 12px;
     background: #fff;
-    scroll-snap-align: start;
   }
 
   .capability-row:last-child {
-    padding-bottom: 18px;
+    padding-bottom: 14px;
   }
 
   .capability-row:nth-child(even) {
@@ -1920,20 +1912,19 @@ main {
 
   .credential-grid {
     display: grid;
-    grid-template-columns: none;
-    grid-auto-flow: column;
-    grid-auto-columns: min(82vw, 318px);
-    grid-auto-rows: 1fr;
-    align-items: stretch;
+    grid-template-columns: minmax(0, 1fr);
+    grid-auto-flow: row;
+    grid-auto-columns: auto;
+    grid-auto-rows: auto;
+    align-items: start;
     margin-top: 22px;
-    margin-right: -14px;
+    margin-right: 0;
   }
 
   .credential-card {
     width: 100%;
-    height: 100%;
-    padding: 8px;
-    scroll-snap-align: start;
+    height: auto;
+    padding: 12px;
   }
 
   .credential-card h3 {
@@ -1944,6 +1935,46 @@ main {
   .credential-dates {
     margin-block: 5px 3px;
   }
+
+  .credential-card-actions {
+    margin-top: 8px;
+    padding-top: 8px;
+    gap: 6px 14px;
+  }
+  .credential-card-actions .text-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .credential-details summary,
+  .certificate-preview summary {
+    display: list-item;
+    padding-block: 12px;
+    min-height: 44px;
+  }
+  .collection-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    margin-top: 14px;
+    padding: 10px 16px;
+    border: 1px solid var(--profile-background);
+    border-radius: 8px;
+    background: var(--profile-background);
+    color: #fff;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 650;
+    cursor: pointer;
+  }
+  .collection-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .collection-toggle:active { opacity: .85; }
+  .mobile-collection-projects[data-expanded='false'] > .project-grid > .project-card:nth-child(n + 3),
+  .mobile-collection-credentials[data-expanded='false'] > .credential-grid > .credential-card:nth-child(n + 5) {
+    display: none;
+  }
+  .mobile-collection-projects > .project-grid > .all-projects-end { display: none; }
 
   .journey-groups {
     gap: 28px;
@@ -1999,6 +2030,11 @@ main {
     transition: none;
     touch-action: manipulation;
   }
+}
+
+@media (min-width: 600px) and (max-width: 760px) {
+  .capability-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .credential-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (prefers-reduced-motion: reduce) {
   html {

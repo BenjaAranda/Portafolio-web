@@ -17,6 +17,7 @@ import { ContactForm } from './contact-form';
 import { Media } from './media';
 import { BrandMark } from './brand-mark';
 import { Credentials } from './credentials';
+import { MobileCollection } from './mobile-collection';
 import { Technology } from './technology';
 import { PortfolioLink } from './portfolio-navigation';
 import { safeDocumentUrl } from '@/lib/document-url';
@@ -241,7 +242,7 @@ export function Home({ data, locale }: { data: Portfolio; locale: Locale }) {
             : 'What I built, how I approached it and what I contributed.'}
         </p>
         {featured.length ? (
-          <div className="project-grid">
+          <MobileCollection kind="projects" total={featured.length} locale={locale}>
             {featured.map((project) => (
               <ProjectCard key={project._id} project={project} locale={locale} />
             ))}
@@ -252,7 +253,7 @@ export function Home({ data, locale }: { data: Portfolio; locale: Locale }) {
             >
               {es ? 'Ver más' : 'See more'}
             </PortfolioLink>
-          </div>
+          </MobileCollection>
         ) : (
           <EmptyProjects locale={locale} />
         )}

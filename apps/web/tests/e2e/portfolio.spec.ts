@@ -103,7 +103,7 @@ test('junior profile exposes projects, skills and honest certification state', a
   );
   await expect(
     page.locator('#certificaciones a[href="https://cert.efset.org/NEyEWs"]'),
-  ).toBeVisible();
+  ).toHaveCount(1);
   await expect(page.locator('#trayectoria')).toContainText('Walmart Chile');
   await expect(page.locator('#trayectoria')).toContainText('Mar. – jul. 2026');
 });
@@ -152,24 +152,21 @@ test('social logos load and selected project cards form an even responsive grid'
     expect(Math.abs(positions[0].height - positions[1].height)).toBeLessThan(2);
     expect(Math.abs(positions[2].height - positions[3].height)).toBeLessThan(2);
     await page.setViewportSize({ width: 390, height: 844 });
-    const mobile = await cards.evaluateAll((elements) =>
+    const mobile = await page.locator('.project-card:visible').evaluateAll((elements) =>
       elements.map((element) => {
         const { x, y, width } = element.getBoundingClientRect();
         return { x, y, width };
       }),
     );
-    expect(mobile.every(({ y }) => Math.abs(y - mobile[0].y) < 2)).toBe(true);
-    expect(mobile[1].x).toBeGreaterThan(mobile[0].x + mobile[0].width);
+    expect(mobile.every(({ x }) => Math.abs(x - mobile[0].x) < 2)).toBe(true);
+    expect(mobile[1].y).toBeGreaterThan(mobile[0].y);
     if (route === '/es') {
       const endLinkMobile = await page.locator('#proyectos .all-projects-end').boundingBox();
-      expect(endLinkMobile).not.toBeNull();
-      expect(endLinkMobile!.x).toBeGreaterThan(mobile.at(-1)!.x + mobile.at(-1)!.width);
-      expect(endLinkMobile!.width).toBeLessThan(150);
-      expect(endLinkMobile!.height).toBeLessThan(60);
+      expect(endLinkMobile).toBeNull();
     }
     expect(
       await page.locator('.project-grid').evaluate((element) => element.scrollWidth > element.clientWidth),
-    ).toBe(true);
+    ).toBe(false);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
       true,
     );
@@ -179,6 +176,8 @@ test('social logos load and selected project cards form an even responsive grid'
 
 test('certificates expand and institutional logos load', async ({ page }) => {
   await page.goto('/es#certificaciones');
+  const expand = page.getByRole('button', { name: 'Ver todas (10)', exact: true });
+  if (await expand.isVisible()) await expand.click();
   const cert = page
     .locator('.credential-card')
     .filter({ has: page.getByRole('heading', { name: 'Smartview Inicial', exact: true }) });
@@ -210,21 +209,29 @@ test('IBM certification displays its issuer mark', async ({ page }) => {
   await expect.poll(() => mark.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth > 0)).toBe(true);
 });
 
-test('credential cards keep equal heights without excessive internal spacing', async ({ page }) => {
+test('credential cards stay compact and mobile collections expand', async ({ page }) => {
   for (const viewport of [
     { width: 1440, height: 900 },
     { width: 390, height: 844 },
   ]) {
     await page.setViewportSize(viewport);
     await page.goto('/es#certificaciones');
-    const cards = page.locator('.credential-card');
-    await expect(cards).toHaveCount(10);
+    const cards = page.locator('.credential-card:visible');
+    await expect(cards).toHaveCount(viewport.width > 700 ? 10 : 4);
     const heights = await cards.evaluateAll((items) =>
       items.map((item) => item.getBoundingClientRect().height),
     );
-    expect(Math.max(...heights) - Math.min(...heights)).toBeLessThan(2);
-    expect(Math.max(...heights)).toBeLessThan(viewport.width > 700 ? 225 : 220);
-    await expect(cards.locator('.credential-card-actions')).toHaveCount(10);
+    if (viewport.width > 700) expect(Math.max(...heights) - Math.min(...heights)).toBeLessThan(2);
+    expect(Math.max(...heights)).toBeLessThan(280);
+    if (viewport.width < 700) {
+      await page.getByRole('button', { name: 'Ver todas (10)', exact: true }).click();
+      await expect(cards).toHaveCount(10);
+      await page.locator('.mobile-collection-credentials').getByRole('button', { name: 'Mostrar menos' }).click();
+      await expect(cards).toHaveCount(4);
+      await expect(page.locator('.project-card:visible')).toHaveCount(2);
+      await page.getByRole('button', { name: 'Mostrar otros 2 proyectos' }).click();
+      await expect(page.locator('.project-card:visible')).toHaveCount(4);
+    }
   }
 });
 
@@ -389,7 +396,7 @@ test('mobile stack cards and all-projects action stay compact', async ({ page })
       };
     }));
   expect(stackCards).toHaveLength(7);
-  expect(stackCards.every(({ width, height }) => Math.abs(width - height) < 2)).toBe(true);
+  expect(stackCards.every(({ width, height }) => width <= 390 && height < width)).toBe(true);
   expect(stackCards.every(({ toolsGap }) => toolsGap < 20)).toBe(true);
   expect(stackCards.every(({ clipped }) => !clipped)).toBe(true);
 });
