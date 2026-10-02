@@ -229,8 +229,9 @@ test('credential cards stay compact and mobile collections expand', async ({ pag
       await page.locator('.mobile-collection-credentials').getByRole('button', { name: 'Mostrar menos' }).click();
       await expect(cards).toHaveCount(4);
       await expect(page.locator('.project-card:visible')).toHaveCount(2);
-      await page.getByRole('button', { name: 'Mostrar otros 2 proyectos' }).click();
-      await expect(page.locator('.project-card:visible')).toHaveCount(4);
+      await page.getByRole('link', { name: 'Mostrar todos los proyectos', exact: true }).click();
+      await expect(page).toHaveURL(/\/es\/proyectos$/);
+      await expect(page.locator('.project-card:visible')).toHaveCount(7);
     }
   }
 });

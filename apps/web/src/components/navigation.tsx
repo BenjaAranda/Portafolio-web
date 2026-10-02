@@ -149,7 +149,7 @@ export function Navigation({
             onClick={() => setOpen(!open)}
           >
             <span />
-            <span className={open ? 'opened' : ''} />
+            <span />
           </button>
         </div>
       </div>
