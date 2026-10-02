@@ -79,6 +79,7 @@ test('junior profile exposes projects, skills and honest certification state', a
   await expect(page.locator('#perfil h1')).toHaveText('Benjamín Aranda');
   const portrait = page.locator('#perfil .profile-context .media img');
   await expect(portrait).toHaveAttribute('alt', /Benjamín Aranda/);
+  await portrait.scrollIntoViewIfNeeded();
   await expect
     .poll(() => portrait.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth > 0))
     .toBe(true);
@@ -344,13 +345,18 @@ test('returning home restores the previous portfolio position', async ({ page })
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(previous - 8);
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBeLessThan(previous + 8);
 });
-test('English portfolio exposes the translated CV and no development banner', async ({ page }) => {
+test('English portfolio exposes a downloadable translated CV and no development banner', async ({ page, request }) => {
   await page.goto('/en');
   await expect(page.getByText('Development preview', { exact: false })).toHaveCount(0);
   const cvLinks = page.getByRole('link', { name: 'View CV', exact: true });
   expect(await cvLinks.count()).toBeGreaterThan(0);
   for (const link of await cvLinks.all()) {
-    await expect(link).toHaveAttribute('href', /cdn\.sanity\.io\/files\/.*\.pdf/);
+    const href = await link.getAttribute('href');
+    expect(href).toMatch(/^(\/documents\/cv-benjamin-aranda-2026-en\.pdf|https:\/\/cdn\.sanity\.io\/files\/[^?#]+\.pdf)$/);
+    const response = await request.get(href!);
+    expect(response.ok()).toBe(true);
+    expect(response.headers()['content-type']).toContain('application/pdf');
+    expect((await response.body()).subarray(0, 5).toString()).toBe('%PDF-');
   }
 });
 test('desktop and mobile navigation include education', async ({ page }) => {
