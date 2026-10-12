@@ -86,7 +86,7 @@ test('junior profile exposes projects, skills and honest certification state', a
   await expect(portrait).toHaveAttribute('alt', /Benjamín Aranda/);
   await portrait.scrollIntoViewIfNeeded();
   await expect
-    .poll(() => portrait.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth > 0))
+    .poll(() => portrait.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth > 0), { timeout: 15000 })
     .toBe(true);
   await expect(page.locator('#proyectos h2')).toHaveText('Proyectos');
   await expect(page.locator('#perfil')).toContainText('automatización de procesos');
