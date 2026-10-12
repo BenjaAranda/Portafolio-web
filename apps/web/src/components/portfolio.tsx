@@ -357,6 +357,7 @@ export function Contact({ data, locale }: { data: Portfolio; locale: Locale }) {
   return (
     <section id="contacto" className="contact-section">
       <div className="shell">
+        <ContactForm locale={locale} />
         <div className="contact-heading">
           <h2>{c.contactTitle}</h2>
         </div>
@@ -404,7 +405,6 @@ export function Contact({ data, locale }: { data: Portfolio; locale: Locale }) {
             </External>
           </div>
         </div>
-        <ContactForm locale={locale} />
       </div>
     </section>
   );

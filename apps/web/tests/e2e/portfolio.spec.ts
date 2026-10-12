@@ -10,6 +10,11 @@ test('contact form sends through Formspree and keeps email fallback', async ({ p
   });
   await page.goto('/es');
   const contact = page.locator('#contacto');
+  const formBox = await contact.locator('.contact-form').boundingBox();
+  const headingBox = await contact.getByRole('heading', { name: 'Contacto profesional' }).boundingBox();
+  expect(formBox).not.toBeNull();
+  expect(headingBox).not.toBeNull();
+  expect(formBox!.y + formBox!.height).toBeLessThan(headingBox!.y);
   await expect(contact.getByRole('link', { name: /@/ })).toHaveAttribute(
     'href',
     'https://mail.google.com/mail/?view=cm&fs=1&to=benjamin.aranda.dev%40gmail.com',
