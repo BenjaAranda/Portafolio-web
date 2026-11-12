@@ -1,4 +1,13 @@
-# Temporary security exception
+# Security exception history
+
+Resolved on 2026-11-12: dependency updates pass the full npm audit with zero
+findings. CI runs `npm audit --audit-level=low` without exceptions. The expired
+exception below is retained only as a historical record, not as active policy.
+
+The minimatch override applies only to versions 7 through 10, upgraded to
+11.0.8 to address GHSA-g3hv-75wg-m249. The build/lint/Studio workflows and
+browser tests validate compatibility; older legacy minimatch APIs are not
+overridden. Next.js and eslint-config-next are updated together.
 
 Approved by the owner on 2026-10-12. Expires 2026-11-12 (UTC).
 
