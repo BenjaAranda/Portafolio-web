@@ -53,7 +53,11 @@ export function Credentials({
               ) : null}
               {primaryUrl ? (
                 <a className="text-link" href={primaryUrl} target="_blank" rel="noreferrer">
-                  {cert.issuer === 'Duoc UC'
+                  {!verificationUrl && certificateUrl
+                    ? es
+                      ? 'Abrir certificado'
+                      : 'Open certificate'
+                    : cert.issuer === 'Duoc UC'
                     ? es
                       ? 'Validar con el ID'
                       : 'Validate using the ID'

@@ -589,6 +589,24 @@ export const seed: Portfolio = {
   ],
   certifications: [
     {
+      _id: 'ibm-data-analyst-career-preparation',
+      title: 'Data Analyst: Career Preparation',
+      issuer: 'IBM Skills Network',
+      date: '2026-11-12',
+      credentialId: 'e20056f3-c3b3-416f-b6be-e798f8a13b8f',
+      url: 'https://cognitiveclass.ai/certificates/e20056f3-c3b3-416f-b6be-e798f8a13b8f',
+      file: '/credentials/data-analyst-career-preparation.pdf',
+    },
+    {
+      _id: 'ibm-python-data-science',
+      title: 'Python 101 for Data Science',
+      issuer: 'IBM Skills Network',
+      date: '2026-10-23',
+      credentialId: '78e638919e3645a68e24f78d1bc3c684',
+      url: 'https://courses.cognitiveclass.ai/certificates/78e638919e3645a68e24f78d1bc3c684',
+      file: '/credentials/python-101-for-data-science.pdf',
+    },
+    {
       _id: 'ibm-sql-relational-databases',
       title: 'SQL and Relational Databases 101',
       issuer: 'IBM Skills Network',
@@ -603,6 +621,7 @@ export const seed: Portfolio = {
       issuer: 'Santander Open Academy',
       date: '2026-09',
       credentialId: 'OA-2026-0915003195792',
+      file: '/credentials/excel-intermedio-avanzado.pdf',
     },
     {
       _id: 'excel',

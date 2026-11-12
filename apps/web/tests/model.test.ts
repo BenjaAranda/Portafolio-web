@@ -14,6 +14,27 @@ import { existsSync } from 'node:fs';
 import { formatCredentialDate } from '../src/lib/dates';
 import { copy } from '../src/lib/i18n';
 import { safeDocumentUrl } from '../src/lib/document-url';
+
+test('new IBM certificates preserve the supplied evidence and downloadable PDFs', () => {
+  for (const [id, title, date] of [
+    ['ibm-python-data-science', 'Python 101 for Data Science', '2026-10-23'],
+    ['ibm-data-analyst-career-preparation', 'Data Analyst: Career Preparation', '2026-11-12'],
+  ]) {
+    const item = seed.certifications.find(credential => credential._id === id);
+    assert.equal(item?.title, title);
+    assert.equal(item?.date, date);
+    assert.ok(item?.url?.includes(item.credentialId!));
+    assert.ok(item?.file && existsSync(`public${item.file}`));
+  }
+});
+
+test('Excel PDF is attached only to the matching advanced credential', () => {
+  const item = seed.certifications.find(credential => credential._id === 'excel-avanzado');
+  assert.equal(item?.credentialId, 'OA-2026-0915003195792');
+  assert.equal(item?.file, '/credentials/excel-intermedio-avanzado.pdf');
+  assert.ok(existsSync(`public${item.file}`));
+  assert.equal(seed.certifications.find(credential => credential._id === 'excel')?.file, undefined);
+});
 test('only HTTPS external URLs without embedded credentials are accepted', () => {
   for (const value of [
     'javascript:alert(1)',
@@ -97,7 +118,7 @@ test('missing translation never silently falls back to Spanish', () => {
 });
 
 test('LinkedIn credentials, experience and literal copy are preserved', () => {
-  assert.equal(seed.certifications.length, 10);
+  assert.equal(seed.certifications.length, 12);
   assert.equal(seed.experience.length, 4);
   assert.equal(seed.certifications.find((c) => c._id === 'mccr')?.expires, '2027-06');
   assert.equal(seed.skills.filter((s) => s.learning).length, 1);

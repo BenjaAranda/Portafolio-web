@@ -98,7 +98,7 @@ test('junior profile exposes projects, skills and honest certification state', a
   await expect(page.locator('#capacidades')).toContainText('Warp');
   await expect(page.locator('#capacidades .technology-fallback')).toHaveCount(0);
   await expect(page.locator('#certificaciones')).toContainText('Smartview Avanzado');
-  await expect(page.locator('.credential-card')).toHaveCount(10);
+  await expect(page.locator('.credential-card')).toHaveCount(12);
   await expect(page.locator('#certificaciones')).toContainText('SQL and Relational Databases 101');
   const sqlCertificate = page
     .locator('.credential-card')
@@ -182,7 +182,7 @@ test('social logos load and selected project cards form an even responsive grid'
 
 test('certificates expand and institutional logos load', async ({ page }) => {
   await page.goto('/es#certificaciones');
-  const expand = page.getByRole('button', { name: 'Ver todas (10)', exact: true });
+  const expand = page.getByRole('button', { name: 'Ver todas (12)', exact: true });
   if (await expand.isVisible()) await expand.click();
   const cert = page
     .locator('.credential-card')
@@ -204,6 +204,18 @@ test('certificates expand and institutional logos load', async ({ page }) => {
   await expect(page.locator('body')).not.toContainText('Menos tareas repetitivas');
 });
 
+test('Excel certificate opens the reviewed downloadable PDF', async ({ page, request }) => {
+  await page.goto('/es#certificaciones');
+  const card = page.locator('.credential-card').filter({
+    has: page.getByRole('heading', { name: 'Excel – de intermedio a avanzado', exact: true }),
+  });
+  const href = await card.getByRole('link', { name: 'Abrir certificado' }).getAttribute('href');
+  expect(href).toMatch(/\.pdf$/);
+  const response = await request.get(href!);
+  expect(response.ok()).toBe(true);
+  expect((await response.body()).subarray(0, 5).toString()).toBe('%PDF-');
+});
+
 test('IBM certification displays its issuer mark', async ({ page }) => {
   await page.goto('/es#certificaciones');
   const ibm = page
@@ -223,15 +235,15 @@ test('credential cards stay compact and mobile collections expand', async ({ pag
     await page.setViewportSize(viewport);
     await page.goto('/es#certificaciones');
     const cards = page.locator('.credential-card:visible');
-    await expect(cards).toHaveCount(viewport.width > 700 ? 10 : 4);
+    await expect(cards).toHaveCount(viewport.width > 700 ? 12 : 4);
     const heights = await cards.evaluateAll((items) =>
       items.map((item) => item.getBoundingClientRect().height),
     );
     if (viewport.width > 700) expect(Math.max(...heights) - Math.min(...heights)).toBeLessThan(2);
     expect(Math.max(...heights)).toBeLessThan(280);
     if (viewport.width < 700) {
-      await page.getByRole('button', { name: 'Ver todas (10)', exact: true }).click();
-      await expect(cards).toHaveCount(10);
+      await page.getByRole('button', { name: 'Ver todas (12)', exact: true }).click();
+      await expect(cards).toHaveCount(12);
       await page.locator('.mobile-collection-credentials').getByRole('button', { name: 'Mostrar menos' }).click();
       await expect(cards).toHaveCount(4);
       await expect(page.locator('.project-card:visible')).toHaveCount(2);
