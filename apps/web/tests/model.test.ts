@@ -35,6 +35,15 @@ test('Excel PDF is attached only to the matching advanced credential', () => {
   assert.ok(existsSync(`public${item.file}`));
   assert.equal(seed.certifications.find(credential => credential._id === 'excel')?.file, undefined);
 });
+test('Power BI certificate preserves the reviewed Santander document', () => {
+  const item = seed.certifications.find(credential => credential._id === 'santander-power-bi');
+  assert.equal(item?.title, 'Power BI');
+  assert.equal(item?.issuer, 'Santander Open Academy');
+  assert.equal(item?.date, '2026-11-28');
+  assert.equal(item?.credentialId, 'OA-2026-1128003704910');
+  assert.equal(item?.file, '/credentials/santander-power-bi.pdf');
+  assert.ok(existsSync(`public${item.file}`));
+});
 test('only HTTPS external URLs without embedded credentials are accepted', () => {
   for (const value of [
     'javascript:alert(1)',
@@ -118,7 +127,7 @@ test('missing translation never silently falls back to Spanish', () => {
 });
 
 test('LinkedIn credentials, experience and literal copy are preserved', () => {
-  assert.equal(seed.certifications.length, 12);
+  assert.equal(seed.certifications.length, 13);
   assert.equal(seed.experience.length, 4);
   assert.equal(seed.certifications.find((c) => c._id === 'mccr')?.expires, '2027-06');
   assert.equal(seed.skills.filter((s) => s.learning).length, 1);

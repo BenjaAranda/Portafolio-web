@@ -589,6 +589,14 @@ export const seed: Portfolio = {
   ],
   certifications: [
     {
+      _id: 'santander-power-bi',
+      title: 'Power BI',
+      issuer: 'Santander Open Academy',
+      date: '2026-11-28',
+      credentialId: 'OA-2026-1128003704910',
+      file: '/credentials/santander-power-bi.pdf',
+    },
+    {
       _id: 'ibm-data-analyst-career-preparation',
       title: 'Data Analyst: Career Preparation',
       issuer: 'IBM Skills Network',
